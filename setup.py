@@ -28,7 +28,7 @@ config = {
     'download_url': 'Where to download it.',
     'author_email': 'rsd@gnu.org',
     'version': '0.0',
-    'install_requires': ['nose'],
+    'install_requires': ['nose', 'markdown'],
     'packages': ['lpschedule'],
     'scripts': [],
     'name': 'lpschedule-generator'
