@@ -16,22 +16,30 @@
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+import mistune
 
-config = {
-    'description': 'LibrePlanet schedule generator',
-    'author': 'rsiddharth',
-    'url': 'URL to get it at.',
-    'download_url': 'Where to download it.',
-    'author_email': 'rsd@gnu.org',
-    'version': '0.0',
-    'install_requires': ['nose', 'markdown', 'mistune'],
-    'packages': ['lpschedule'],
-    'scripts': [],
-    'name': 'lpschedule-generator'
-    }
-
-setup(**config)
+class Mark2html(object):
+  """
+  Converts Markdown to HTML format. `mistune` parser is used.
+  
+  Attributes:
+      FileName : Markdown File descriptor
+  """
+  def __init__(self, FileName):
+    """ 
+    Returns a Mark2html object 
+    """
+    self.FileName = FileName
+    
+  def PrintHTML(self):
+    """
+    Prints HTML format of FileName
+    """
+    print mistune.markdown(self.FileName.read())
+    
+  def GetHTML(self):
+    """
+    Returns HTML format of FileName
+    """
+    return mistune.markdown(self.FileName.read())
+    
