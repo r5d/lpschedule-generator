@@ -1,11 +1,6 @@
 # LibrePlanet schedule generator
 
-## dependencies
-
-- nose
-- mistune
-
-## on GNU/Linux
+## On GNU/Linux
 
 Install `virtualenv` and python dev. package.
 
@@ -13,7 +8,7 @@ On a Debian based distribution, do:
 
     # aptitude install virtualenv python-dev
 
-## set up environment
+## Set up environment
 
     $ git clone git://notabug.org/rsd/lpschedule-generator.git
 
