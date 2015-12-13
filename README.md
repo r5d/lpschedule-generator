@@ -3,7 +3,7 @@
 ## dependencies
 
 - nose
-- markdown
+- mistune
 
 ## on GNU/Linux
 
