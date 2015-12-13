@@ -1,4 +1,4 @@
-#    Copyright (C) 2015  lpschedule-generator author(s). See AUTHORS.
+#    Copyright (C) 2015  lpschedule-generator contributors. See CONTRIBUTORS.
 #
 #    This file is part of lpschedule-generator.
 #
@@ -42,4 +42,3 @@ class Mark2html(object):
     Returns HTML format of FileName
     """
     return mistune.markdown(self.FileName.read())
-    
