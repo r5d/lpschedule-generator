@@ -18,6 +18,9 @@
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
 
+import json
+
+from argparse import ArgumentParser
 from collections import OrderedDict
 from os import path
 
@@ -128,3 +131,21 @@ class LPSMarkdown(Markdown):
         lps_dict = OrderedDict()
         html = super(LPSMarkdown, self).parse(text)
         return lps_dict
+
+
+def main():
+    parser = ArgumentParser()
+    parser.add_argument("lps_md",
+                        help="Path to the markdown version of LP Schedule.")
+    args = parser.parse_args()
+
+    lps_md_content = read_file(path.abspath(args.lps_md))
+
+    markdown = LPSMarkdown()
+    lps_dict = markdown(lps_md_content)
+
+    print json.dumps(lps_dict, indent=4)
+
+
+if __name__ == "__main__":
+    main()
