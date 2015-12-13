@@ -24,13 +24,11 @@ except ImportError:
 config = {
     'description': 'LibrePlanet schedule generator',
     'author': 'rsiddharth',
-    'url': 'URL to get it at.',
-    'download_url': 'Where to download it.',
+    'url': 'https://notabug.org/rsd/lpschedule-generator/',
     'author_email': 'rsd@gnu.org',
     'version': '0.0',
     'install_requires': ['nose', 'mistune'],
-    'packages': ['lpschedule'],
-    'scripts': [],
+    'py_modules': ['lps_gen'],
     'name': 'lpschedule-generator'
     }
 
