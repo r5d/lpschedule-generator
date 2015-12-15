@@ -19,6 +19,7 @@
 #   <http://www.gnu.org/licenses/>.
 
 import json
+import jinja2
 
 from argparse import ArgumentParser
 from collections import OrderedDict
@@ -132,6 +133,15 @@ class LPSMarkdown(Markdown):
         html = super(LPSMarkdown, self).parse(text)
         return lps_dict
 
+def HTMLRender(_dict):
+  
+  templateLoader = jinja2.FileSystemLoader( searchpath="./" )
+  templateEnv = jinja2.Environment( loader=templateLoader )
+  TEMPLATE_FILE = "tests/files/index.html"
+  template = templateEnv.get_template( TEMPLATE_FILE )
+  _data  = {'res':_dict}
+  outputText = template.render( _data )
+  return outputText
 
 def main():
     parser = ArgumentParser()
@@ -143,8 +153,9 @@ def main():
 
     markdown = LPSMarkdown()
     lps_dict = markdown(lps_md_content)
+    print HTMLRender(lps_dict)
 
-    print json.dumps(lps_dict, indent=4)
+    #print json.dumps(lps_dict, indent=4)
 
 
 if __name__ == "__main__":
