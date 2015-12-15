@@ -133,15 +133,18 @@ class LPSMarkdown(Markdown):
         html = super(LPSMarkdown, self).parse(text)
         return lps_dict
 
-def HTMLRender(_dict):
-  
-  templateLoader = jinja2.FileSystemLoader( searchpath="./" )
-  templateEnv = jinja2.Environment( loader=templateLoader )
-  TEMPLATE_FILE = "tests/files/index.html"
-  template = templateEnv.get_template( TEMPLATE_FILE )
-  _data  = {'res':_dict}
-  outputText = template.render( _data )
-  return outputText
+def HTMLRender(_dict):  
+    """Render html from a dictionary and returns a string.
+
+    Uses jinja2 and HTML template file.
+    """ 
+    templateLoader = jinja2.FileSystemLoader( searchpath="./" )
+    templateEnv = jinja2.Environment( loader=templateLoader )
+    TEMPLATE_FILE = "tests/files/index.html"
+    template = templateEnv.get_template( TEMPLATE_FILE )
+    _data  = {'res':_dict}
+    lps_output = template.render( _data )
+    return lps_output
 
 def main():
     parser = ArgumentParser()
