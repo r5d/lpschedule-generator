@@ -19,13 +19,14 @@
 #   <http://www.gnu.org/licenses/>.
 
 import json
-import jinja2
 
 from argparse import ArgumentParser
 from collections import OrderedDict
 from os import path
 
+from jinja2 import Environment, PackageLoader
 from mistune import Renderer, Markdown
+
 
 # Python dictionary that will contain the lp schedule.
 lps_dict = OrderedDict()
@@ -62,6 +63,10 @@ class LPSRenderer(Renderer):
 
     def header(self, text, level, raw=None):
         global lps_dict
+        utf8_text = text
+
+        # jinja2 will encode text back to utf8.
+        text = text.decode('utf8')
 
         if level == 2:
             # Add new day.
@@ -79,13 +84,16 @@ class LPSRenderer(Renderer):
             # to 0.
             self.no_paragraph = 0
 
-        return super(LPSRenderer, self).header(text, level, raw)
+        return super(LPSRenderer, self).header(utf8_text, level, raw)
 
 
     def paragraph(self, text):
         global lps_dict
 
         p = super(LPSRenderer, self).paragraph(text)
+
+        # jinja2 will encode text back to utf8.
+        text = text.decode('utf8')
 
         if self.no_paragraph == 0:
             # Speaker
@@ -133,18 +141,19 @@ class LPSMarkdown(Markdown):
         html = super(LPSMarkdown, self).parse(text)
         return lps_dict
 
-def HTMLRender(_dict):  
-    """Render html from a dictionary and returns a string.
 
-    Uses jinja2 and HTML template file.
-    """ 
-    templateLoader = jinja2.FileSystemLoader( searchpath="./" )
-    templateEnv = jinja2.Environment( loader=templateLoader )
-    TEMPLATE_FILE = "tests/files/index.html"
-    template = templateEnv.get_template( TEMPLATE_FILE )
-    _data  = {'res':_dict}
-    lps_output = template.render( _data )
-    return lps_output
+def RenderHTML(lps_dict, year):
+    """Renders LP schedule in HTML from a python dictionary.
+
+    Returns the HTML as a string.
+    """
+    env = Environment(loader=PackageLoader('lps_gen',
+                                           'templates'),
+                      trim_blocks=True, lstrip_blocks=True)
+    template = env.get_template('lp-sch-%s.jinja2' % year)
+
+    return template.render(schedule=lps_dict)
+
 
 def main():
     parser = ArgumentParser()
@@ -156,9 +165,6 @@ def main():
 
     markdown = LPSMarkdown()
     lps_dict = markdown(lps_md_content)
-    print HTMLRender(lps_dict)
-
-    #print json.dumps(lps_dict, indent=4)
 
 
 if __name__ == "__main__":
