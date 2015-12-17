@@ -112,22 +112,22 @@ class TestLpsGen(object):
         Testing `LPSMarkdown` class - Speaker
         """
         speakers = [
-            'Richard Stallman',
-            'Christopher Webber',
-            'ginger coons',
+            ['Richard Stallman'],
+            ['<a href="http://dustycloud.org">Christopher Webber</a>'],
+            ['ginger coons'],
             ['Marianne Corvellec', 'Jonathan Le Lous'],
-            'Seth Schoen',
-            'Jonas Öberg',
-            'Benjamin Mako Hill',
-            'Bradley Kuhn',
-            'Ken Starks',
+            ['Seth Schoen'],
+            ['Jonas Öberg'],
+            ['Benjamin Mako Hill'],
+            ['Bradley Kuhn'],
+            ['Ken Starks'],
             ]
 
         i = 0
         for lps_timeslots in self.lps_dict.values():
             for lps_sessions in lps_timeslots.values():
                 for session_info in lps_sessions.values():
-                    assert_equal(session_info['speaker'], speakers[i])
+                    assert_equal(session_info['speakers'], speakers[i])
                     i = i + 1
 
 

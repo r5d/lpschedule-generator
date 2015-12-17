@@ -78,8 +78,8 @@
   {% for session, session_info in sessions.iteritems() %} {# session start #}
     <section id="day-{{ day_index }}-timeslot-{{ timeslot_index }}-session-{{ loop.index }}" class="program-session"> <!-- day-{{ day_index }}-timeslot-{{ timeslot_index }}-session-{{ loop.index }} start -->
       {{ mk_session_header(session) }}
-      <p>{{ session_info['speaker'] }}</p>
-      <p>{{ session_info['room'] }}</p>
+      {{ mk_speakers(session_info['speakers']) }}
+      {{ mk_room(session_info['room']) }}
       {{ desc(session_info['desc']) }}
     </section> <!-- day-{{ day_index }}-timeslot-{{ timeslot_index }}-session-{{ loop.index }} end -->
   {% endfor %} {# session end #}

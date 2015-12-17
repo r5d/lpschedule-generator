@@ -96,13 +96,10 @@ class LPSRenderer(Renderer):
 
         if self.no_paragraph == 0:
             # Speaker
-            if len(text.split(', ')) == 1:
-                speaker_text = text
-            else:
-                speaker_text = text.split(', ')
+            speakers = text.split(', ')
 
             lps_dict[self.last_day][self.last_time_slot][
-                self.last_session]['speaker'] = speaker_text
+                self.last_session]['speakers'] = speakers
             self.no_paragraph = self.no_paragraph + 1
         elif self.no_paragraph == 1:
             # Room

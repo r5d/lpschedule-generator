@@ -17,7 +17,9 @@ director.
 
 #### Federation and GNU
 
-Christopher Webber
+[Christopher Webber][webber]
+
+[webber]: http://dustycloud.org
 
 Room 32-123
 
