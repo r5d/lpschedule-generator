@@ -23,7 +23,7 @@
 
 {# make day header macro #}
 {% macro mk_day_header(day) %}
-  <header>
+  <header class="program-day-header">
     <hgroup>
       <h2>{{ day }}</h2>
     </hgroup>
@@ -32,7 +32,7 @@
 
 {# make timeslot header macro #}
 {% macro mk_timeslot_header(timeslot) %}
-  <header>
+  <header class="program-timeslot-break-header">
     <hgroup>
       <h2>{{ timeslot }}</h2>
     </hgroup>
@@ -41,7 +41,7 @@
 
 {# make session header macro #}
 {% macro mk_session_header(session) %}
-  <header>
+  <header class="program-session-header">
     <hgroup>
       <h2>{{ session }}</h2>
     </hgroup>
@@ -58,7 +58,7 @@
 {# populate sessions macro #}
 {% macro populate_sessions(sessions, day_index, timeslot_index) %}
   {% for session, session_info in sessions.iteritems() %} {# session start #}
-    <section> <!-- day-{{ day_index }}-timeslot-{{ timeslot_index }}-session-{{ loop.index }} start -->
+    <section id="day-{{ day_index }}-timeslot-{{ timeslot_index }}-session-{{ loop.index }}" class="program-session"> <!-- day-{{ day_index }}-timeslot-{{ timeslot_index }}-session-{{ loop.index }} start -->
       {{ mk_session_header(session) }}
       <p>{{ session_info['speaker'] }}</p>
       <p>{{ session_info['room'] }}</p>
@@ -70,7 +70,7 @@
 {# populate timeslots macro #}
 {% macro populate_timeslots(timeslots, day_index) %}
   {% for timeslot, sessions in timeslots.iteritems() %}  {# timeslot start #}
-    <article> <!-- day-{{ day_index }}-timeslot-{{ loop.index }} start -->
+    <article id="day-{{ day_index }}-timeslot-{{ loop.index }}" class="program-timeslot"> <!-- day-{{ day_index }}-timeslot-{{ loop.index }} start -->
       {{ mk_timeslot_header(timeslot) }}
       {{ populate_sessions(sessions, day_index, loop.index) }}
     </article> <!-- day-{{ day_index }}-timeslot-{{ loop.index }} end -->
@@ -79,7 +79,7 @@
 
 {# lp 2016 template start #}
 {% for day, timeslots in schedule.iteritems() %} {# day start #}
-  <article> <!-- day-{{ loop.index }} start -->
+  <article id="day-{{ loop.index }}-program" class="program-day"> <!-- day-{{ loop.index }} start -->
     {{ mk_day_header(day) }}
     {{ populate_timeslots(timeslots, loop.index) }}
   </article> <!-- day-{{ loop.index }} end -->
