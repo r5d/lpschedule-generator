@@ -19,6 +19,7 @@
 #   <http://www.gnu.org/licenses/>.
 
 import json
+import sys
 
 from argparse import ArgumentParser
 from collections import OrderedDict
@@ -26,6 +27,11 @@ from os import path
 
 from jinja2 import Environment, PackageLoader
 from mistune import Renderer, Markdown
+
+
+# unicode magic
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 # Python dictionary that will contain the lp schedule.
@@ -63,10 +69,6 @@ class LPSRenderer(Renderer):
 
     def header(self, text, level, raw=None):
         global lps_dict
-        utf8_text = text
-
-        # jinja2 will encode text back to utf8.
-        text = text.decode('utf8')
 
         if level == 2:
             # Add new day.
@@ -84,16 +86,13 @@ class LPSRenderer(Renderer):
             # to 0.
             self.no_paragraph = 0
 
-        return super(LPSRenderer, self).header(utf8_text, level, raw)
+        return super(LPSRenderer, self).header(text, level, raw)
 
 
     def paragraph(self, text):
         global lps_dict
 
         p = super(LPSRenderer, self).paragraph(text)
-
-        # jinja2 will encode text back to utf8.
-        text = text.decode('utf8')
 
         if self.no_paragraph == 0:
             # Speaker
