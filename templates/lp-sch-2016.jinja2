@@ -21,6 +21,24 @@
 
 {# macros start #}
 
+{# make speakers macro #}
+{% macro mk_speakers(speakers) %}
+  <span class="program-session-speaker">
+    {% for speaker in speakers %}
+      {% if loop.last %}
+        {{ speaker }}
+      {% else %}
+        {{ speaker }},
+      {% endif %}
+    {% endfor %}
+  </span>
+{% endmacro %}
+
+{# make room macro #}
+{% macro mk_room(room) %}
+  <p><span class="label label-default">{{ room }}</span></p>
+{% endmacro %}
+
 {# make day header macro #}
 {% macro mk_day_header(day) %}
   <header class="program-day-header">
