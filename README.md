@@ -1,28 +1,44 @@
 # LibrePlanet schedule generator
 
-## On GNU/Linux
+## Get it
 
-Install `virtualenv` and python dev. package.
+    $ git clone https://notabug.org/rsd/lpschedule-generator.git
+
+## Setup virtual environment
+
+Install `virtualenv` and `python-dev` package.
 
 On a Debian based distribution, do:
 
     # aptitude install virtualenv python-dev
 
-## Set up environment
-
-    $ git clone git://notabug.org/rsd/lpschedule-generator.git
-
-Setup virtual environment:
-
-    $ cd lpschedule-generator
+    $ cd path/to/lpschedule-generator
     $ virtualenv .
 
-Activate the virtual environment:
+## Activate virtual environment
 
+    $ cd path/to/lpschedule-generator
     $ source bin/activate
 
-Install `lpschedule-generator`:
+Heads up! Always activate the virtual environment before executing any
+of the commands in the following sections.
+
+## Install script
 
     $ python setup.py install
 
-This will install all the dependencies.
+This will install the script.
+
+## Upgrade script
+
+    $ git pull origin master
+    $ python setup.py install
+
+## Usage
+
+    $ lps_gen YEAR path/to/lp-schd.md > path/to/program-schedule.html
+
+Replace `YEAR` with LP year; for example, for generating LP 2016
+schedule, the command will be:
+
+    $ lps_gen 2016 path/to/lp-schd.md > path/to/program-schedule.html
