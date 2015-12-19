@@ -19,6 +19,8 @@
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
 
+import lps_gen
+
 try:
     from setuptools import setup
 except ImportError:
@@ -27,13 +29,19 @@ except ImportError:
 config = {
     'name': 'lpschedule-generator',
     'description': 'LibrePlanet schedule generator',
-    'author': 'rsiddharth',
+    'long_description': lps_gen.read_file('README.md'),
+    'version': lps_gen.__version__,
+    'platforms': 'GNU/Linux',
+    'license': 'GNU General Public License version 3 or later',
     'url': 'https://notabug.org/rsd/lpschedule-generator/',
+    'author': 'rsiddharth',
     'author_email': 'rsd@gnu.org',
-    'version': '0.0',
     'install_requires': ['nose', 'mock', 'mistune', 'Jinja2', 'beautifulsoup4'],
     'py_modules': ['lps_gen'],
     'data_files':[('templates',['templates/lp-sch-2016.jinja2'])],
+    'entry_points': {
+        'console_scripts': ['lps_gen = lps_gen:main']
+    },
 }
 
 setup(**config)

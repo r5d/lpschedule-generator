@@ -30,6 +30,7 @@ from jinja2 import Environment, PackageLoader
 from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
 
+__version__ = '0.0.0'
 
 # unicode magic
 reload(sys)
