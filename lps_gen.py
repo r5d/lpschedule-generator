@@ -48,9 +48,12 @@ def read_file(filename):
     """
     content = ''
 
-    with open(filename, 'rb') as f:
-        for line in f:
-            content = content + line
+    try:
+        with open(filename, 'rb') as f:
+            for line in f:
+                content = content + line
+    except IOError:
+        print "Error: unable to open %s" % filename
 
     return content
 
