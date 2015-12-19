@@ -163,6 +163,7 @@ class TestLpsGen(object):
         print lps_html
 
 
+    @raises(SystemExit)
     def test_RenderHTML_invalid_year(self):
         """Testing `RenderHTML` function - with invalid year
         """

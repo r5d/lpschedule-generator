@@ -160,7 +160,7 @@ def RenderHTML(lps_dict, year):
         template = env.get_template(template_name)
     except TemplateNotFound as e:
         print "Template %s not found." % template_name
-        return
+        exit(1)
 
     lps_html = template.render(schedule=lps_dict)
 
