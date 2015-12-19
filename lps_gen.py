@@ -169,14 +169,27 @@ def RenderHTML(lps_dict, year):
 
 def main():
     parser = ArgumentParser()
+    parser.add_argument("year",
+                        help="LP Schedule year.")
     parser.add_argument("lps_md",
                         help="Path to the markdown version of LP Schedule.")
     args = parser.parse_args()
 
     lps_md_content = read_file(path.abspath(args.lps_md))
+    lp_year = args.year
 
-    markdown = LPSMarkdown()
-    lps_dict = markdown(lps_md_content)
+    if lps_md_content:
+        markdown = LPSMarkdown()
+        lps_dict = markdown(lps_md_content)
+        lps_html = RenderHTML(lps_dict, lp_year)
+    else:
+        exit(1)
+
+    if lps_html:
+        # stdout lps html
+        print lps_html
+    else:
+        print 'Error generating LP HTML.'
 
 
 if __name__ == "__main__":
