@@ -22,8 +22,10 @@ import json
 import pprint
 
 import mistune
+import mock
 
 from os import path
+from StringIO import StringIO
 
 from nose.tools import *
 
@@ -159,6 +161,18 @@ class TestLpsGen(object):
         """
         lps_html = RenderHTML(self.lps_dict, '2016')
         print lps_html
+
+
+    def test_RenderHTML_invalid_year(self):
+        """Testing `RenderHTML` function - with invalid year
+        """
+        with mock.patch('sys.stdout', new_callable=StringIO) as out:
+            invalid_year = '2016_invalid'
+            template_name = 'lp-sch-%s.jinja2' % invalid_year
+
+            lps_html = RenderHTML(self.lps_dict, invalid_year)
+            expected_out = 'Template %s not found.\n' % template_name
+            assert out.getvalue() == expected_out
 
 
     def teardown(self):

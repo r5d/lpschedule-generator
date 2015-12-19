@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
 #    Copyright (C) 2015  lpschedule-generator contributors. See CONTRIBUTORS.
 #
 #    This file is part of lpschedule-generator.
@@ -22,14 +25,15 @@ except ImportError:
     from distutils.core import setup
 
 config = {
+    'name': 'lpschedule-generator',
     'description': 'LibrePlanet schedule generator',
     'author': 'rsiddharth',
     'url': 'https://notabug.org/rsd/lpschedule-generator/',
     'author_email': 'rsd@gnu.org',
     'version': '0.0',
-    'install_requires': ['nose', 'mistune', 'Jinja2'],
+    'install_requires': ['nose', 'mock', 'mistune', 'Jinja2', 'beautifulsoup4'],
     'py_modules': ['lps_gen'],
-    'name': 'lpschedule-generator'
-    }
+    'data_files':[('templates',['templates/lp-sch-2016.jinja2'])],
+}
 
 setup(**config)

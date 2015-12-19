@@ -25,7 +25,9 @@ from argparse import ArgumentParser
 from collections import OrderedDict
 from os import path
 
+from bs4 import BeautifulSoup
 from jinja2 import Environment, PackageLoader
+from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
 
 
@@ -146,9 +148,19 @@ def RenderHTML(lps_dict, year):
     env = Environment(loader=PackageLoader('lps_gen',
                                            'templates'),
                       trim_blocks=True, lstrip_blocks=True)
-    template = env.get_template('lp-sch-%s.jinja2' % year)
 
-    return template.render(schedule=lps_dict)
+    template_name = 'lp-sch-%s.jinja2' % year
+    template  = None
+
+    try:
+        template = env.get_template(template_name)
+    except TemplateNotFound as e:
+        print "Template %s not found." % template_name
+        return
+
+    lps_html = template.render(schedule=lps_dict)
+
+    return BeautifulSoup(lps_html, 'html.parser').prettify()
 
 
 def main():
