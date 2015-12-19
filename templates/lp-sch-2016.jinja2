@@ -40,19 +40,35 @@
 {% endmacro %}
 
 {# make day header macro #}
-{% macro mk_day_header(day) %}
+{% macro mk_day_header(day, collapse_area) %}
   <header class="program-day-header">
     <hgroup>
-      <h2>{{ day }}</h2>
+      <h2>{{ day }}
+        <a class="btn btn-default btn-xs" role="button"
+           data-toggle="collapse" aria-expanded="false"
+           aria-controls="{{ collapse_area }}"
+           href="#{{ collapse_area }}">
+           &#x2193;
+        </a>
+      </h2>
     </hgroup>
   </header>
 {% endmacro %}
 
 {# make timeslot header macro #}
-{% macro mk_timeslot_header(timeslot) %}
+{% macro mk_timeslot_header(timeslot, collapse, collapse_area='') %}
   <header class="program-timeslot-break-header">
     <hgroup>
-      <h2>{{ timeslot }}</h2>
+      <h2>{{ timeslot }}
+        {% if collapse %}
+          <a class="btn btn-default btn-xs" role="button"
+             data-toggle="collapse" aria-expanded="false"
+             aria-controls="{{ collapse_area }}"
+             href="#{{ collapse_area }}">
+             &#x2193;
+          </a>
+        {% endif %}
+      </h2>
     </hgroup>
   </header>
 {% endmacro %}
@@ -89,8 +105,13 @@
 {% macro populate_timeslots(timeslots, day_index) %}
   {% for timeslot, sessions in timeslots.iteritems() %}  {# timeslot start #}
     <article id="day-{{ day_index }}-timeslot-{{ loop.index }}" class="program-timeslot"> <!-- day-{{ day_index }}-timeslot-{{ loop.index }} start -->
-      {{ mk_timeslot_header(timeslot) }}
-      {{ populate_sessions(sessions, day_index, loop.index) }}
+      {{ mk_timeslot_header(timeslot, sessions|length > 0, "day-%d-timeslot-%d-sessions"|format(day_index, loop.index)) }}
+      {% if sessions|length > 0 %}
+        <div class="collapse in"
+             id="day-{{ day_index }}-timeslot-{{ loop.index }}-sessions">
+             {{ populate_sessions(sessions, day_index, loop.index) }}
+        </div> <!-- day-{{ day_index }}-timeslot-{{ loop.index }}-sessions end -->
+      {% endif %}
     </article> <!-- day-{{ day_index }}-timeslot-{{ loop.index }} end -->
   {% endfor %} {# timeslot start #}
 {% endmacro %}
@@ -98,7 +119,9 @@
 {# lp 2016 template start #}
 {% for day, timeslots in schedule.iteritems() %} {# day start #}
   <article id="day-{{ loop.index }}-program" class="program-day"> <!-- day-{{ loop.index }} start -->
-    {{ mk_day_header(day) }}
-    {{ populate_timeslots(timeslots, loop.index) }}
+    {{ mk_day_header(day, "day-%d-timeslots"|format(loop.index)) }}
+    <div class="collapse in" id="day-{{ loop.index }}-timeslots">
+      {{ populate_timeslots(timeslots, loop.index) }}
+    </div> <!-- day-{{ loop.index }}-timeslots end -->
   </article> <!-- day-{{ loop.index }} end -->
 {% endfor %} {# day loop end #}
