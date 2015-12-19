@@ -157,7 +157,8 @@ class TestLpsGen(object):
     def test_RenderHTML(self):
         """Testing `RenderHTML` function
         """
-        print RenderHTML(self.lps_dict, '2016')
+        lps_html = RenderHTML(self.lps_dict, '2016')
+        print lps_html
 
 
     def teardown(self):
