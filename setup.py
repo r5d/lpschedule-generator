@@ -22,7 +22,7 @@
 import lps_gen
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
     from distutils.core import setup
 
@@ -38,7 +38,8 @@ config = {
     'author_email': 'rsd@gnu.org',
     'install_requires': ['nose', 'mock', 'mistune', 'Jinja2', 'beautifulsoup4'],
     'py_modules': ['lps_gen'],
-    'data_files':[('templates',['templates/lp-sch-2016.jinja2'])],
+    'packages': find_packages(exclude=['tests']),
+    'package_data': { 'lpschedule_generator': ['templates/*.jinja2'] },
     'entry_points': {
         'console_scripts': ['lps_gen = lps_gen:main']
     },

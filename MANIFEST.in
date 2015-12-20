@@ -1,4 +1,4 @@
 include COPYING CONTRIBUTORS README.md
-recursive-include templates *
+recursive-include lpschedule_generator *
 recursive-include tests *
 recursive-exclude tests *.pyc

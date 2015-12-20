@@ -30,7 +30,7 @@ from jinja2 import Environment, PackageLoader
 from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
 
-__version__ = '0.1.0.dev1'
+__version__ = '0.1.0.dev2'
 
 # unicode magic
 reload(sys)
@@ -149,7 +149,7 @@ def RenderHTML(lps_dict, year):
 
     Returns the HTML as a string.
     """
-    env = Environment(loader=PackageLoader('lps_gen',
+    env = Environment(loader=PackageLoader('lpschedule_generator',
                                            'templates'),
                       trim_blocks=True, lstrip_blocks=True)
 
