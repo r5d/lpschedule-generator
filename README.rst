@@ -4,7 +4,7 @@ LibrePlanet schedule generator
 Get it
 ------
 
-Install `virtualenv` and `python-dev` package.
+Install ``virtualenv`` and ``python-dev`` package.
 
 On a Debian based distribution, do::
 
