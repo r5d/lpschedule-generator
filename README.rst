@@ -12,11 +12,11 @@ On a Debian based distribution, do::
   $ virtualenv .
   $ source bin/activate
 
-  $ pip install lpschedule-generator --pre
+  $ pip install --pre lpschedule-generator
 
 
 Activating virtual environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Always activate the virtual environment before using the ``lps_gen``
 command::
