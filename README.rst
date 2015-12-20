@@ -13,7 +13,7 @@ Install globally
 
 ::
 
-   $ sudo pip install --pre lpschedule-generator
+   $ sudo pip install lpschedule-generator
 
 
 Install locally using virtualenv (Recommended)
@@ -30,7 +30,7 @@ virtual environment in it::
 
 Install ``lpschedule-generator`` inside this directory using ``pip``::
 
-  $ pip install --pre lpschedule-generator
+  $ pip install lpschedule-generator
 
 Activating virtual environment
 ``````````````````````````````
