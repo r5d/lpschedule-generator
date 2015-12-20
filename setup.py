@@ -29,7 +29,7 @@ except ImportError:
 config = {
     'name': 'lpschedule-generator',
     'description': 'LibrePlanet schedule generator',
-    'long_description': lps_gen.read_file('README.md'),
+    'long_description': lps_gen.read_file('README.rst'),
     'version': lps_gen.__version__,
     'platforms': 'GNU/Linux',
     'license': 'GNU General Public License version 3 or later',
