@@ -38,6 +38,7 @@ config = {
     'author_email': 'rsd@gnu.org',
     'install_requires': ['mistune', 'Jinja2', 'beautifulsoup4'],
     'tests_require': ['nose', 'mock'],
+    'test_suite': 'nose.collector',
     'py_modules': ['lps_gen'],
     'packages': find_packages(exclude=['tests']),
     'package_data': { 'lpschedule_generator': ['templates/*.jinja2'] },
