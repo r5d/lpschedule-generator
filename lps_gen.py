@@ -30,7 +30,7 @@ from jinja2 import Environment, PackageLoader
 from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
 
-__version__ = '0.1.0.dev6'
+__version__ = '0.1.0.dev7'
 
 # unicode magic
 reload(sys)
@@ -169,6 +169,9 @@ def RenderHTML(lps_dict, year):
 
 def main():
     parser = ArgumentParser()
+    parser.add_argument("--version", action="version",
+                        version='lpschedule-generator version %s' % __version__,
+                        help="Show version number and exit.")
     parser.add_argument("year",
                         help="LP Schedule year.")
     parser.add_argument("lps_md",
