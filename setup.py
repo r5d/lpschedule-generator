@@ -42,6 +42,18 @@ config = {
     'entry_points': {
         'console_scripts': ['lps_gen = lps_gen:main']
     },
+    'classifiers': [
+        'Development Status :: 3 - Alpha',
+        'Environment :: Console',
+        'Intended Audience :: Other Audience',
+        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+        'Operating System :: POSIX :: Linux',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 2 :: Only',
+        'Topic :: Text Processing',
+        'Topic :: Utilities',
+        ]
 }
 
 setup(**config)
