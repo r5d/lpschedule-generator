@@ -42,6 +42,9 @@ class TestLpsGen(object):
         self.MD_FILE = path.join('tests', 'files', 'lp-sch.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
+        self.SCH_TEMPLATE = path.join('tests', 'files',
+                                      'lp-sch-2016.jinja2')
+
         self.markdown = LPSMarkdown()
         self.lps_dict = self.markdown(self.MD_FILE_CONTENT)
 
@@ -160,19 +163,18 @@ class TestLpsGen(object):
     def test_RenderHTML(self):
         """Testing `RenderHTML` function
         """
-        lps_html = RenderHTML(self.lps_dict, '2016')
+        lps_html = RenderHTML(self.lps_dict, self.SCH_TEMPLATE)
         print lps_html
 
 
     @raises(SystemExit)
     def test_RenderHTML_invalid_year(self):
-        """Testing `RenderHTML` function - with invalid year
+        """Testing `RenderHTML` function - with non-existent template
         """
         with mock.patch('sys.stdout', new_callable=StringIO) as out:
-            invalid_year = '2016_invalid'
-            template_name = 'lp-sch-%s.jinja2' % invalid_year
+            nonexistent_template = 'lpsch-template.null'
 
-            lps_html = RenderHTML(self.lps_dict, invalid_year)
+            lps_html = RenderHTML(self.lps_dict, nonexistent_template)
             expected_out = 'Template %s not found.\n' % template_name
             assert out.getvalue() == expected_out
 

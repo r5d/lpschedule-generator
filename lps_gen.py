@@ -26,7 +26,7 @@ from collections import OrderedDict
 from os import path
 
 from bs4 import BeautifulSoup
-from jinja2 import Environment, PackageLoader
+from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
 
@@ -144,16 +144,15 @@ class LPSMarkdown(Markdown):
         return lps_dict
 
 
-def RenderHTML(lps_dict, year):
+def RenderHTML(lps_dict, template):
     """Renders LP schedule in HTML from a python dictionary.
 
     Returns the HTML as a string.
     """
-    env = Environment(loader=PackageLoader('lpschedule_generator',
-                                           'templates'),
+    env = Environment(loader=FileSystemLoader(path.dirname(template)),
                       trim_blocks=True, lstrip_blocks=True)
 
-    template_name = 'lp-sch-%s.jinja2' % year
+    template_name = path.basename(template)
     template  = None
 
     try:
@@ -172,25 +171,25 @@ def main():
     parser.add_argument("--version", action="version",
                         version='lpschedule-generator version %s' % __version__,
                         help="Show version number and exit.")
-    parser.add_argument("year",
-                        help="LP Schedule year.")
-    parser.add_argument("lps_md",
-                        help="Path to the markdown version of LP Schedule.")
+    parser.add_argument("lp_t",
+                        help="Path to the LP template.")
+    parser.add_argument("lp_md",
+                        help="Path to the LP markdown.")
     args = parser.parse_args()
 
-    lps_md_content = read_file(path.abspath(args.lps_md))
-    lp_year = args.year
+    lp_template = args.lp_t
+    lp_md_content = read_file(path.abspath(args.lp_md))
 
-    if lps_md_content:
+    if path.exists(lp_template) and lp_md_content:
         markdown = LPSMarkdown()
-        lps_dict = markdown(lps_md_content)
-        lps_html = RenderHTML(lps_dict, lp_year)
+        lp_dict = markdown(lp_md_content)
+        lp_html = RenderHTML(lp_dict, lp_template)
     else:
         exit(1)
 
-    if lps_html:
+    if lp_html:
         # stdout lps html
-        print lps_html
+        print lp_html
     else:
         print 'Error generating LP HTML.'
 

@@ -47,12 +47,7 @@ Usage
 
 ::
 
-   $ lps_gen YEAR path/to/lp-sch.md > path/to/program-schedule.html
-
-Replace ``YEAR`` with LP year; for example, for generating LP 2016
-schedule, the command will be::
-
-  $ lps_gen 2016 path/to/lp-sch.md > path/to/program-schedule.html
+   $ lps_gen path/to/lp-sch.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
 
 
 LP schedule markdown structure
