@@ -1,4 +1,3 @@
 include COPYING CONTRIBUTORS README.rst
-recursive-include lpschedule_generator *
 recursive-include tests *
 recursive-exclude tests *.pyc
