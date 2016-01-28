@@ -23,6 +23,9 @@ test:
 build-dist:
 	@python setup.py sdist bdist_wheel
 
+egg:
+	@python setup.py egg_info
+
 upload:
 	@twine upload -r pypi -s -i rsd@gnu.org dist/*.tar.gz
 	@twine upload -r pypi -s -i rsd@gnu.org dist/*.whl
@@ -32,5 +35,8 @@ clean-build:
 	@rm -rf dist/
 	@rm -rf *.egg-info
 
-.PHONY: dist clean-build upload build-dist
+clean-pyc:
+	@find . -name '*.pyc' -exec rm -f {} +
+
+.PHONY: dist clean-build upload build-dist egg clean-pyc
 
