@@ -21,10 +21,8 @@
 
 import lps_gen
 
-try:
-    from setuptools import setup, find_packages
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
+
 
 config = {
     'name': 'lpschedule-generator',
