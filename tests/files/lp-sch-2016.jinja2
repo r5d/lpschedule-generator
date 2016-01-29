@@ -36,25 +36,31 @@
 
 {# make room macro #}
 {% macro mk_room(room) %}
-  <span class="label label-default">{{ room }}</span>
+  {% if room|lower != 'roomtba' %}
+    <span class="label label-default">{{ room }}</span>
+  {% endif %}
 {% endmacro %}
 
 {# make day header macro #}
 {% macro mk_day_header(day, collapse_area) %}
-  <header class="program-day-header">
-    <hgroup>
-      <h2>{{ day }}</h2>
-    </hgroup>
-  </header>
+  {% if day|trim != '' %}
+    <header class="program-day-header">
+      <hgroup>
+        <h2>{{ day }}</h2>
+      </hgroup>
+    </header>
+  {% endif %}
 {% endmacro %}
 
 {# make timeslot header macro #}
 {% macro mk_timeslot_header(timeslot, collapse, collapse_area='') %}
-  <header class="program-timeslot-header">
-    <hgroup>
-      <h2>{{ timeslot }}</h2>
-    </hgroup>
-  </header>
+  {% if timeslot|trim != '' %}
+    <header class="program-timeslot-header">
+      <hgroup>
+        <h2>{{ timeslot }}</h2>
+      </hgroup>
+    </header>
+  {% endif %}
 {% endmacro %}
 
 {# make session header macro #}
