@@ -168,7 +168,7 @@ class TestLpsGen(object):
 
 
     @raises(SystemExit)
-    def test_RenderHTML_invalid_year(self):
+    def test_RenderHTML_nonexistent_template(self):
         """Testing `RenderHTML` function - with non-existent template
         """
         with mock.patch('sys.stdout', new_callable=StringIO) as out:
