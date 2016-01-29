@@ -167,6 +167,16 @@ class TestLpsGen(object):
         print lps_html
 
 
+    def test_RenderHTML_sessions_only(self):
+        """Testing `RenderHTML` function - sessions only
+        """
+        md_content = read_file(path.join('tests', 'files',
+                                         'lp-sch-sessions-only.md'))
+
+        lps_html = RenderHTML(self.markdown(md_content),
+                              self.SCH_TEMPLATE)
+        print lps_html
+
     @raises(SystemExit)
     def test_RenderHTML_nonexistent_template(self):
         """Testing `RenderHTML` function - with non-existent template
