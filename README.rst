@@ -116,8 +116,9 @@ Session structure::
   [sfc]: https://sfconservancy.org/
 
 
-Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch.md
+Sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch.md
 
+Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch-sessions-only.md
 
 Source
 ------
