@@ -39,7 +39,6 @@ config = {
     'test_suite': 'nose.collector',
     'py_modules': ['lps_gen'],
     'packages': find_packages(exclude=['tests']),
-    'package_data': { 'lpschedule_generator': ['templates/*.jinja2'] },
     'entry_points': {
         'console_scripts': ['lps_gen = lps_gen:main']
     },
