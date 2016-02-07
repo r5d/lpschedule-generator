@@ -139,8 +139,8 @@ Sessions only schedule
 It is possible to have a sessions only schedule. To do this, at the
 beginning of the markdown document:
 
- - Add a level two heading (``##``) with one or more whitespaces.
- - Add a level three heading (``###``) with one or more whitespaces.
+- Add a level two heading (``##``) with one or more whitespaces.
+- Add a level three heading (``###``) with one or more whitespaces.
 
 Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch-sessions-only.md
 
@@ -204,15 +204,14 @@ The last name of the speaker is automatically made the ID; if a
 speaker' name is "John Hacker", the ID for this speaker will be
 ``hacker``.
 
- - If two or more speakers have the same last name, then, the first
-   speaker will have their last name as their ID and from the second
-   to the n^th speaker will have their full name as their
-   ID; if "Bill Hacker" and "Jill Hacker" are two speakers, "Bill"
-   will get ``hacker`` as his ID and "Jill" will get ``jill_hacker``
-   as her ID.
+- If two or more speakers have the same last name, then, the first
+  speaker will have their last name as their ID and from the second to
+  the n^th speaker will have their full name as their ID; if "Bill
+  Hacker" and "Jill Hacker" are two speakers, "Bill" will get
+  ``hacker`` as his ID and "Jill" will get ``jill_hacker`` as her ID.
 
- - The IDs are transliterated to ASCII; if a speaker' name is "John
-   HÖcker", the ID for this speaker will be ``hacker``.
+- The IDs are transliterated to ASCII; if a speaker' name is "John
+  HÖcker", the ID for this speaker will be ``hacker``.
 
 
 Source
