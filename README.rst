@@ -45,8 +45,8 @@ command::
 LP schedule
 -----------
 
-Usage
-~~~~~
+LP schedule usage
+~~~~~~~~~~~~~~~~~
 ::
 
    $ lps_gen -s path/to/lp-sch.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
