@@ -9,9 +9,7 @@ wide range of free software projects, and a participant in protocol
 development standards organizations like the IETF, with an eye toward
 preserving and improving civil liberties and civil rights through our
 shared infrastructure. <span class="text-muted">Photo license: This
-work by <span xmlns:cc="http://creativecommons.org/ns#"
-property="cc:attributionName">Daniel Kahn Gillmor</span> is licensed
-under a <a rel="license"
+work by Daniel Kahn Gillmor is licensed under a <a rel="license"
 href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
 Attribution ShareAlike 4.0 International License</a>.</span>
 
@@ -28,15 +26,10 @@ the largest debate about reforms to US surveillance policy
 since 1978. Today, he works on methods of enforcing human rights
 through the application and development of new technologies. He joined
 the board of Freedom of the Press Foundation in February 2014. <span
-class="text-muted">Photo license: <span
-xmlns:dct="http://purl.org/dc/terms/"
-href="http://purl.org/dc/dcmitype/StillImage" property="dct:title"
-rel="dct:type">Screenshot of a Citizen Four by Praxis Films.</span> by
-<span xmlns:cc="http://creativecommons.org/ns#"
-property="cc:attributionName">Laura Poitras</span> is licensed under a
-<a rel="license"
+class="text-muted">Photo license: >Screenshot of a Citizen Four by
+Praxis Films. by Laura Poitras is licensed under a <a rel="license"
 href="http://creativecommons.org/licenses/by/3.0/">Creative Commons
-Attribution 3.0</a></span>.)
+Attribution 3.0</a></span>.
 
 # Richard Stallman
 
