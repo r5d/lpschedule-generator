@@ -161,14 +161,14 @@ class TestLPS(object):
 
 
     def test_RenderHTML(self):
-        """Testing `RenderHTML` function
+        """Testing `RenderHTML` function with LP schedule
         """
         lps_html = RenderHTML(self.lps_dict, self.SCH_TEMPLATE)
         print lps_html
 
 
     def test_RenderHTML_sessions_only(self):
-        """Testing `RenderHTML` function - sessions only
+        """Testing `RenderHTML` function - LP schedule - sessions only
         """
         md_content = read_file(path.join('tests', 'files',
                                          'lp-sch-sessions-only.md'))
