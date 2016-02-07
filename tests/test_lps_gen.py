@@ -212,6 +212,9 @@ class TestLPSpeakers(object):
         self.MD_FILE = path.join('tests', 'files', 'lp-speakers.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
+        self.SPEAKERS_TEMPLATE = path.join('tests', 'files',
+                                           'lp-speakers-2016.jinja2')
+
         self.markdown = LPSpeakersMarkdown()
         self.lpspeakers_dict = self.markdown(self.MD_FILE_CONTENT)
 
@@ -429,6 +432,13 @@ class TestLPSpeakers(object):
                     j = j + 1
 
             i = i + 1
+
+
+    def test_RenderHTML(self):
+        """Testing `RenderHTML` function with LP speakers
+        """
+        lps_html = RenderHTML(self.lpspeakers_dict, self.SPEAKERS_TEMPLATE)
+        print lps_html
 
 
     def teardown(self):
