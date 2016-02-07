@@ -206,7 +206,7 @@ speaker' name is "John Hacker", the ID for this speaker will be
 
  - If two or more speakers have the same last name, then, the first
    speaker will have their last name as their ID and from the second
-   to the n<sup>th</sup> speaker will have their full name as their
+   to the n^th speaker will have their full name as their
    ID; if "Bill Hacker" and "Jill Hacker" are two speakers, "Bill"
    will get ``hacker`` as his ID and "Jill" will get ``jill_hacker``
    as her ID.
