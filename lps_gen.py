@@ -254,8 +254,8 @@ class LPSpeakersMarkdown(Markdown):
         return lpspeakers_dict
 
 
-def RenderHTML(lps_dict, template):
-    """Renders LP schedule in HTML from a python dictionary.
+def RenderHTML(lp_dict, template):
+    """Renders LP schedule/speakers in HTML from a python dictionary.
 
     Returns the HTML as a string.
     """
@@ -271,9 +271,9 @@ def RenderHTML(lps_dict, template):
         print "Template %s not found." % template_name
         exit(1)
 
-    lps_html = template.render(schedule=lps_dict)
+    lp_html = template.render(lp_dict=lp_dict)
 
-    return BeautifulSoup(lps_html, 'html.parser').prettify()
+    return BeautifulSoup(lp_html, 'html.parser').prettify()
 
 
 def main():
