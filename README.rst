@@ -120,7 +120,7 @@ Session structure::
   [sandler]: https://libreplanet.org/YEAR/path/to/speakers.html#sandler
   [sfc]: https://sfconservancy.org/
 
-Sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch.md
+Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch.md
 
 Special cases
 +++++++++++++
@@ -142,7 +142,7 @@ beginning of the markdown document:
  - Add a level two heading (``##``) with one or more whitespaces.
  - Add a level three heading (``###``) with one or more whitespaces.
 
-Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch-sessions-only.md
+Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch-sessions-only.md
 
 Source
 ------
