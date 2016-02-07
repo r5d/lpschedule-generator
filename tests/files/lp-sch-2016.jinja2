@@ -114,8 +114,8 @@
   {% endfor %} {# timeslot start #}
 {% endmacro %}
 
-{# lp 2016 template start #}
-{% for day, timeslots in schedule.iteritems() %} {# day start #}
+{# lp schedule 2016 template start #}
+{% for day, timeslots in lp_dict.iteritems() %} {# day start #}
   <article id="day-{{ loop.index }}-program" class="program-day">
     {{ mk_day_header(day) }}
       {{ populate_timeslots(timeslots, loop.index) }}
