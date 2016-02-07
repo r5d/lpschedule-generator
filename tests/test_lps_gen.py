@@ -298,14 +298,14 @@ class TestLPSpeakers(object):
 
         """
 
-        keynote_speaker_bios = [['<p>Daniel Kahn Gillmor is a technologist with the ACLU\'s Speech, Privacy'],
-                                ['<p>Edward Snowden is a former intelligence officer who served the CIA,'],
-                                ['<p>Richard is a software developer and software freedom activist. In 1983',
-                                 '<p>Since the mid-1990s, Richard has spent most of his time in political',],
+        keynote_speaker_bios = [['Daniel Kahn Gillmor is a technologist with the ACLU\'s Speech, Privacy'],
+                                ['Edward Snowden is a former intelligence officer who served the CIA,'],
+                                ['Richard is a software developer and software freedom activist. In 1983',
+                                 'Since the mid-1990s, Richard has spent most of his time in political',],
                                 [],
 
-                                ['<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam',
-                                 '<p>Ut turpis felis, pulvinar a semper sed, adipiscing id']]
+                                ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam',
+                                 'Ut turpis felis, pulvinar a semper sed, adipiscing id']]
 
 
         i = 0
@@ -409,16 +409,16 @@ class TestLPSpeakers(object):
         """Testing LPSpeakersMarkdown speakers' bio.
 
         """
-        speaker_bios = [['<p>Emmanuel is a Division III student at Hampshire College, studying how'],
+        speaker_bios = [['Emmanuel is a Division III student at Hampshire College, studying how'],
                         [],
-                        ['<p>Marianne Corvellec has been a Free Software activist with April'],
-                        ['<p>Richard Fontana is a lawyer at Red Hat. He leads support for Red Hat\'s'],
+                        ['Marianne Corvellec has been a Free Software activist with April'],
+                        ['Richard Fontana is a lawyer at Red Hat. He leads support for Red Hat\'s'],
                         [],
-                        ['<p>Bassam is a 3D animator/filmmaker whose 2006 short, Elephants Dream,'],
-                        ['<p>Jonathan has been involved with the Free Software Movement for ten'],
-                        ['<p>M. C. is the founder of Transparency Toolkit, a free software project'],
+                        ['Bassam is a 3D animator/filmmaker whose 2006 short, Elephants Dream,'],
+                        ['Jonathan has been involved with the Free Software Movement for ten'],
+                        ['M. C. is the founder of Transparency Toolkit, a free software project'],
                         [],
-                        ['<p>Stefano Zacchiroli is Associate Professor of Computer Science at']]
+                        ['Stefano Zacchiroli is Associate Professor of Computer Science at']]
 
         i = 0
         for kspeaker in self.lpspeakers_dict['speakers']:

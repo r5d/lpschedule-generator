@@ -55,8 +55,6 @@ system.
 
 # Ludovic Courtès
 
-NO_IMAGE
-
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam
 lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam
 viverra nec consectetur ante hendrerit. Donec et mollis
@@ -98,8 +96,6 @@ issues.
 
 ## Richard Fontana, Red Hat
 
-NO_IMAGE
-
 Richard Fontana is a lawyer at Red Hat. He leads support for Red Hat's
 engineering and research and development units and is Red Hat's lead
 counsel for legal issues relating to free software. Richard is also a
@@ -132,8 +128,6 @@ Jonathan has been involved with the Free Software Movement for ten
 years, in France and now in Canada.
 
 ## M. C. McGrath
-
-NO_IMAGE
 
 M. C. is the founder of Transparency Toolkit, a free software project
 that helps people use open data to expose surveillance and human

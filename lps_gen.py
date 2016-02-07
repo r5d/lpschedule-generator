@@ -176,12 +176,14 @@ class LPSpeakersRenderer(Renderer):
 
             lpspeakers_dict[self.speaker_type][-1]['speaker'] = text
             lpspeakers_dict[self.speaker_type][-1]['id'] = self.mk_uid(text)
+            lpspeakers_dict[self.speaker_type][-1]['bio']  = []
         elif level == 2:
             self.speaker_type = 'speakers'
             lpspeakers_dict[self.speaker_type].append(OrderedDict())
 
             lpspeakers_dict[self.speaker_type][-1]['speaker'] = text.split(', ')[0]
             lpspeakers_dict[self.speaker_type][-1]['id'] = self.mk_uid(text)
+            lpspeakers_dict[self.speaker_type][-1]['bio']  = []
 
         return super(LPSpeakersRenderer, self).header(text, level, raw)
 
@@ -200,12 +202,11 @@ class LPSpeakersRenderer(Renderer):
 
         p = super(LPSpeakersRenderer, self).paragraph(text)
 
-        if not lpspeakers_dict[self.speaker_type][-1].has_key('bio'):
-            lpspeakers_dict[self.speaker_type][-1]['bio']  = []
+        if text.startswith('<img'):
+            # ignore
             return p
 
-        lpspeakers_dict[self.speaker_type][-1]['bio'].append(p)
-
+        lpspeakers_dict[self.speaker_type][-1]['bio'].append(text)
         return p
 
 
