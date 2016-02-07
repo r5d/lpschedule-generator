@@ -89,7 +89,6 @@ Overall structure::
 
    ...
 
-
 Session structure::
 
   #### Fork and ignore: fighting a GPL violation by coding instead
@@ -129,12 +128,10 @@ Special cases
 Room TBA
 ........
 
-
 When a room for a session is not yet available put ``RoomTBA`` as the
 placeholder in the line that usually contains the room number; the
 rendered HTML will not have the room number for sessions that have
 ``RoomTBA``.
-
 
 Sessions only schedule
 ......................
