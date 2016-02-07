@@ -278,6 +278,13 @@ def RenderHTML(lp_dict, template):
 
 def main():
     parser = ArgumentParser()
+
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-s", "--schedule", action="store_true",
+                       help="Generate LP schedule")
+    group.add_argument("-sp", "--speakers", action="store_true",
+                       help="Generate LP speakers")
+
     parser.add_argument("--version", action="version",
                         version='lpschedule-generator version %s' % __version__,
                         help="Show version number and exit.")
@@ -291,7 +298,14 @@ def main():
     lp_md_content = read_file(path.abspath(args.lp_md))
 
     if path.exists(lp_template) and lp_md_content:
-        markdown = LPSMarkdown()
+
+        if args.schedule:
+            markdown = LPSMarkdown()
+        elif args.speakers:
+            markdown = LPSpeakersMarkdown()
+        else:
+            parser.error('No action requested, add -s or -sp switch')
+
         lp_dict = markdown(lp_md_content)
         lp_html = RenderHTML(lp_dict, lp_template)
     else:
