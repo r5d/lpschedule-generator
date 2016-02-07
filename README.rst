@@ -42,16 +42,22 @@ command::
    $ source bin/activate
 
 
-Usage
------
+LP schedule
+-----------
 
+Usage
+~~~~~
 ::
 
-   $ lps_gen path/to/lp-sch.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
+   $ lps_gen -s path/to/lp-sch.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
+
+or::
+
+  $ lps_gen --schedule path/to/lp-sch.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
 
 
 LP schedule markdown structure
-------------------------------
+``````````````````````````````
 
 Overall structure::
 
@@ -115,8 +121,29 @@ Session structure::
   [sandler]: https://libreplanet.org/YEAR/path/to/speakers.html#sandler
   [sfc]: https://sfconservancy.org/
 
-
 Sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch.md
+
+Special cases
++++++++++++++
+
+Room TBA
+........
+
+
+When a room for a session is not yet available put ``RoomTBA`` as the
+placeholder in the line that usually contains the room number; the
+rendered HTML will not have the room number for sessions that have
+``RoomTBA``.
+
+
+Sessions only schedule
+......................
+
+It is possible to have a sessions only schedule. To do this, at the
+beginning of the markdown document:
+
+ - Add a level two heading (``##``) with one or more whitespaces.
+ - Add a level three heading (``###``) with one or more whitespaces.
 
 Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch-sessions-only.md
 
