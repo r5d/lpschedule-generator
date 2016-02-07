@@ -31,9 +31,9 @@ from nose.tools import *
 
 from lps_gen import *
 
-class TestLpsGen(object):
+class TestLPS(object):
     """
-    Class that tests the lps_gen.py module.
+    Class that tests everything related LP Schedule.
     """
     @classmethod
     def setup_class(self):
@@ -187,6 +187,248 @@ class TestLpsGen(object):
             lps_html = RenderHTML(self.lps_dict, nonexistent_template)
             expected_out = 'Template %s not found.\n' % template_name
             assert out.getvalue() == expected_out
+
+
+    def teardown(self):
+        """Cleans up things after each test in this class."""
+        pass
+
+
+    @classmethod
+    def teardown_class(self):
+        """Purge the mess created by this test."""
+        pass
+
+
+class TestLPSpeakers(object):
+    """
+    Class that tests everything related LP Speakers
+    """
+
+    @classmethod
+    def setup_class(self):
+        """Runs before running any tests in this class."""
+
+        self.MD_FILE = path.join('tests', 'files', 'lp-speakers.md')
+        self.MD_FILE_CONTENT = read_file(self.MD_FILE)
+
+        self.markdown = LPSpeakersMarkdown()
+        self.lpspeakers_dict = self.markdown(self.MD_FILE_CONTENT)
+
+
+    def setup(self):
+        """Runs before each test in this class."""
+        pass
+
+
+    def test_LPSpeakersMarkdown_keynotespeakers_name(self):
+        """Testing LPSpeakersMarkdown keynote speakers' names.
+
+        """
+        keynote_speakers = ['Daniel Kahn Gillmor',
+                            'Edward Snowden',
+                            'Richard Stallman',
+                            'Clara Snowden',
+                            'Ludovic Courtès']
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['keynote-speakers']:
+            assert_equal(kspeaker['speaker'], keynote_speakers[i])
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_keynotespeakers_id(self):
+        """Testing LPSpeakersMarkdown keynote speakers' id.
+
+        """
+        keynote_speaker_ids = ['gillmor',
+                               'snowden',
+                               'stallman',
+                               'clara_snowden',
+                               'courtes']
+
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['keynote-speakers']:
+            assert_equal(kspeaker['id'], keynote_speaker_ids[i])
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_keynotespeakers_imgurl(self):
+        """Testing LPSpeakersMarkdown keynote speakers' image url.
+
+        """
+        keynote_speaker_img_urls = ['//static.fsf.org/nosvn/libreplanet/speaker-pics/dkg.jpg',
+                                    '//static.fsf.org/nosvn/libreplanet/speaker-pics/snowden.jpg',
+                                    '//static.fsf.org/nosvn/libreplanet/speaker-pics/stallman.jpg',
+                                    '//static.fsf.org/nosvn/libreplanet/speaker-pics/c_snowden.jpg']
+
+
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['keynote-speakers']:
+            if kspeaker.has_key('img_url'):
+                assert_equal(kspeaker['img_url'],
+                             keynote_speaker_img_urls[i])
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_keynotespeakers_imgalt(self):
+        """Testing LPSpeakersMarkdown keynote speakers' image alt text.
+
+        """
+
+        keynote_speaker_img_alts = ['Daniel Kahn Gillmor - Photo',
+                                    'Edward Snowden - Photo',
+                                    'Richard Stallman - Photo',
+                                    'Clara Snowden - Photo']
+
+
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['keynote-speakers']:
+            if kspeaker.has_key('img_alt'):
+                assert_equal(kspeaker['img_alt'],
+                             keynote_speaker_img_alts[i])
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_keynotespeakers_bio(self):
+        """Testing LPSpeakersMarkdown keynote speakers' bio.
+
+        """
+
+        keynote_speaker_bios = [['<p>Daniel Kahn Gillmor is a technologist with the ACLU\'s Speech, Privacy'],
+                                ['<p>Edward Snowden is a former intelligence officer who served the CIA,'],
+                                ['<p>Richard is a software developer and software freedom activist. In 1983',
+                                 '<p>Since the mid-1990s, Richard has spent most of his time in political',],
+                                [],
+
+                                ['<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam',
+                                 '<p>Ut turpis felis, pulvinar a semper sed, adipiscing id']]
+
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['keynote-speakers']:
+            if kspeaker.has_key('bio'):
+                j = 0
+                for p in kspeaker['bio']:
+                    p.startswith(keynote_speaker_bios[i][j])
+                    j = j + 1
+
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_speakers_name(self):
+        """Testing LPSpeakersMarkdown speakers' names.
+
+        """
+        speakers = ['Emmanuel',
+                    'George Chriss',
+                    'Marianne Corvellec',
+                    'Richard Fontana',
+                    'Mike Gerwitz',
+                    'Bassam Kurdali',
+                    'Jonathan Le Lous',
+                    'M. C. McGrath',
+                    'Deb Nicholson',
+                    'Stefano Zacchiroli']
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['speakers']:
+            assert_equal(kspeaker['speaker'], speakers[i])
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_speakers_id(self):
+        """Testing LPSpeakersMarkdown speakers' id.
+
+        """
+        speaker_ids = ['emmanuel',
+                       'chriss',
+                       'corvellec',
+                       'fontana',
+                       'gerwitz',
+                       'kurdali',
+                       'lous',
+                       'mcgrath',
+                       'nicholson',
+                       'zacchiroli']
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['speakers']:
+            assert_equal(kspeaker['id'], speaker_ids[i])
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_speakers_imgurl(self):
+        """Testing LPSpeakersMarkdown speakers' image url.
+
+        """
+        speaker_img_urls = ['', '',
+                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/corvellec.jpg',
+                            '', '',
+                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/kurdali.png',
+                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/lelous.jpg',
+                            '',
+                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/nicholson.jpg',
+                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/zacchiroli.jpg']
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['speakers']:
+            if kspeaker.has_key('img_url'):
+                assert_equal(kspeaker['img_url'],
+                             speaker_img_urls[i])
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_speakers_imgalt(self):
+        """Testing LPSpeakersMarkdown speakers' image alt text.
+
+        """
+        speaker_img_alts = ['', '',
+                            'Marianne Corvellec - Photo',
+                            '', '',
+                            'Bassam Kurdali - Photo',
+                            'Jonathan Le Lous - Photo',
+                            '',
+                            'Deb Nicholson - Photo',
+                            'Stefano Zacchiroli - Photo']
+
+
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['speakers']:
+            if kspeaker.has_key('img_alt'):
+                assert_equal(kspeaker['img_alt'],
+                             speaker_img_alts[i])
+            i = i + 1
+
+
+    def test_LPSpeakersMarkdown_speakers_bio(self):
+        """Testing LPSpeakersMarkdown speakers' bio.
+
+        """
+        speaker_bios = [['<p>Emmanuel is a Division III student at Hampshire College, studying how'],
+                        [],
+                        ['<p>Marianne Corvellec has been a Free Software activist with April'],
+                        ['<p>Richard Fontana is a lawyer at Red Hat. He leads support for Red Hat\'s'],
+                        [],
+                        ['<p>Bassam is a 3D animator/filmmaker whose 2006 short, Elephants Dream,'],
+                        ['<p>Jonathan has been involved with the Free Software Movement for ten'],
+                        ['<p>M. C. is the founder of Transparency Toolkit, a free software project'],
+                        [],
+                        ['<p>Stefano Zacchiroli is Associate Professor of Computer Science at']]
+
+        i = 0
+        for kspeaker in self.lpspeakers_dict['speakers']:
+            if kspeaker.has_key('bio'):
+                j = 0
+                for p in kspeaker['bio']:
+                    p.startswith(speaker_bios[i][j])
+                    j = j + 1
+
+            i = i + 1
 
 
     def teardown(self):

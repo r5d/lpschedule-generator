@@ -29,6 +29,7 @@ from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
+from unidecode import unidecode
 
 __version__ = '0.1.1'
 
@@ -40,6 +41,8 @@ sys.setdefaultencoding('utf-8')
 # Python dictionary that will contain the lp schedule.
 lps_dict = OrderedDict()
 
+# Python dictionary that will contain the lp speakers.
+lpspeakers_dict = OrderedDict()
 
 def read_file(filename):
     """Read file and return it as a string.
@@ -122,6 +125,90 @@ class LPSRenderer(Renderer):
         return p
 
 
+class LPSpeakersRenderer(Renderer):
+    """Helps in converting Markdown version of LP speakers to a dictionary.
+    """
+
+    def __init__(self, **kwargs):
+        super(LPSpeakersRenderer, self).__init__(**kwargs)
+        global lpspeakers_dict
+
+        lpspeakers_dict = OrderedDict()
+        lpspeakers_dict['keynote-speakers'] = []
+        lpspeakers_dict['speakers'] = []
+
+        # Type of present speaker being processed; can either be
+        # 'keynote-speakers' or 'speakers'.'
+        self.speaker_type = None
+
+        # Maintain a list of used IDs
+        self.used_ids = []
+
+
+    def mk_uid(self, text):
+        """Returns a unique id.
+        """
+        # 'John HÖcker, Onion Project' -> 'John HÖcker'
+        text = text.split(', ')[0]
+
+        # 'John HÖcker' -> 'John Hacker'
+        ascii_text = unidecode(unicode(text))
+
+        # 'John Hacker' -> 'hacker'
+        id_ = ascii_text.split()[-1].lower()
+
+        if id_ not in self.used_ids:
+            self.used_ids.append(id_)
+            return id_
+        else:
+            # 'John Hacker' -> 'john_hacker'
+            id_ = '_'.join([s.lower() for s in ascii_text.split()])
+            self.used_ids.append(id_)
+            return id_
+
+
+    def header(self, text, level, raw=None):
+        global lpspeakers_dict
+
+        if level == 1:
+            self.speaker_type = 'keynote-speakers'
+            lpspeakers_dict[self.speaker_type].append(OrderedDict())
+
+            lpspeakers_dict[self.speaker_type][-1]['speaker'] = text
+            lpspeakers_dict[self.speaker_type][-1]['id'] = self.mk_uid(text)
+        elif level == 2:
+            self.speaker_type = 'speakers'
+            lpspeakers_dict[self.speaker_type].append(OrderedDict())
+
+            lpspeakers_dict[self.speaker_type][-1]['speaker'] = text.split(', ')[0]
+            lpspeakers_dict[self.speaker_type][-1]['id'] = self.mk_uid(text)
+
+        return super(LPSpeakersRenderer, self).header(text, level, raw)
+
+
+    def image(self, src, title, text):
+        global lpspeakers_dict
+
+        lpspeakers_dict[self.speaker_type][-1]['img_url'] = src
+        lpspeakers_dict[self.speaker_type][-1]['img_alt'] = text
+
+        return super(LPSpeakersRenderer, self).image(src, title, text)
+
+
+    def paragraph(self, text):
+        global lpspeakers_dict
+
+        p = super(LPSpeakersRenderer, self).paragraph(text)
+
+        if not lpspeakers_dict[self.speaker_type][-1].has_key('bio'):
+            lpspeakers_dict[self.speaker_type][-1]['bio']  = []
+            return p
+
+        lpspeakers_dict[self.speaker_type][-1]['bio'].append(p)
+
+        return p
+
+
 class LPSMarkdown(Markdown):
     """Converts MD LP schedule to a dictionary.
 
@@ -142,6 +229,28 @@ class LPSMarkdown(Markdown):
         lps_dict = OrderedDict()
         html = super(LPSMarkdown, self).parse(text)
         return lps_dict
+
+
+class LPSpeakersMarkdown(Markdown):
+    """Converts MD LP speakers to a dictionary.
+
+    Returns the Markdown version of LP speakers as a dictionary.
+    """
+
+    def __init__(self, inline=None, block=None, **kwargs):
+        """
+        Initialize with LPSpeakersRenderer as the renderer.
+        """
+        super(LPSpeakersMarkdown, self).__init__(renderer=LPSpeakersRenderer(),
+                                                 inline=None, block=None,
+                                                 **kwargs)
+
+
+    def parse(self, text):
+        global lpspeakers_dict
+
+        html = super(LPSpeakersMarkdown, self).parse(text)
+        return lpspeakers_dict
 
 
 def RenderHTML(lps_dict, template):
