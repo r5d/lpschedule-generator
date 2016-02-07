@@ -53,8 +53,6 @@ system.
 
 # Clara Snowden
 
-![Clara Snowden - Photo](//static.fsf.org/nosvn/libreplanet/speaker-pics/c_snowden.jpg)
-
 # Ludovic Courtès
 
 NO_IMAGE
