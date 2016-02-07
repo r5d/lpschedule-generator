@@ -179,7 +179,7 @@ class TestLPS(object):
 
     @raises(SystemExit)
     def test_RenderHTML_nonexistent_template(self):
-        """Testing `RenderHTML` function - with non-existent template
+        """Testing `RenderHTML` function - LP schedule - ith non-existent template
         """
         with mock.patch('sys.stdout', new_callable=StringIO) as out:
             nonexistent_template = 'lpsch-template.null'
