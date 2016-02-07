@@ -281,7 +281,7 @@ class TestLPSpeakers(object):
         keynote_speaker_img_alts = ['Daniel Kahn Gillmor - Photo',
                                     'Edward Snowden - Photo',
                                     'Richard Stallman - Photo',
-                                    'Clara Snowden - Photo']
+                                    '']
 
 
 
