@@ -180,7 +180,7 @@ class LPSpeakersRenderer(Renderer):
         lpspeakers_dict['speakers'] = []
 
         # Type of present speaker being processed; can either be
-        # 'keynote-speakers' or 'speakers'.'
+        # 'keynote-speakers' or 'speakers'.
         self.speaker_type = None
 
         # Maintain a dict of speakers and their IDs.
