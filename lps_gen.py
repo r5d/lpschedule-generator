@@ -48,7 +48,8 @@ lpspeakers_dict = OrderedDict()
 def read_file(filename):
     """Read file and return it as a string.
 
-    filename: Absolute pathname of the file.
+    :param str filename: Absolute pathname of the file.
+
     """
     content = ''
 
