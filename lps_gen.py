@@ -31,7 +31,7 @@ from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
 from unidecode import unidecode
 
-__version__ = '0.2.0'
+__version__ = '0.3.0.dev1'
 
 # unicode magic
 reload(sys)
@@ -61,9 +61,49 @@ def read_file(filename):
     return content
 
 
+def write_file(filename, filecontent):
+    """Write `filecontent` to `filename`.
+
+    :param str filename:
+        Absolute pathname of the file.
+    :param str filecontent:
+        Data to write to `filename`.
+
+    """
+    file_ = None
+    try:
+      file_   = open(filename, 'wb')
+      file_.write(filecontent)
+      file_.close()
+    except IOError:
+        print "Error creating and writing content to %s" % filename
+        exit(1)
+
+
+
+def json_write(filename, obj):
+    """Serialize `obj` to JSON formatted `str` to `filename`.
+
+    `filename` is written relative to the current working directory.
+
+    """
+    write_file(filename, json.dumps(obj, ensure_ascii=False, indent=4))
+
+
+def json_read(filename):
+    """Deserialize JSON formatted `str` from `filename` into Python object.
+    """
+    if not path.isfile(filename):
+        return False
+
+    return json.loads(read_file(filename),
+                      object_pairs_hook=OrderedDict)
+
+
 class LPSRenderer(Renderer):
     """Helps in converting Markdown version of LP schedule to a dictionary.
     """
+
     def __init__(self, **kwargs):
         super(LPSRenderer, self).__init__(**kwargs)
         self.last_day = None

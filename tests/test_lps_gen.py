@@ -19,17 +19,96 @@
 #   <http://www.gnu.org/licenses/>.
 
 import json
+import os
 import pprint
 
 import mistune
 import mock
 
+from collections import OrderedDict
 from os import path
 from StringIO import StringIO
 
 from nose.tools import *
 
 from lps_gen import *
+
+
+class TestJSONUtils(object):
+    """Class that tests json utils in `lps_gen` module.
+    """
+    @classmethod
+    def setup_class(self):
+        """Runs before running any tests in this class."""
+        self.speakers_ids = OrderedDict({
+            unicode('Daniel Kahn Gillmor'): 'gillmor',
+            unicode('Edward Snowden'): 'snowden',
+            unicode('Richard Stallman'): 'stallman',
+            unicode('Clara Snowden'): 'clara_snowden',
+            unicode('Ludovic Courtès'): 'courtes',
+            unicode('Jonas Öberg'): 'aberg',
+        })
+        self.ids_filename = 'speakers.ids'
+
+        self.speakers_noids = [
+            unicode('Daniel Kahn Gillmor'),
+            unicode('Richard Stallman'),
+            unicode('Ludovic Courtès'),
+            unicode('Jonas Öberg'),
+        ]
+        self.noids_filename = 'speakers.noids'
+
+        # Change current working directory to the tests directory.
+        self.old_cwd = os.getcwd()
+        os.chdir('tests')
+
+
+    def setup(self):
+        """Runs before each test in this class."""
+        pass
+
+
+    def test_json_write(self):
+        """Testing json_write function."""
+        json_write(self.ids_filename, self.speakers_ids)
+        assert_equal(json.loads(read_file(self.ids_filename),
+                                object_pairs_hook=OrderedDict),
+                     self.speakers_ids)
+
+        json_write(self.noids_filename, self.speakers_noids)
+        assert_equal(json.loads(read_file(self.noids_filename),
+                                object_pairs_hook=OrderedDict),
+                     self.speakers_noids)
+
+
+    def test_json_read(self):
+        """Testing json_read function."""
+        write_file(self.ids_filename, json.dumps(self.speakers_ids,
+                                             indent=4))
+        assert_equal(json_read(self.ids_filename), self.speakers_ids)
+
+        write_file(self.noids_filename, json.dumps(self.speakers_noids,
+                                             indent=4))
+        assert_equal(json_read(self.noids_filename), self.speakers_noids)
+
+
+    def teardown(self):
+        """Cleans up things after each test in this class."""
+        # Remove `speaker.ids` file if it exists.
+        if path.isfile(self.ids_filename):
+            os.remove(self.ids_filename)
+
+        # Remove `speaker.noids` file if it exists.
+        if path.isfile(self.noids_filename):
+            os.remove(self.noids_filename)
+
+
+    @classmethod
+    def teardown_class(self):
+        """Purge the mess created by this test."""
+        # Change back to the old cwd
+        os.chdir(self.old_cwd)
+
 
 class TestLPS(object):
     """
