@@ -94,18 +94,18 @@ class TestJSONUtils(object):
 
     def teardown(self):
         """Cleans up things after each test in this class."""
-        # Remove `speaker.ids` file if it exists.
+        # Remove `speakers.ids` file if it exists.
         if path.isfile(self.ids_filename):
             os.remove(self.ids_filename)
 
-        # Remove `speaker.noids` file if it exists.
+        # Remove `speakers.noids` file if it exists.
         if path.isfile(self.noids_filename):
             os.remove(self.noids_filename)
 
 
     @classmethod
     def teardown_class(self):
-        """Purge the mess created by this test."""
+        """Clean up the mess created by this test."""
         # Change back to the old cwd
         os.chdir(self.old_cwd)
 
