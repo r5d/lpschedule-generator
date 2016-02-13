@@ -44,6 +44,7 @@ lps_dict = OrderedDict()
 # Python dictionary that will contain the lp speakers.
 lpspeakers_dict = OrderedDict()
 
+
 def read_file(filename):
     """Read file and return it as a string.
 
