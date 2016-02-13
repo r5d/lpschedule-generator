@@ -118,10 +118,14 @@ class TestLPS(object):
     def setup_class(self):
         """Runs before running any tests in this class."""
 
-        self.MD_FILE = path.join('tests', 'files', 'lp-sch.md')
+        # Change current working directory to the tests directory.
+        self.old_cwd = os.getcwd()
+        os.chdir('tests')
+
+        self.MD_FILE = path.join('files', 'lp-sch.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SCH_TEMPLATE = path.join('tests', 'files',
+        self.SCH_TEMPLATE = path.join('files',
                                       'lp-sch-2016.jinja2')
 
         self.markdown = LPSMarkdown()
@@ -275,9 +279,14 @@ class TestLPS(object):
 
     @classmethod
     def teardown_class(self):
-        """Purge the mess created by this test."""
-        pass
+        """Clean up the mess created by this test."""
 
+        # Remove `speakers.noids` file if it exists.
+        if path.isfile('speakers.noids'):
+            os.remove('speakers.noids')
+
+        # Change back to the old cwd
+        os.chdir(self.old_cwd)
 
 class TestLPSpeakers(object):
     """
@@ -547,5 +556,201 @@ class TestLPSpeakers(object):
         if path.isfile('speakers.ids'):
             os.remove('speakers.ids')
 
+        # Change back to the old cwd
+        os.chdir(self.old_cwd)
+
+
+class TestSpeakersAutoLinking(object):
+    """Class tests autolinking of speakers in sessions MD.
+    """
+    @classmethod
+    def setup_class(self):
+        """Runs before running any tests in this class."""
+
+        # Change current working directory to the tests directory.
+        self.old_cwd = os.getcwd()
+        os.chdir('tests')
+
+        self.ids_filename = 'speakers.ids'
+        self.noids_filename = 'speakers.noids'
+
+        self.SPEAKERS_MD = path.join('files', 'lp-speakers-autolink.md')
+        self.SPEAKERS_MD_CONTENT = read_file(self.SPEAKERS_MD)
+        self.SPEAKERS_TEMPLATE = path.join('files',
+                                           'lp-speakers-2016.jinja2')
+
+        self.SESSIONS_MD = path.join('files', 'lp-sessions-autolink.md')
+        self.SESSIONS_MD_CONTENT = read_file(self.SESSIONS_MD)
+        self.SESSIONS_TEMPLATE = path.join('files',
+                                           'lp-sch-2016.jinja2')
+
+
+    def setup(self):
+        """Runs before each test in this class."""
+        pass
+
+
+    def test_sessions_autolinking(self):
+        """Testing autolinking of speakers in sessions. """
+        self.speakers_markdown = LPSpeakersMarkdown()
+        self.lpspeakers_dict = self.speakers_markdown(
+            self.SPEAKERS_MD_CONTENT)
+
+        assert (path.isfile(self.ids_filename) and
+                json.loads(read_file(self.ids_filename)))
+
+        self.sessions_markdown = LPSMarkdown()
+        self.lps_dict = self.sessions_markdown(self.SESSIONS_MD_CONTENT)
+
+        assert (path.isfile(self.noids_filename) and
+                json.loads(read_file(self.noids_filename)))
+
+        speakers = [
+            [
+                '<a href="speakers.html#snowden">Edward Snowden</a>',
+                '<a href="speakers.html#gillmor">Daniel Kahn Gillmor</a>',
+            ],
+            [
+                '<a href="speakers.html#nicholson">Deb Nicholson</a>',
+                '<a href="speakers.html#fontana">Richard Fontana</a>',
+            ],
+            [
+                'Paige Peterson', 'MaidSoft'
+            ],
+            [
+                'George Chriss',
+                'Kat Walsh (moderator)',
+            ],
+            [
+                '<a href="speakers.html#zacchiroli">Stefano Zacchiroli</a>',
+                'Debian', 'OSI', 'IRILL'
+            ],
+            [
+                '<a href="speakers.html#corvellec">Marianne Corvellec</a>',
+                'April and Jonathan Le Lous',
+                'April'
+            ],
+            [
+                '<a href="speakers.html#brown">Michaela R. Brown</a>',
+            ],
+            [
+                '<a href="speakers.html#gott">Molly Gott</a>'
+            ],
+            [
+                'Christopher Webber',
+                '<a href="speakers.html#thompson">David Thompson</a>',
+                'Ludovic Courtès',
+            ],
+        ]
+
+        i = 0
+        for lps_timeslots in self.lps_dict.values():
+            for lps_sessions in lps_timeslots.values():
+                for session_info in lps_sessions.values():
+                    assert_equal(session_info['speakers'], speakers[i])
+                    i = i + 1
+
+        speakers_noids = [
+            'Paige Peterson',
+            'George Chriss',
+            'Kat Walsh',
+            'Jonathan Le Lous',
+            'Christopher Webber',
+            'Ludovic Courtès',
+        ]
+        assert_equal(json_read(self.noids_filename), speakers_noids)
+
+
+    def test_sessions_autolinking_nospeakerids(self):
+        """Testing autolinked speakrs in sessions MD when speakers.id not available. """
+
+        assert not path.isfile(self.ids_filename)
+
+        self.sessions_markdown = LPSMarkdown()
+        self.lps_dict = self.sessions_markdown(self.SESSIONS_MD_CONTENT)
+
+        assert (path.isfile(self.noids_filename) and
+                json.loads(read_file(self.noids_filename)))
+
+        speakers = [
+            [
+                'Edward Snowden',
+                'Daniel Kahn Gillmor',
+            ],
+            [
+                'Deb Nicholson',
+                'Richard Fontana',
+            ],
+            [
+                'Paige Peterson', 'MaidSoft'
+            ],
+            [
+                'George Chriss',
+                'Kat Walsh (moderator)',
+            ],
+            [
+                'Stefano Zacchiroli',
+                'Debian', 'OSI', 'IRILL'
+            ],
+            [
+                'Marianne Corvellec',
+                'April and Jonathan Le Lous',
+                'April'
+            ],
+            [
+                'Michaela R. Brown',
+            ],
+            [
+                'Molly Gott'
+            ],
+            [
+                'Christopher Webber',
+                'David Thompson',
+                'Ludovic Courtès',
+            ],
+        ]
+
+        i = 0
+        for lps_timeslots in self.lps_dict.values():
+            for lps_sessions in lps_timeslots.values():
+                for session_info in lps_sessions.values():
+                    assert_equal(session_info['speakers'], speakers[i])
+                    i = i + 1
+
+        speakers_noids = [
+            'Edward Snowden',
+            'Daniel Kahn Gillmor',
+            'Deb Nicholson',
+            'Richard Fontana',
+            'Paige Peterson',
+            'George Chriss',
+            'Kat Walsh',
+            'Stefano Zacchiroli',
+            'Marianne Corvellec',
+            'Jonathan Le Lous',
+            'Michaela R. Brown',
+            'Molly Gott',
+            'Christopher Webber',
+            'David Thompson',
+            'Ludovic Courtès',
+        ]
+
+        assert_equal(json_read(self.noids_filename), speakers_noids)
+
+
+    def teardown(self):
+        """Cleans up things after each test in this class."""
+        # Remove `speakers.ids` file if it exists.
+        if path.isfile(self.ids_filename):
+           os.remove(self.ids_filename)
+
+        # Remove `speakers.noids` file if it exists.
+        if path.isfile(self.noids_filename):
+           os.remove(self.noids_filename)
+
+
+    @classmethod
+    def teardown_class(self):
+        """Clean up the mess created by this test class"""
         # Change back to the old cwd
         os.chdir(self.old_cwd)

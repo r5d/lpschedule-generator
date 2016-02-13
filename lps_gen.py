@@ -117,6 +117,51 @@ class LPSRenderer(Renderer):
         # "room" and session "description".
         self.no_paragraph = None
 
+        # Contains a list of speakers' names which are marked up for
+        # auto-linking[1], but don't have an id to link to.
+        #
+        # [1]: Markup for auto-linking speakers is [John Hacker]().
+        self.speakers_noids = []
+
+        # If it is 'False', then the 'speaker.ids' file was not found;
+        # otherwise it is an OrderedDict containing the mapping of
+        # speakers and their corresponding id.
+        self.speakers_ids = json_read('speakers.ids')
+
+
+    def get_uid(self, speaker):
+        """Returns unique id for `speaker` if it exists; `False` otherwise.
+        """
+        if not self.speakers_ids:
+            # There is no speakers_ids OrderedDict available.
+            return False
+
+        speaker = unicode(speaker)
+        if speaker in self.speakers_ids.keys():
+            return self.speakers_ids[speaker]
+        else:
+            # speaker not found in speakers_ids OrderedDict.
+            return False
+
+
+    def link(self, link, title, text):
+        # Here, we catch speaker names that have to be autolinked and
+        # autolink them if there is an id available for the speaker.
+        if not link:
+            # We found a speaker that has to be autolinked.
+
+            # Here, `text` is the speaker' name.
+            id_ = self.get_uid(text)
+            if id_:
+                link = 'speakers.html#%s' % id_
+            else:
+                # Oh no, there is no id for this speaker.
+                self.speakers_noids.append(text)
+                # Don't linkify this speaker; they don't have an id.
+                return text
+
+        return super(LPSRenderer, self).link(link, title, text)
+
 
     def header(self, text, level, raw=None):
         global lps_dict
@@ -261,9 +306,11 @@ class LPSMarkdown(Markdown):
         """
         Initialize with LPSRenderer as the renderer.
         """
-        super(LPSMarkdown, self).__init__(renderer=LPSRenderer(),
-                                          inline=None, block=None,
-                                          **kwargs)
+        self.sessions_renderer = LPSRenderer()
+        super(LPSMarkdown, self).__init__(
+            renderer=self.sessions_renderer,
+            inline=None, block=None,
+            **kwargs)
 
 
     def parse(self, text):
@@ -271,6 +318,10 @@ class LPSMarkdown(Markdown):
 
         lps_dict = OrderedDict()
         html = super(LPSMarkdown, self).parse(text)
+
+        # Write list of speakers with no ids to `speakers.noids`.
+        json_write('speakers.noids', self.sessions_renderer.speakers_noids)
+
         return lps_dict
 
 
