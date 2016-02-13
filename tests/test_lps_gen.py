@@ -288,10 +288,14 @@ class TestLPSpeakers(object):
     def setup_class(self):
         """Runs before running any tests in this class."""
 
-        self.MD_FILE = path.join('tests', 'files', 'lp-speakers.md')
+        # Change current working directory to the tests directory.
+        self.old_cwd = os.getcwd()
+        os.chdir('tests')
+
+        self.MD_FILE = path.join('files', 'lp-speakers.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SPEAKERS_TEMPLATE = path.join('tests', 'files',
+        self.SPEAKERS_TEMPLATE = path.join('files',
                                            'lp-speakers-2016.jinja2')
 
         self.markdown = LPSpeakersMarkdown()
@@ -301,6 +305,16 @@ class TestLPSpeakers(object):
     def setup(self):
         """Runs before each test in this class."""
         pass
+
+
+    def test_speakers_id_file_exists(self):
+        """
+        Testing if LPSpeakersMardown created speakers.ids file.
+        """
+        speakers_ids = self.markdown.speakers_renderer.speakers_ids
+
+        assert path.isfile('speakers.ids')
+        assert_equal(json_read('speakers.ids'), speakers_ids)
 
 
     def test_LPSpeakersMarkdown_keynotespeakers_name(self):
@@ -528,4 +542,10 @@ class TestLPSpeakers(object):
     @classmethod
     def teardown_class(self):
         """Purge the mess created by this test."""
-        pass
+
+        # Remove `speakers.ids` file if it exists.
+        if path.isfile('speakers.ids'):
+            os.remove('speakers.ids')
+
+        # Change back to the old cwd
+        os.chdir(self.old_cwd)

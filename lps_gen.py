@@ -183,29 +183,29 @@ class LPSpeakersRenderer(Renderer):
         # 'keynote-speakers' or 'speakers'.'
         self.speaker_type = None
 
-        # Maintain a list of used IDs
-        self.used_ids = []
+        # Maintain a dict of speakers and their IDs.
+        self.speakers_ids = OrderedDict()
 
 
     def mk_uid(self, text):
         """Returns a unique id.
         """
         # 'John HÖcker, Onion Project' -> 'John HÖcker'
-        text = text.split(', ')[0]
+        speaker = unicode(text.split(', ')[0])
 
         # 'John HÖcker' -> 'John Hacker'
-        ascii_text = unidecode(unicode(text))
+        ascii_speaker = unidecode(speaker)
 
         # 'John Hacker' -> 'hacker'
-        id_ = ascii_text.split()[-1].lower()
+        id_ = ascii_speaker.split()[-1].lower()
 
-        if id_ not in self.used_ids:
-            self.used_ids.append(id_)
+        if id_ not in self.speakers_ids.values():
+            self.speakers_ids[speaker]= id_
             return id_
         else:
             # 'John Hacker' -> 'john_hacker'
-            id_ = '_'.join([s.lower() for s in ascii_text.split()])
-            self.used_ids.append(id_)
+            id_ = '_'.join([s.lower() for s in ascii_speaker.split()])
+            self.speakers_ids[speaker] = id_
             return id_
 
 
@@ -284,15 +284,21 @@ class LPSpeakersMarkdown(Markdown):
         """
         Initialize with LPSpeakersRenderer as the renderer.
         """
-        super(LPSpeakersMarkdown, self).__init__(renderer=LPSpeakersRenderer(),
-                                                 inline=None, block=None,
-                                                 **kwargs)
+        self.speakers_renderer = LPSpeakersRenderer()
+        super(LPSpeakersMarkdown, self).__init__(
+            renderer=self.speakers_renderer,
+            inline=None, block=None,
+            **kwargs)
 
 
     def parse(self, text):
         global lpspeakers_dict
 
         html = super(LPSpeakersMarkdown, self).parse(text)
+
+        # Write mapping of speakers and their ids to speakers.ids.
+        json_write('speakers.ids', self.speakers_renderer.speakers_ids)
+
         return lpspeakers_dict
 
 
