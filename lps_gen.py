@@ -232,11 +232,11 @@ class LPSpeakersRenderer(Renderer):
         self.speakers_ids = OrderedDict()
 
 
-    def mk_uid(self, text):
+    def mk_uid(self, speaker_block):
         """Returns a unique id.
         """
         # 'John HÖcker, Onion Project' -> 'John HÖcker'
-        speaker = unicode(text.split(', ')[0])
+        speaker = unicode(speaker_block.split(', ')[0])
 
         # 'John HÖcker' -> 'John Hacker'
         ascii_speaker = unidecode(speaker)
