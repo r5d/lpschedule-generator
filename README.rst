@@ -53,7 +53,7 @@ LP schedule usage
 
 or::
 
-  $ lps_gen --schedule path/to/lp-sch.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
+  $ lps_gen --schedule path/to/lp-schedule.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
 
 
 LP schedule markdown structure
@@ -178,11 +178,11 @@ LP speakers usage
 ~~~~~~~~~~~~~~~~~
 ::
 
-   $ lps_gen -sp path/to/lp-speakers-2016.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
+   $ lps_gen -sp path/to/lp-speakers.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
 
 or::
 
-  $ lps_gen --speakers path/to/lp-speakers-2016.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
+  $ lps_gen --speakers path/to/lp-speakers.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
 
 LP speakers markdown structure
 ``````````````````````````````
