@@ -363,10 +363,12 @@ class TestLPSpeakers(object):
         """Testing LPSpeakersMarkdown keynote speakers' image url.
 
         """
-        keynote_speaker_img_urls = ['//static.fsf.org/nosvn/libreplanet/speaker-pics/dkg.jpg',
-                                    '//static.fsf.org/nosvn/libreplanet/speaker-pics/snowden.jpg',
-                                    '//static.fsf.org/nosvn/libreplanet/speaker-pics/stallman.jpg',
-                                    '//static.fsf.org/nosvn/libreplanet/speaker-pics/c_snowden.jpg']
+        keynote_speaker_img_urls = [
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/dkg.jpg',
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/snowden.jpg',
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/stallman.jpg',
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/c_snowden.jpg'
+        ]
 
 
 
@@ -382,7 +384,6 @@ class TestLPSpeakers(object):
         """Testing LPSpeakersMarkdown keynote speakers' image alt text.
 
         """
-
         keynote_speaker_img_alts = ['Daniel Kahn Gillmor - Photo',
                                     'Edward Snowden - Photo',
                                     'Richard Stallman - Photo',
@@ -402,16 +403,15 @@ class TestLPSpeakers(object):
         """Testing LPSpeakersMarkdown keynote speakers' bio.
 
         """
-
-        keynote_speaker_bios = [['Daniel Kahn Gillmor is a technologist with the ACLU\'s Speech, Privacy'],
-                                ['Edward Snowden is a former intelligence officer who served the CIA,'],
-                                ['Richard is a software developer and software freedom activist. In 1983',
-                                 'Since the mid-1990s, Richard has spent most of his time in political',],
-                                [],
-
-                                ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam',
-                                 'Ut turpis felis, pulvinar a semper sed, adipiscing id']]
-
+        keynote_speaker_bios = [
+            ['Daniel Kahn Gillmor is a technologist with the ACLU\'s Speech, Privacy'],
+            ['Edward Snowden is a former intelligence officer who served the CIA,'],
+            ['Richard is a software developer and software freedom activist. In 1983',
+             'Since the mid-1990s, Richard has spent most of his time in political',],
+            [],
+            ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam',
+             'Ut turpis felis, pulvinar a semper sed, adipiscing id']
+        ]
 
         i = 0
         for kspeaker in self.lpspeakers_dict['keynote-speakers']:
@@ -470,14 +470,16 @@ class TestLPSpeakers(object):
         """Testing LPSpeakersMarkdown speakers' image url.
 
         """
-        speaker_img_urls = ['', '',
-                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/corvellec.jpg',
-                            '', '',
-                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/kurdali.png',
-                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/lelous.jpg',
-                            '',
-                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/nicholson.jpg',
-                            '//static.fsf.org/nosvn/libreplanet/speaker-pics/zacchiroli.jpg']
+        speaker_img_urls = [
+            '', '',
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/corvellec.jpg',
+            '', '',
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/kurdali.png',
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/lelous.jpg',
+            '',
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/nicholson.jpg',
+            '//static.fsf.org/nosvn/libreplanet/speaker-pics/zacchiroli.jpg'
+        ]
 
         i = 0
         for kspeaker in self.lpspeakers_dict['speakers']:
@@ -491,16 +493,15 @@ class TestLPSpeakers(object):
         """Testing LPSpeakersMarkdown speakers' image alt text.
 
         """
-        speaker_img_alts = ['', '',
-                            'Marianne Corvellec - Photo',
-                            '', '',
-                            'Bassam Kurdali - Photo',
-                            'Jonathan Le Lous - Photo',
-                            '',
-                            'Deb Nicholson - Photo',
-                            'Stefano Zacchiroli - Photo']
-
-
+        speaker_img_alts = [
+            '', '',
+            'Marianne Corvellec - Photo',
+            '', '',
+            'Bassam Kurdali - Photo',
+            'Jonathan Le Lous - Photo',
+            '',
+            'Deb Nicholson - Photo',
+            'Stefano Zacchiroli - Photo']
 
         i = 0
         for kspeaker in self.lpspeakers_dict['speakers']:
@@ -514,16 +515,18 @@ class TestLPSpeakers(object):
         """Testing LPSpeakersMarkdown speakers' bio.
 
         """
-        speaker_bios = [['Emmanuel is a Division III student at Hampshire College, studying how'],
-                        [],
-                        ['Marianne Corvellec has been a Free Software activist with April'],
-                        ['Richard Fontana is a lawyer at Red Hat. He leads support for Red Hat\'s'],
-                        [],
-                        ['Bassam is a 3D animator/filmmaker whose 2006 short, Elephants Dream,'],
-                        ['Jonathan has been involved with the Free Software Movement for ten'],
-                        ['M. C. is the founder of Transparency Toolkit, a free software project'],
-                        [],
-                        ['Stefano Zacchiroli is Associate Professor of Computer Science at']]
+        speaker_bios = [
+            ['Emmanuel is a Division III student at Hampshire College, studying how'],
+            [],
+            ['Marianne Corvellec has been a Free Software activist with April'],
+            ['Richard Fontana is a lawyer at Red Hat. He leads support for Red Hat\'s'],
+            [],
+            ['Bassam is a 3D animator/filmmaker whose 2006 short, Elephants Dream,'],
+            ['Jonathan has been involved with the Free Software Movement for ten'],
+            ['M. C. is the founder of Transparency Toolkit, a free software project'],
+            [],
+            ['Stefano Zacchiroli is Associate Professor of Computer Science at']
+        ]
 
         i = 0
         for kspeaker in self.lpspeakers_dict['speakers']:
