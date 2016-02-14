@@ -122,6 +122,33 @@ Session structure::
 
 Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch.md
 
+
+Auto-linking speaker names
+++++++++++++++++++++++++++
+
+Speakers in the schedule MD can be auto-linked to speakers' page by
+marking them up like this ``[John Hacker]()``
+
+The script converts:
+
+- ``[John Hacker]()`` to ``<a href="speakers.html#hacker">John
+  Hacker</a>`` if John Hacker's bio is available in the speakers' page.
+
+- ``[John Hacker]()`` to ``John Hacker`` if John Hacker's bio is not
+  available in the speakers' page. In this case, the script also appends
+  ``John Hacker`` name in the ``speakers.noids`` file.
+
+  The ``speakers.noids`` file contains a list of speakers who were
+  auto-linked in the schedule MD but who's bio is not (yet) available
+  in the speakers' page.
+
+For auto-linking speakers, the script uses the ``speakers.ids`` file;
+this file is written to the disk after generating the the speakers'
+page from MD. Generate the speakers' page before generating the
+schedule page for auto-linking to work.
+
+Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sessions-autolink.md
+
 Special cases
 +++++++++++++
 
