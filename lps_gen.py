@@ -347,7 +347,7 @@ class LPSpeakersMarkdown(Markdown):
 
         html = super(LPSpeakersMarkdown, self).parse(text)
 
-        # Write mapping of speakers and their ids to speakers.ids.
+        # Write mapping of speakers and their ids to `speakers.ids`.
         json_write('speakers.ids', self.speakers_renderer.speakers_ids)
 
         return lpspeakers_dict
