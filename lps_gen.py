@@ -31,7 +31,7 @@ from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
 from unidecode import unidecode
 
-__version__ = '0.3.0.dev3'
+__version__ = '0.3.0'
 
 # unicode magic
 reload(sys)
