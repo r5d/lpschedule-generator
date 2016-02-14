@@ -82,7 +82,6 @@ def write_file(filename, filecontent):
         exit(1)
 
 
-
 def json_write(filename, obj):
     """Serialize `obj` to JSON formatted `str` to `filename`.
 
