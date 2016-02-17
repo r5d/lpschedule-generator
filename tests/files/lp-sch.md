@@ -8,6 +8,8 @@
 
 Richard Stallman
 
+[comment]: <> (Comment about registration.)
+
 Room 32-123
 
 Preceded by a welcome address from John Sullivan, FSF executive
@@ -15,7 +17,11 @@ director.
 
 ### 10:55 - 11:40: Session Block 1A
 
+[//]: <> (This is a comment.)
+
 #### Federation and GNU
+
+[//]: # (This another comment.)
 
 [Christopher Webber][webber]
 
