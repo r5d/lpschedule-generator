@@ -8,7 +8,7 @@
 
 Richard Stallman
 
-[comment]: <> (Comment about registration.)
+[comment]: <> (Comment about rms talk.)
 
 Room 32-123
 
