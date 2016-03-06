@@ -38,5 +38,11 @@ clean-build:
 clean-pyc:
 	@find . -name '*.pyc' -exec rm -f {} +
 
-.PHONY: dist clean-build upload build-dist egg clean-pyc
 
+clean-venv:
+	@rm -rf bin/
+	@rm -rf include/
+	@rm -rf lib/
+	@rm -rf local/
+
+.PHONY: dist clean-build upload build-dist egg clean-pyc clean-venv
