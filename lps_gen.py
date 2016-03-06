@@ -372,7 +372,7 @@ def RenderHTML(lp_dict, template):
 
     lp_html = template.render(lp_dict=lp_dict)
 
-    return BeautifulSoup(lp_html, 'html.parser').prettify()
+    return str(BeautifulSoup(lp_html, 'html.parser')).strip()
 
 
 def main():
