@@ -45,4 +45,9 @@ clean-venv:
 	@rm -rf local/
 	@rm -rf man/
 
+dev-packages:
+	@pip install nose mock restructuredtext_lint
+	@pip install wheel twine
+
 .PHONY: dist clean-build upload build-dist egg clean-pyc clean-venv
+.PHONY: dev-packages
