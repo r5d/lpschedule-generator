@@ -19,16 +19,25 @@
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
 
-import lps_gen
+import _version
 
 from setuptools import setup, find_packages
 
+def readf(filename):
+    content = ''
+    try:
+        with open(filename, 'rb') as f:
+            for line in f:
+                content = content + line
+    except IOError:
+        print "Error: unable to open %s" % filename
+    return content
 
 config = {
     'name': 'lpschedule-generator',
     'description': 'LibrePlanet schedule generator',
-    'long_description': lps_gen.read_file('README.rst'),
-    'version': lps_gen.__version__,
+    'long_description': readf('README.rst'),
+    'version': _version.__version__,
     'platforms': 'GNU/Linux',
     'license': 'GNU General Public License version 3 or later',
     'url': 'https://notabug.org/rsd/lpschedule-generator/',
