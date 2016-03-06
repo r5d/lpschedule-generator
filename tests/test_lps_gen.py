@@ -253,7 +253,7 @@ class TestLPS(object):
     def test_RenderHTML_sessions_only(self):
         """Testing `RenderHTML` function - LP schedule - sessions only
         """
-        md_content = read_file(path.join('tests', 'files',
+        md_content = read_file(path.join('files',
                                          'lp-sch-sessions-only.md'))
 
         lps_html = RenderHTML(self.markdown(md_content),
