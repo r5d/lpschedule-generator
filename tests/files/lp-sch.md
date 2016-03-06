@@ -23,9 +23,7 @@ director.
 
 [//]: # (This another comment.)
 
-[Christopher Webber][webber]
-
-[webber]: http://dustycloud.org
+[Christopher Webber](http://dustycloud.org)
 
 Room 32-123
 
@@ -56,7 +54,7 @@ teaching.
 
 #### TAFTA, CETA, TISA: traps and threats to Free Software Everywhere
 
-[Marianne Corvellec][corvellec], [Jonathan Le Lous][lous]
+[Marianne Corvellec](/2015/program/speakers.html#corvellec), [Jonathan Le Lous](/2015/program/speakers.html#le-lous)
 
 Room 32-155
 
@@ -69,9 +67,6 @@ in 2012. The presentation focuses on the software aspects of TAFTA,
 CETA, TISA. We will call for action against these global treaty
 projects and offer alternative proposals, which favour Free Software
 Everywhere.
-
-[corvellec]: http://libreplanet.org/2015/program/speakers.html#corvellec
-[lous]: http://libreplanet.org/2015/program/speakers.html#le-lous
 
 ### 11:40 - 11:50: Break
 
