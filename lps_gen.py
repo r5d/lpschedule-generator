@@ -31,7 +31,7 @@ from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
 from unidecode import unidecode
 
-from _version import __version__
+from lpschedule_generator._version import __version__
 
 
 # unicode magic

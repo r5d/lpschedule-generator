@@ -19,7 +19,7 @@
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
 
-import _version
+from lpschedule_generator import _version
 
 from setuptools import setup, find_packages
 
@@ -46,7 +46,7 @@ config = {
     'install_requires': ['mistune', 'Jinja2', 'beautifulsoup4', 'unidecode'],
     'tests_require': ['nose', 'mock'],
     'test_suite': 'nose.collector',
-    'py_modules': ['lps_gen'],
+    'py_modules': ['lps_gen', 'lpschedule_generator._version'],
     'data_files': [('local/share/lpschedule-generator/libreplanet-templates/2016',
                     ['libreplanet-templates/2016/lp-schedule.jinja2',
                      'libreplanet-templates/2016/lp-speakers.jinja2'])],
