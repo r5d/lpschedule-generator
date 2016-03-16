@@ -19,6 +19,7 @@
 #   <http://www.gnu.org/licenses/>.
 
 import json
+import re
 import sys
 
 from argparse import ArgumentParser
@@ -100,6 +101,44 @@ def json_read(filename):
 
     return json.loads(read_file(filename),
                       object_pairs_hook=OrderedDict)
+
+
+class LPiCal(object):
+    """
+    Used for producing iCal for LP schedule.
+    """
+
+    def __init__(self, lps_dict):
+        self.lps_dict = lps_dict
+
+        # Matches strings like '09:45 - 10:30: Lorem ipsum dolor sit.'
+        self.timeslot_re = re.compile(r'(\d+:\d+).+?(\d+:\d+)')
+        # Matches strings like 'Saturday, March 19'
+        self.month_day_re = re.compile(r'\w+,\s*([a-zA-Z]+)\s*(\d+)')
+
+
+    def get_timeslot(self, s):
+        """Get start and end time for a timeslot.
+        """
+
+        timeslot = self.timeslot_re.search(s)
+
+        start = timeslot.group(1)
+        end = timeslot.group(2)
+
+        return start, end
+
+
+    def get_month_day(self, s):
+        """Get month and day.
+        """
+
+        month_day = self.month_day_re.search(s)
+
+        month = month_day.group(1)
+        day = month_day.group(2)
+
+        return month, day
 
 
 class LPSRenderer(Renderer):

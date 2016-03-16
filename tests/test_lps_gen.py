@@ -110,6 +110,67 @@ class TestJSONUtils(object):
         os.chdir(self.old_cwd)
 
 
+class TestLPiCal(object):
+    """
+    Testing LPiCal class.
+    """
+
+    @classmethod
+    def setup_class(self):
+        """Setting up things for Testing LPiCal class.
+        """
+        self.lp_ical = LPiCal({})
+
+
+    def test_get_timeslot(self):
+        """
+        Testing LPiCal.get_timeslot.
+        """
+
+        timeslots = {
+            '09:00-09:45: Registration and Breakfast': ['09:00', '09:45'],
+            '  09:45 - 10:45: Opening Keynote': ['09:45', '10:45'],
+            '10:5 - 10:55: Break': ['10:5', '10:55'],
+            ' 10:55 - 11:40: Session Block 1A': ['10:55', '11:40'],
+            '    11:40 - 11:50: Break': ['11:40', '11:50'],
+            '9:45 - 10:30: Keynote ': ['9:45', '10:30'],
+            '16:55 - 17:40:Session Block 6B': ['16:55', '17:40'],
+            '17:50 - 18:35: Closing keynote': ['17:50', '18:35'],
+            }
+
+        for string, timeslot in timeslots.iteritems():
+            start, end = self.lp_ical.get_timeslot(string)
+            assert_equal(start, timeslot[0])
+            assert_equal(end, timeslot[1])
+
+
+    def test_get_month_day(self):
+        """Testing LPiCal.get_month_day.
+        """
+
+        month_days = {
+            'Sunday, March 20': ['March', '20'],
+            'Saturday, March 19': ['March', '19'],
+            'Monday,March 20 ': ['March', '20'],
+            'Tuesday,March21': ['March', '21'],
+            '   Wednesday, March 22': ['March', '22'],
+            'Thursday, March 23  ': ['March', '23'],
+            }
+
+        for string, month_day in month_days.iteritems():
+            month, day  = self.lp_ical.get_month_day(string)
+            assert_equal(month, month_day[0])
+            assert_equal(day, month_day[1])
+
+
+    @classmethod
+    def teardown_class(self):
+        """
+        Tearing down the mess created by Testing LPiCal class.
+        """
+        pass
+
+
 class TestLPS(object):
     """
     Class that tests everything related LP Schedule.
