@@ -552,6 +552,8 @@ def main():
     group.add_argument("-sp", "--speakers", action="store_true",
                        help="Generate LP speakers")
 
+    parser.add_argument("--ical", type=int,
+                        help="Specify LP year as argument; generates iCal")
     parser.add_argument("--version", action="version",
                         version='lpschedule-generator version %s' % __version__,
                         help="Show version number and exit.")
@@ -575,6 +577,10 @@ def main():
 
         lp_dict = markdown(lp_md_content)
         lp_html = RenderHTML(lp_dict, lp_template)
+
+        if args.ical and args.schedule:
+            LPiCal(lp_dict, args.ical).to_ical()
+
     else:
         exit(1)
 
