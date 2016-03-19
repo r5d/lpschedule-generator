@@ -150,6 +150,9 @@ class LPiCal(object):
 
         timeslot = self.timeslot_re.search(s)
 
+        if (not timeslot) or (len(timeslot.groups()) < 3):
+            return None, None, None
+
         t_start = timeslot.group(1)
         t_end = timeslot.group(2)
         name = timeslot.group(3)
@@ -162,6 +165,9 @@ class LPiCal(object):
         """
 
         month_day = self.month_day_re.search(s)
+
+        if (not month_day) or (len(month_day.groups()) < 2):
+            return None, None
 
         month = month_day.group(1)
         day = month_day.group(2)
@@ -251,8 +257,16 @@ class LPiCal(object):
 
         for day_str, timeslots in self.lps_dict.iteritems():
             month, day = self.get_month_day(day_str)
+            if not month:
+                # month, day not specified; cannot generate ical for
+                # this day
+                continue
             for timeslot_str, sessions in timeslots.iteritems():
                 t_start, t_end, t_name = self.get_timeslot(timeslot_str)
+                if not t_start:
+                    # timeslot not specified; cannot generate ical for
+                    # this timeslot
+                    continue
                 for session, session_info in sessions.iteritems():
                     self.add_event(month, day, t_start, t_end,
                                    session, session_info)

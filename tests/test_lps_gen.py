@@ -130,11 +130,15 @@ class TestLPiCal(object):
         self.MD_FILE = path.join('files', 'lp-sch.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
+        self.MD_FILE_S_ONLY = path.join('files', 'lp-sch-sessions-only.md')
+        self.MD_FILE_S_ONLY_CONTENT = read_file(self.MD_FILE_S_ONLY)
+
         self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
                                       'lp-schedule.jinja2')
 
         self.markdown = LPSMarkdown()
         self.lps_dict = self.markdown(self.MD_FILE_CONTENT)
+        self.lps_dict_s_only = self.markdown(self.MD_FILE_S_ONLY_CONTENT)
         self.purge_list = ['speakers.noids']
 
 
@@ -178,7 +182,13 @@ class TestLPiCal(object):
             ['16:55', '17:40', 'Session Block 6B'],
             '17:50 - 18:35: Closing keynote':
             ['17:50', '18:35', 'Closing keynote'],
-            }
+            '':
+            [None, None, None],
+            '\t\t\t':
+            [None, None, None],
+            '                  ':
+            [None, None, None],
+        }
 
         for string, timeslot in timeslots.iteritems():
             start, end, name = self.lp_ical.get_timeslot(string)
@@ -198,7 +208,10 @@ class TestLPiCal(object):
             'Tuesday,March21': ['March', '21'],
             '   Wednesday, March 22': ['March', '22'],
             'Thursday, March 23  ': ['March', '23'],
-            }
+            '': [None, None],
+            '\t\t': [None, None],
+            '       ': [None, None],
+        }
 
         for string, month_day in month_days.iteritems():
             month, day  = self.lp_ical.get_month_day(string)
@@ -295,6 +308,12 @@ class TestLPiCal(object):
         """Testing LPiCal.gen_ical.
         """
         print self.lp_ical.gen_ical()
+
+
+    def test_gen_ical_sessions_only(self):
+        """Testing LPiCal.gen_ical with sessions only schedule.
+        """
+        print LPiCal(self.lps_dict_s_only, '2016').gen_ical()
 
 
     def test_to_ical(self):
