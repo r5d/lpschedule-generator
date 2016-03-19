@@ -29,7 +29,10 @@ from collections import OrderedDict
 from os import path
 from StringIO import StringIO
 
+from bs4 import BeautifulSoup
+from icalendar import vCalAddress, vText, vDatetime
 from nose.tools import *
+from pytz import timezone
 
 from lps_gen import *
 
@@ -119,7 +122,38 @@ class TestLPiCal(object):
     def setup_class(self):
         """Setting up things for Testing LPiCal class.
         """
-        self.lp_ical = LPiCal({})
+
+        # Change current working directory to the tests directory.
+        self.old_cwd = os.getcwd()
+        os.chdir('tests')
+
+        self.MD_FILE = path.join('files', 'lp-sch.md')
+        self.MD_FILE_CONTENT = read_file(self.MD_FILE)
+
+        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
+                                      'lp-schedule.jinja2')
+
+        self.markdown = LPSMarkdown()
+        self.lps_dict = self.markdown(self.MD_FILE_CONTENT)
+        self.purge_list = ['speakers.noids']
+
+
+    def setup(self):
+        """Setting up things for a new test.
+        """
+        self.lp_ical = LPiCal(self.lps_dict, '2016')
+
+
+    def test_gen_uid(self):
+        """Testing LPiCal.gen_uid.
+        """
+
+        uid_fmt = ''.join(['{id}@LP', self.lp_ical.lp_year,
+                           '@libreplanet.org'])
+
+        for i in range(40):
+            assert_equals(self.lp_ical.gen_uid(),
+                          uid_fmt.format(id=i+1))
 
 
     def test_get_timeslot(self):
@@ -128,20 +162,29 @@ class TestLPiCal(object):
         """
 
         timeslots = {
-            '09:00-09:45: Registration and Breakfast': ['09:00', '09:45'],
-            '  09:45 - 10:45: Opening Keynote': ['09:45', '10:45'],
-            '10:5 - 10:55: Break': ['10:5', '10:55'],
-            ' 10:55 - 11:40: Session Block 1A': ['10:55', '11:40'],
-            '    11:40 - 11:50: Break': ['11:40', '11:50'],
-            '9:45 - 10:30: Keynote ': ['9:45', '10:30'],
-            '16:55 - 17:40:Session Block 6B': ['16:55', '17:40'],
-            '17:50 - 18:35: Closing keynote': ['17:50', '18:35'],
+            '09:00-09:45: Registration and Breakfast':
+            ['09:00', '09:45', 'Registration and Breakfast'],
+            '  09:45 - 10:45: Opening Keynote':
+            ['09:45', '10:45', 'Opening Keynote'],
+            '10:5 - 10:55: Break':
+            ['10:5', '10:55', 'Break'],
+            ' 10:55 - 11:40: Session Block 1A':
+            ['10:55', '11:40', 'Session Block 1A'],
+            '    11:40 - 11:50: Break':
+            ['11:40', '11:50', 'Break'],
+            '9:45 - 10:30: Keynote ':
+            ['9:45', '10:30', 'Keynote'],
+            '16:55 - 17:40:Session Block 6B':
+            ['16:55', '17:40', 'Session Block 6B'],
+            '17:50 - 18:35: Closing keynote':
+            ['17:50', '18:35', 'Closing keynote'],
             }
 
         for string, timeslot in timeslots.iteritems():
-            start, end = self.lp_ical.get_timeslot(string)
+            start, end, name = self.lp_ical.get_timeslot(string)
             assert_equal(start, timeslot[0])
             assert_equal(end, timeslot[1])
+            assert_equal(name, timeslot[2])
 
 
     def test_get_month_day(self):
@@ -163,12 +206,116 @@ class TestLPiCal(object):
             assert_equal(day, month_day[1])
 
 
+    def test_mk_datetime(self):
+        """Testing LPiCal.mk_datetime
+        """
+
+        datetimes = [
+            {
+                'params': ['February', '28','08:00'],
+                'datetime': '2016-02-28 08:00:00',
+            },
+            {
+                'params': ['March', '21', '9:0'],
+                'datetime': '2016-03-21 09:00:00',
+            },
+            {
+                'params': ['March', '23', '15:30'],
+                'datetime': '2016-03-23 15:30:00',
+            },
+        ]
+
+        for test in datetimes:
+            month = test['params'][0]
+            day = test['params'][1]
+            time = test['params'][2]
+
+            dt_obj = self.lp_ical.mk_datetime(month, day, time)
+
+            assert str(dt_obj.dt.tzinfo) == 'US/Eastern'
+            assert str(dt_obj.dt)[:-6] == test['datetime']
+
+
+    def test_mk_attendee(self):
+        """Testing LPiCal.mk_attendee
+        """
+        speakers = [
+            'Richard Stallman',
+            'ginger coons',
+            '<a href="speakers.htmll#corvellec">Marianne Corvellec</a>',
+            '<a href="speakers.html#le-lous">Jonathan Le Lous</a>',
+            'Jonas \xc3\x96berg',
+            ]
+
+        for speaker in speakers:
+            attendee = self.lp_ical.mk_attendee(speaker)
+            assert str(attendee) == 'invalid:nomail'
+            assert attendee.params.get('cn') == BeautifulSoup(
+                speaker, 'html.parser').get_text()
+            assert attendee.params.get('ROLE') == 'REQ-PARTICIPANT'
+            assert attendee.params.get('CUTYPE') == 'INDIVIDUAL'
+
+
+    def test_add_event(self):
+        """Testing LPiCal.add_event
+        """
+        uids = []
+
+        for day_str, timeslots in self.lps_dict.iteritems():
+            month, day = self.lp_ical.get_month_day(day_str)
+            for timeslot_str, sessions in timeslots.iteritems():
+                t_start, t_end, t_name = self.lp_ical.get_timeslot(timeslot_str)
+                for session, session_info in sessions.iteritems():
+                    event = self.lp_ical.add_event(month, day, t_start, t_end,
+                                           session, session_info)
+                    assert event['uid'] not in uids
+                    uids.append(event['uid'])
+
+                    assert event['dtstamp'] == self.lp_ical.dtstamp
+                    assert event['class'] == 'PUBLIC'
+                    assert event['status'] == 'CONFIRMED'
+                    assert event['method'] == 'PUBLISH'
+                    assert event['summary'] == session
+                    assert event['location'] == session_info['room']
+                    assert event['description'] == BeautifulSoup(' '.join(
+                        session_info['desc']).replace(
+                            '\n',' '), 'html.parser').get_text()
+
+                    if type(event['attendee']) is list:
+                        for attendee in event['attendee']:
+                            assert isinstance(attendee, vCalAddress)
+                    else:
+                        assert isinstance(event['attendee'], vCalAddress)
+
+                    assert isinstance(event['dtstart'], vDatetime)
+                    assert isinstance(event['dtend'], vDatetime)
+
+
+    def test_gen_ical(self):
+        """Testing LPiCal.gen_ical.
+        """
+        ical =  self.lp_ical.gen_ical()
+
+
+    def test_to_ical(self):
+        """Testing LPiCal.to_ical.
+        """
+        self.purge_list.append(self.lp_ical.to_ical())
+
+
     @classmethod
     def teardown_class(self):
         """
         Tearing down the mess created by Testing LPiCal class.
         """
-        pass
+
+        # remove files in the purge_list.
+        for f in self.purge_list:
+            if path.isfile(f):
+                os.remove(f)
+
+        # Change back to the old cwd
+        os.chdir(self.old_cwd)
 
 
 class TestLPS(object):
@@ -348,6 +495,7 @@ class TestLPS(object):
 
         # Change back to the old cwd
         os.chdir(self.old_cwd)
+
 
 class TestLPSpeakers(object):
     """

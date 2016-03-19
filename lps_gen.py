@@ -22,14 +22,19 @@ import json
 import re
 import sys
 
+import pytz
+
 from argparse import ArgumentParser
 from collections import OrderedDict
+from datetime import datetime
 from os import path
 
 from bs4 import BeautifulSoup
+from icalendar import Calendar, Event, vCalAddress, vText, vDatetime
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
 from mistune import Renderer, Markdown
+from pytz import timezone
 from unidecode import unidecode
 
 from lpschedule_generator._version import __version__
@@ -108,13 +113,35 @@ class LPiCal(object):
     Used for producing iCal for LP schedule.
     """
 
-    def __init__(self, lps_dict):
+    def __init__(self, lps_dict, lp_year):
         self.lps_dict = lps_dict
+        self.lp_year = lp_year
 
         # Matches strings like '09:45 - 10:30: Lorem ipsum dolor sit.'
-        self.timeslot_re = re.compile(r'(\d+:\d+).+?(\d+:\d+)')
+        self.timeslot_re = re.compile(r'(\d+:\d+).+?(\d+:\d+):\s*(.+\b)')
         # Matches strings like 'Saturday, March 19'
         self.month_day_re = re.compile(r'\w+,\s*([a-zA-Z]+)\s*(\d+)')
+
+        self.cal = Calendar()
+        self.cal.add('prodid', '-//lpschedule generator//mxm.dk//')
+        self.cal.add('version', '2.0')
+
+        # RFC 2445 requires DTSTAMP to be in UTC. DTSTAMP is used in
+        # VEVENT (Event object, see `add_event` method).
+        self.dtstamp = vDatetime(datetime.now(pytz.utc))
+
+        # used to generate uid for ical.
+        self.ucounter = 0
+
+
+    def gen_uid(self):
+        """Returns an unique id.
+
+        Used for Event object.
+        """
+        self.ucounter = self.ucounter + 1
+        return '%s@LP%s@libreplanet.org' % (str(self.ucounter),
+                                             self.lp_year)
 
 
     def get_timeslot(self, s):
@@ -123,10 +150,11 @@ class LPiCal(object):
 
         timeslot = self.timeslot_re.search(s)
 
-        start = timeslot.group(1)
-        end = timeslot.group(2)
+        t_start = timeslot.group(1)
+        t_end = timeslot.group(2)
+        name = timeslot.group(3)
 
-        return start, end
+        return t_start, t_end, name
 
 
     def get_month_day(self, s):
@@ -139,6 +167,107 @@ class LPiCal(object):
         day = month_day.group(2)
 
         return month, day
+
+
+    def mk_datetime(self, month, day, time):
+        """Returns datetime object (EST).
+        """
+        # Day %d
+        # Month %B
+        # Year %Y
+        # Hour %H (24-hr)
+        # Minute %M (zero padded)
+        # Second %S (zero padded)
+        datetime_fmt = '%d %B %Y %H:%M:%S'
+        eastern = timezone('US/Eastern')
+
+        hour = time.split(':')[0]
+        minute = time.split(':')[1]
+        datetime_str = '%s %s %s %s:%s:%s' % (day, month, self.lp_year,
+                                              hour.zfill(2), minute.zfill(2),
+                                              '00')
+
+        dt_object = datetime.strptime(datetime_str, datetime_fmt)
+
+        return vDatetime(eastern.localize(dt_object))
+
+
+    def mk_attendee(self, speaker):
+        """
+        Make Attendee to be added to an Event object.
+
+        See `add_event` method.
+        """
+        # Get rid of HTML (<a> element, etc) in `speaker`
+        speaker = BeautifulSoup(speaker, 'html.parser').get_text()
+
+        attendee = vCalAddress('invalid:nomail')
+        attendee.params['cn'] = vText(speaker)
+        attendee.params['ROLE'] = vText('REQ-PARTICIPANT')
+        attendee.params['CUTYPE'] = vText('INDIVIDUAL')
+
+        return attendee
+
+
+    def add_event(self, month, day, t_start, t_end, session, session_info):
+        """Adds event to calendar.
+        """
+        event = Event()
+        event['uid'] = self.gen_uid()
+        event['dtstamp'] = self.dtstamp
+        event['class'] = vText('PUBLIC')
+        event['status'] = vText('CONFIRMED')
+        event['method'] = vText('PUBLISH')
+
+        event['summary'] = session
+        event['location'] = vText(session_info['room'])
+
+        # Get rid of HTML in 'desc'
+        desc = BeautifulSoup(' '.join(
+            session_info['desc']).replace(
+                '\n', ' '), 'html.parser').get_text()
+        event['description'] = desc
+
+        # Add speakers
+        for speaker in session_info['speakers']:
+            event.add('attendee', self.mk_attendee(speaker), encode=0)
+
+        dt_start = self.mk_datetime(month, day, t_start)
+        dt_end = self.mk_datetime(month, day, t_end)
+
+        event['dtstart'] = dt_start
+        event['dtend'] = dt_end
+
+        # Add to calendar
+        self.cal.add_component(event)
+
+        return event
+
+
+    def gen_ical(self):
+        """Parse LP schedule dict and generate iCal Calendar object.
+
+        """
+
+        for day_str, timeslots in self.lps_dict.iteritems():
+            month, day = self.get_month_day(day_str)
+            for timeslot_str, sessions in timeslots.iteritems():
+                t_start, t_end, t_name = self.get_timeslot(timeslot_str)
+                for session, session_info in sessions.iteritems():
+                    self.add_event(month, day, t_start, t_end,
+                                   session, session_info)
+
+        return self.cal.to_ical()
+
+
+    def to_ical(self):
+        """Writes iCal to disk.
+
+        """
+        filename = 'lp%s-schedule.ics' % self.lp_year
+        write_file(filename, self.gen_ical())
+
+        return filename
 
 
 class LPSRenderer(Renderer):

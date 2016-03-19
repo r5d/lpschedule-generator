@@ -43,7 +43,7 @@ config = {
     'url': 'https://notabug.org/rsd/lpschedule-generator/',
     'author': 'rsiddharth',
     'author_email': 'rsd@gnu.org',
-    'install_requires': ['mistune', 'Jinja2', 'beautifulsoup4', 'unidecode'],
+    'install_requires': ['mistune', 'Jinja2', 'beautifulsoup4', 'unidecode', 'icalendar', 'pytz'],
     'tests_require': ['nose', 'mock'],
     'test_suite': 'nose.collector',
     'py_modules': ['lps_gen', 'lpschedule_generator._version'],
