@@ -115,7 +115,7 @@ class LPiCal(object):
 
     def __init__(self, lps_dict, lp_year):
         self.lps_dict = lps_dict
-        self.lp_year = lp_year
+        self.lp_year = str(lp_year)
 
         # Matches strings like '09:45 - 10:30: Lorem ipsum dolor sit.'
         self.timeslot_re = re.compile(r'(\d+:\d+).+?(\d+:\d+):\s*(.+\b)')
