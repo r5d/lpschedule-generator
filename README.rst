@@ -89,6 +89,24 @@ Overall structure::
 
    ...
 
+Level two heading (``##``) format::
+
+  ## Saturday, March 19
+
+  ...
+
+  ## Sunday, March 20
+
+Level three heading (``###``) format::
+
+  ### 09:00 - 09:45: Registration and Breakfast
+
+  ### 09:45 - 10:45: Opening Keynote
+
+  ...
+
+  ### 10:55 - 11:40: Session Block 1A
+
 Session structure::
 
   #### Fork and ignore: fighting a GPL violation by coding instead
