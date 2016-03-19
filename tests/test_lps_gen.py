@@ -294,7 +294,7 @@ class TestLPiCal(object):
     def test_gen_ical(self):
         """Testing LPiCal.gen_ical.
         """
-        ical =  self.lp_ical.gen_ical()
+        print self.lp_ical.gen_ical()
 
 
     def test_to_ical(self):
