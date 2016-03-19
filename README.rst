@@ -171,6 +171,19 @@ beginning of the markdown document:
 
 Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch-sessions-only.md
 
+
+LP schedule iCal export
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``--ical`` switch enables iCal export while generating LP
+schedule::
+
+  $ lps_gen -s --ical 2016 path/to/lp-schedule.jinja2 path/to/lp-schedule.md > path/to/program-schedule.html
+
+The year of the conference must be given as an argument to the
+``--ical`` switch.
+
+
 LP speakers
 -----------
 
