@@ -572,6 +572,23 @@ class TestLPSTBA(object):
             assert_equal(sp_block, speakers.pop(0))
 
 
+    def test_LP_room(self):
+        """Tests the non-existence of `RoomTBA` in gen. HTML.
+
+        """
+        rooms = [
+            'Room 32-141',
+            'Room 32-144',
+            'Room 31-123',
+            'Room 32-144',
+            'Room 42-042',
+        ]
+
+        for sp in self.soup.find_all(class_='room'):
+            room_block = sp.string
+            assert_equal(room_block, rooms.pop(0))
+
+
     def teardown(self):
         """Cleans up things after each test in this class.
 
