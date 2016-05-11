@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#    Copyright (C) 2015  lpschedule-generator contributors. See CONTRIBUTORS.
+#    Copyright (C) 2015-2016  lpschedule-generator contributors. See CONTRIBUTORS.
 #
 #    This file is part of lpschedule-generator.
 #
