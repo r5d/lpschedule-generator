@@ -516,6 +516,79 @@ class TestLPS(object):
         os.chdir(self.old_cwd)
 
 
+class TestLPSTBA(object):
+    """Class tests TBAs in the LP schedule.
+
+    """
+
+    @classmethod
+    def setup_class(self):
+        """Runs before running any tests in this class.
+
+        """
+        # Change current working directory to the tests directory.
+        self.old_cwd = os.getcwd()
+        os.chdir('tests')
+
+        self.MD_FILE = path.join('files', 'lp-sch-tba.md')
+        self.MD_FILE_CONTENT = read_file(self.MD_FILE)
+
+        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
+                                      'lp-schedule.jinja2')
+
+        self.markdown = LPSMarkdown()
+        self.lps_dict = self.markdown(self.MD_FILE_CONTENT)
+
+
+    def setup(self):
+        """Runs before each test in this class.
+
+        """
+        lp_html = RenderHTML(self.lps_dict, self.SCH_TEMPLATE)
+        self.soup = BeautifulSoup(lp_html, 'html.parser')
+
+
+    def cleanup_speaker(self, sp):
+        return ' '.join([s.strip() for s in sp.string.split('\n')
+                        if len(s.strip())])
+
+
+    def test_LP_speakers(self):
+        """Tests the non-existence of `SpeakerTBA` in gen. HTML.
+
+        """
+        speakers = [
+            'Paige Peterson, MaidSoft',
+            'George Chriss and others, Kat Walsh (moderator)',
+            'Andrew Seeder, Dudley Street Neighborhood Initiative',
+            'Marina Zhurakhinskaya, Red Hat',
+            'Marianne Corvellec, April and Jonathan Le Lous, April',
+            'Scott Dexter and Evan Misshula, CUNY, and Erin Glass, UCSD',
+            'Michaela R. Brown',
+        ]
+
+        for sp in self.soup.find_all(class_='program-session-speaker'):
+            sp_block = self.cleanup_speaker(sp)
+            assert_equal(sp_block, speakers.pop(0))
+
+
+    def teardown(self):
+        """Cleans up things after each test in this class.
+
+        """
+        # Remove `speakers.noids` file if it exists.
+        if path.isfile('speakers.noids'):
+            os.remove('speakers.noids')
+
+
+    @classmethod
+    def teardown_class(self):
+        """Cleans up the mess after running all tests in this class.
+        """
+        # Change back to the old cwd
+        os.chdir(self.old_cwd)
+
+
 class TestLPSpeakers(object):
     """
     Class that tests everything related LP Speakers

@@ -23,15 +23,17 @@
 
 {# make speakers macro #}
 {% macro mk_speakers(speakers) %}
-  <span class="program-session-speaker">
-    {% for speaker in speakers %}
-      {% if loop.last %}
-        {{ speaker }}
-      {% else %}
-        {{ speaker }},
-      {% endif %}
-    {% endfor %}
-  </span>
+  {% if speakers[0]|lower != 'speakertba' %}
+    <span class="program-session-speaker">
+      {% for speaker in speakers %}
+        {% if loop.last %}
+          {{ speaker }}
+        {% else %}
+          {{ speaker }},
+        {% endif %}
+      {% endfor %}
+    </span>
+  {% endif %}
 {% endmacro %}
 
 {# make room macro #}
