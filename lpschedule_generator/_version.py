@@ -18,4 +18,4 @@
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
 
-__version__ = '0.5.0a1'
+__version__ = '0.5.0'
