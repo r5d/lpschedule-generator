@@ -553,6 +553,10 @@ class TestLPSTBA(object):
                         if len(s.strip())])
 
 
+    def cleanup_desc(self, desc):
+        return desc.replace('\n', '').strip()
+
+
     def test_LP_speakers(self):
         """Tests the non-existence of `SpeakerTBA` in gen. HTML.
 
@@ -587,6 +591,27 @@ class TestLPSTBA(object):
         for sp in self.soup.find_all(class_='room'):
             room_block = sp.string
             assert_equal(room_block, rooms.pop(0))
+
+
+    def test_LP_description(self):
+        """Tests the non-existence of `DescTBA` in gen. HTML.
+        """
+        descriptions = [
+            'Your workplace can exert a lot of control over how',
+            'Free software developers and users tend to be most',
+            'This talk will help you gather information, frame',
+            'A look back at free software history',
+            'Academic Institutions and their researchers',
+            'At CUNY, we have taken steps to change this',
+            'Being a free software user isn\'t easy,',
+            'In this session, I\'ll give students tips',
+        ]
+
+        for descs in self.soup.find_all(class_='session-desc'):
+            for desc in descs.strings:
+                desc = self.cleanup_desc(desc)
+                if desc:
+                    assert desc.startswith(descriptions.pop(0))
 
 
     def teardown(self):
