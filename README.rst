@@ -170,6 +170,14 @@ Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sess
 Special cases
 +++++++++++++
 
+Speaker TBA
+...........
+
+When the speaker information for a session is not yet available put
+``SpeakerTBA`` as the placeholder in the line that usually contains
+the speaker information; the rendered HTML will not have speaker
+information for sessions that have ``SpeakerTBA``.
+
 Room TBA
 ........
 
@@ -177,6 +185,15 @@ When a room for a session is not yet available put ``RoomTBA`` as the
 placeholder in the line that usually contains the room number; the
 rendered HTML will not have the room number for sessions that have
 ``RoomTBA``.
+
+Description TBA
+...............
+
+When the description for session is not yet available put ``DescTBA``
+as the placeholder; the rendered HTML will not have the description
+for sessions that have ``DescTBA``.
+
+Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch-tba.md
 
 Sessions only schedule
 ......................
