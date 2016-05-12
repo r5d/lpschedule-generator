@@ -4,7 +4,7 @@ lpschedule-generator
 Python package that enables the FSF_ to write the LibrePlanet_
 schedule in Markdown_.
 
-To get started see "Installation_".
+See "Installation_" to get started.
 
 .. _Installation: https://pythonhosted.org/lpschedule-generator/install
 .. _FSF: https://fsf.org
