@@ -9,3 +9,4 @@
    install/index
    schedule/index
    speakers/index
+   general/index
