@@ -7,4 +7,5 @@
 
    Home <self>
    install/index
+   schedule/index
    speakers/index
