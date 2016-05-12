@@ -7,3 +7,4 @@
 
    Home <self>
    install/index
+   speakers/index
