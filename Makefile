@@ -30,6 +30,9 @@ upload:
 	@twine upload -r pypi -s -i rsd@gnu.org dist/*.tar.gz
 	@twine upload -r pypi -s -i rsd@gnu.org dist/*.whl
 
+docs:
+	@$(MAKE) -C docs html
+
 clean-build:
 	@rm -rf build/
 	@rm -rf dist/
@@ -51,4 +54,4 @@ dev-packages:
 	@pip install -U Sphinx
 
 .PHONY: dist clean-build upload build-dist egg clean-pyc clean-venv
-.PHONY: dev-packages
+.PHONY: dev-packages docs
