@@ -33,6 +33,9 @@ upload:
 docs:
 	@$(MAKE) -C docs html
 
+upload-docs: docs
+	@python setup.py upload_docs -r pypi --show-response --upload-dir docs/_build/html
+
 clean-build:
 	@rm -rf build/
 	@rm -rf dist/
@@ -54,4 +57,4 @@ dev-packages:
 	@pip install -U Sphinx
 
 .PHONY: dist clean-build upload build-dist egg clean-pyc clean-venv
-.PHONY: dev-packages docs
+.PHONY: dev-packages docs upload-docs
