@@ -10,3 +10,6 @@ lib/
 local/
 man/
 *.egg-info/
+
+# docs
+docs/_build
