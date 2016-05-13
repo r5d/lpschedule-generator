@@ -27,8 +27,3 @@ license version 3 or later`__.
 
 .. _gplv3: https://www.gnu.org/licenses/gpl-3.0-standalone.html
 __ gplv3_
-
-help
-----
-
-Contact rsiddharth <rsd@gnu.org>.
