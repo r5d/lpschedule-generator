@@ -81,5 +81,5 @@ You must get::
     --version        Show version number and exit.
 
 If the ``lps_gen`` command is installed, move to the :ref:`next
-section <lps-doc-sec-schedule>`; otherwise for
+section <lps-doc-sec-schedule>`; otherwise ask for
 :ref:`lps-doc-sec-help`.
