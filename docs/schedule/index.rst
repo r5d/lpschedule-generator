@@ -3,21 +3,10 @@
 LP schedule
 -----------
 
-.. highlight:: bash
+.. highlight:: text
 
-LP schedule usage
-~~~~~~~~~~~~~~~~~
-::
-
-   $ lps_gen -s path/to/lp-sch.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
-
-or::
-
-  $ lps_gen --schedule path/to/lp-schedule.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
-
-
-LP schedule markdown structure
-``````````````````````````````
+LP schedule Markdown structure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Overall structure::
 
@@ -167,8 +156,21 @@ beginning of the markdown document:
 Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch-sessions-only.md
 
 
-LP schedule iCal export
-~~~~~~~~~~~~~~~~~~~~~~~
+.. highlight:: bash
+
+Generate HTML from Markdown
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::
+
+   $ lps_gen -s path/to/lp-sch.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
+
+or::
+
+  $ lps_gen --schedule path/to/lp-schedule.jinja2 path/to/lp-sch.md > path/to/program-schedule.html
+
+
+iCal export
+~~~~~~~~~~~
 
 The ``--ical`` switch enables iCal export while generating LP
 schedule::
@@ -177,3 +179,7 @@ schedule::
 
 The year of the conference must be given as an argument to the
 ``--ical`` switch.
+
+If you run into issues, ask for :ref:`help <lps-doc-sec-help>`.
+
+Next, go to the :ref:`lps-doc-sec-speakers` section.
