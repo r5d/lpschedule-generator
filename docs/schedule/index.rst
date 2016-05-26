@@ -182,4 +182,4 @@ The year of the conference must be given as an argument to the
 
 If you run into issues, ask for :ref:`help <lps-doc-sec-help>`.
 
-Next, go to the :ref:`lps-doc-sec-speakers` section.
+Next, you might want to look at the :ref:`lps-doc-sec-speakers` section or the :ref:`lps-doc-sec-general` section.
