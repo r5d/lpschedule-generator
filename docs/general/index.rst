@@ -1,3 +1,5 @@
+.. _lps-doc-sec-general:
+
 General
 -------
 

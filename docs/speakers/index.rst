@@ -3,18 +3,8 @@
 LP speakers
 -----------
 
-LP speakers usage
-~~~~~~~~~~~~~~~~~
-::
-
-   $ lps_gen -sp path/to/lp-speakers.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
-
-or::
-
-  $ lps_gen --speakers path/to/lp-speakers.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
-
-LP speakers markdown structure
-``````````````````````````````
+Markdown structure
+~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -68,3 +58,17 @@ speaker' name is "John Hacker", the ID for this speaker will be
 
 - The IDs are transliterated to ASCII; if a speaker' name is "John
   HÖcker", the ID for this speaker will be ``hacker``.
+
+Generate HTML from Markdown
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::
+
+   $ lps_gen -sp path/to/lp-speakers.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
+
+or::
+
+  $ lps_gen --speakers path/to/lp-speakers.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
+
+If you run into issues, ask for :ref:`help <lps-doc-sec-help>`.
+
+Next, you might want to look at the :ref:`lps-doc-sec-schedule` section or the :ref:`lps-doc-sec-general` section.
