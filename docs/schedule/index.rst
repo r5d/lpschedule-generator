@@ -5,8 +5,8 @@ LP schedule
 
 .. highlight:: text
 
-LP schedule Markdown structure
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Markdown structure
+~~~~~~~~~~~~~~~~~~
 
 Overall structure::
 
