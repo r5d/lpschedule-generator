@@ -20,6 +20,8 @@
 test:
 	@nosetests
 
+.PHONY: test
+
 build-dist:
 	@python setup.py sdist bdist_wheel
 
@@ -30,11 +32,15 @@ upload:
 	@twine upload -r pypi -s -i rsd@gnu.org dist/*.tar.gz
 	@twine upload -r pypi -s -i rsd@gnu.org dist/*.whl
 
+.PHONY: build-dist egg upload
+
 docs:
 	@$(MAKE) -C docs html
 
 upload-docs: docs
 	@python setup.py upload_docs -r pypi --show-response --upload-dir docs/_build/html
+
+.PHONY: docs upload-docs
 
 clean-build:
 	@rm -rf build/
@@ -54,10 +60,14 @@ clean-venv:
 clean-docs:
 	@$(MAKE) -C docs clean
 
+.PHONY: clean-build clean-pyc clean-venv clean-docs
+
 dev-packages:
 	@pip install -U nose mock restructuredtext_lint
 	@pip install -U wheel twine
 	@pip install -U Sphinx
 
-.PHONY: dist clean-build upload build-dist egg clean-pyc clean-venv
-.PHONY: dev-packages docs upload-docs clean-docs
+.PHONY: dev-packages
+
+
+
