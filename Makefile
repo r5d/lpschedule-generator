@@ -51,10 +51,13 @@ clean-venv:
 	@rm -rf local/
 	@rm -rf man/
 
+clean-docs:
+	@$(MAKE) -C docs clean
+
 dev-packages:
 	@pip install -U nose mock restructuredtext_lint
 	@pip install -U wheel twine
 	@pip install -U Sphinx
 
 .PHONY: dist clean-build upload build-dist egg clean-pyc clean-venv
-.PHONY: dev-packages docs upload-docs
+.PHONY: dev-packages docs upload-docs clean-docs
