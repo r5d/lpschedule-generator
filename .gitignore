@@ -8,6 +8,7 @@ dist/
 include/
 lib/
 local/
+share/
 man/
 *.egg-info/
 
