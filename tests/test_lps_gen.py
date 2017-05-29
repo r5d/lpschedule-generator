@@ -279,8 +279,9 @@ class TestLPiCal(object):
             for timeslot_str, sessions in timeslots.iteritems():
                 t_start, t_end, t_name = self.lp_ical.get_timeslot(timeslot_str)
                 for session, session_info in sessions.iteritems():
-                    event = self.lp_ical.add_event(month, day, t_start, t_end,
-                                           session, session_info)
+                    event = self.lp_ical.add_event(month, day,
+                                            t_start, t_end, t_name,
+                                            session, session_info)
                     assert event['uid'] not in uids
                     uids.append(event['uid'])
 
@@ -288,7 +289,12 @@ class TestLPiCal(object):
                     assert event['class'] == 'PUBLIC'
                     assert event['status'] == 'CONFIRMED'
                     assert event['method'] == 'PUBLISH'
-                    assert event['summary'] == session
+
+                    if session == 'st-from-ts':
+                        assert event['summary'] == t_name
+                    else:
+                        assert event['summary'] == session
+
                     assert event['location'] == session_info['room']
                     assert event['description'] == BeautifulSoup(' '.join(
                         session_info['desc']).replace(

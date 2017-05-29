@@ -215,7 +215,8 @@ class LPiCal(object):
         return attendee
 
 
-    def add_event(self, month, day, t_start, t_end, session, session_info):
+    def add_event(self, month, day, t_start, t_end, t_name, session,
+                      session_info):
         """Adds event to calendar.
         """
         event = Event()
@@ -225,7 +226,11 @@ class LPiCal(object):
         event['status'] = vText('CONFIRMED')
         event['method'] = vText('PUBLISH')
 
-        event['summary'] = session
+        if session == 'st-from-ts':
+            event['summary'] = t_name
+        else:
+            event['summary'] = session
+
         event['location'] = vText(session_info['room'])
 
         # Get rid of HTML in 'desc'
@@ -268,7 +273,7 @@ class LPiCal(object):
                     # this timeslot
                     continue
                 for session, session_info in sessions.iteritems():
-                    self.add_event(month, day, t_start, t_end,
+                    self.add_event(month, day, t_start, t_end, t_name,
                                    session, session_info)
 
         return self.cal.to_ical()
