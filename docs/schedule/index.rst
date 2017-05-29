@@ -155,6 +155,19 @@ beginning of the markdown document:
 
 Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch-sessions-only.md
 
+Single session time slot
+........................
+
+If a time slot contains only one session (like a Keynote), then
+session heading/title can be omitted::
+
+  ### 9:00 - 10:45: Opening Keynote - Beyond unfree...
+
+  [Cory Doctorow][doctorow]
+
+  Room 32-123
+
+  Software has eaten the world...
 
 .. highlight:: bash
 
