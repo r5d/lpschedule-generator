@@ -326,6 +326,34 @@ class LPSRenderer(Renderer):
             return False
 
 
+    def _check_session_title_exists(self):
+        """Checks if :py:attr:`.last_session` is set.
+
+        If :py:attr:`.last_session` is not set and first paragraph is
+        encountered, then it is assumed that the current timeslot is in
+        the following format::
+
+            ### 9:00 - 10:45: Opening Keynote - Beyond unfree...
+
+            [Cory Doctorow][doctorow]
+
+            Room 32-123
+
+            Software has eaten the world...
+
+        This method is meant to be called from the
+        :py:method:`.paragraph` method.
+        """
+        if not self.last_session and self.no_paragraph == 0:
+            # Current timeslot has only one session and there
+            # no session title.
+            #
+            # st-from-ts -> session title from time slot.
+            lps_dict[self.last_day][self.last_time_slot][
+                'st-from-ts'] = OrderedDict()
+            self.last_session = 'st-from-ts'
+
+
     def link(self, link, title, text):
         # Here, we catch speaker names that have to be autolinked and
         # autolink them if there is an id available for the speaker.
@@ -356,6 +384,10 @@ class LPSRenderer(Renderer):
             # Add new timeslot
             lps_dict[self.last_day][text] = OrderedDict()
             self.last_time_slot = text
+            # New timeslot, reset paragraphs processed and
+            # last session.
+            self.no_paragraph = 0
+            self.last_session = None
         elif level == 4:
             # Add new session
             lps_dict[self.last_day][self.last_time_slot][text] = OrderedDict()
@@ -370,6 +402,7 @@ class LPSRenderer(Renderer):
     def paragraph(self, text):
         global lps_dict
 
+        self._check_session_title_exists()
         p = super(LPSRenderer, self).paragraph(text)
 
         if self.no_paragraph == 0:
