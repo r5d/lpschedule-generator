@@ -358,7 +358,7 @@ class TestLPS(object):
         self.MD_FILE = path.join('files', 'lp-sch.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
+        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2018',
                                       'lp-schedule.jinja2')
 
         self.markdown = LPSMarkdown()
@@ -392,7 +392,7 @@ class TestLPS(object):
             '11:40 - 11:50: Break',
             '11:50 - 12:35: Session Block 2A',
             '09:00 - 09:45: Registration and breakfast',
-            '09:45 - 10:30: Keynote: Benjamin Mako Hill',
+            '09:45 - 10:30: Keynote: Access without empowerment',
             '10:30 - 10:40: Break',
             '10:40 - 11:25: Session Block 1B',
             ]
@@ -415,7 +415,7 @@ class TestLPS(object):
             'TAFTA, CETA, TISA: traps and threats to Free Software Everywhere',
             'Let\'s encrypt!',
             'Attribution revolution -- turning copyright upside-down',
-            'Access without empowerment',
+            'st-from-ts',
             'Fork and ignore: fighting a GPL violation by coding instead',
             'Who did this? Just wait until your father gets home',
             ]

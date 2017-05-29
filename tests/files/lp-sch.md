@@ -116,9 +116,7 @@ and where we're heading in the future.
 
 ### 09:00 - 09:45: Registration and breakfast
 
-### 09:45 - 10:30: Keynote: Benjamin Mako Hill
-
-#### Access without empowerment
+### 09:45 - 10:30: Keynote: Access without empowerment
 
 Benjamin Mako Hill
 
