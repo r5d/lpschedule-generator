@@ -100,7 +100,8 @@ def json_write(filename, obj):
 
 
 def json_read(filename):
-    """Deserialize JSON formatted `str` from `filename` into Python object.
+    """Deserialize JSON from `filename` into Python object.
+
     """
     if not path.isfile(filename):
         return False
@@ -110,8 +111,7 @@ def json_read(filename):
 
 
 class LPiCal(object):
-    """
-    Used for producing iCal for LP schedule.
+    """Used for producing iCal for LP schedule.
     """
 
     def __init__(self, lps_dict, lp_year):
@@ -201,8 +201,7 @@ class LPiCal(object):
 
 
     def mk_attendee(self, speaker):
-        """
-        Make Attendee to be added to an Event object.
+        """Make Attendee to be added to an Event object.
 
         See `add_event` method.
         """
@@ -259,7 +258,6 @@ class LPiCal(object):
 
     def gen_ical(self):
         """Parse LP schedule dict and generate iCal Calendar object.
-
         """
 
         for day_str, timeslots in self.lps_dict.iteritems():
@@ -283,7 +281,6 @@ class LPiCal(object):
 
     def to_ical(self):
         """Writes iCal to disk.
-
         """
         filename = 'lp%s-schedule.ics' % self.lp_year
         write_file(filename, self.gen_ical())
@@ -292,7 +289,7 @@ class LPiCal(object):
 
 
 class LPSRenderer(Renderer):
-    """Helps in converting Markdown version of LP schedule to a dictionary.
+    """Helps convert Markdown version of LP schedule to a dictionary.
     """
 
     def __init__(self, **kwargs):
@@ -319,7 +316,9 @@ class LPSRenderer(Renderer):
 
 
     def get_uid(self, speaker):
-        """Returns unique id for `speaker` if it exists; `False` otherwise.
+        """Generate unique id for `speaker`.
+
+        Returns unique id for `speaker` if it exists; `False` otherwise.
         """
         if not self.speakers_ids:
             # There is no speakers_ids OrderedDict available.
@@ -436,7 +435,7 @@ class LPSRenderer(Renderer):
 
 
 class LPSpeakersRenderer(Renderer):
-    """Helps in converting Markdown version of LP speakers to a dictionary.
+    """Helps convert Markdown version of LP speakers to a dictionary.
     """
 
     def __init__(self, **kwargs):
