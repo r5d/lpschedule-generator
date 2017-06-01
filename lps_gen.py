@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-#    Copyright (C) 2015-2016  lpschedule-generator contributors. See CONTRIBUTORS.
+#   Copyright (C) 2015-2016 lpschedule-generator contributors. See
+#   CONTRIBUTORS.
 #
 #    This file is part of lpschedule-generator.
 #
@@ -9,10 +10,10 @@
 #   as published by the Free Software Foundation, either version 3 of
 #   the License, or (at your option) any later version.
 #
-#   lpschedule-generator is distributed in the hope that it will be useful, but
-#   WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-#   General Public License for more details.
+#   lpschedule-generator is distributed in the hope that it will be
+#   useful, but WITHOUT ANY WARRANTY; without even the implied
+#   warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#   See the GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
 #   along with lpschedule-generator (see COPYING).  If not, see
@@ -190,8 +191,9 @@ class LPiCal(object):
         hour = time.split(':')[0]
         minute = time.split(':')[1]
         datetime_str = '%s %s %s %s:%s:%s' % (day, month, self.lp_year,
-                                              hour.zfill(2), minute.zfill(2),
-                                              '00')
+                                                hour.zfill(2),
+                                                minute.zfill(2),
+                                                '00')
 
         dt_object = datetime.strptime(datetime_str, datetime_fmt)
 
@@ -395,7 +397,8 @@ class LPSRenderer(Renderer):
             self.last_session = None
         elif level == 4:
             # Add new session
-            lps_dict[self.last_day][self.last_time_slot][text] = OrderedDict()
+            lps_dict[self.last_day][self.last_time_slot][
+                text] = OrderedDict()
             self.last_session = text
             # We found a new session; set no of paragraphs processed
             # to 0.
@@ -482,15 +485,20 @@ class LPSpeakersRenderer(Renderer):
             lpspeakers_dict[self.speaker_type].append(OrderedDict())
 
             lpspeakers_dict[self.speaker_type][-1]['speaker'] = text
-            lpspeakers_dict[self.speaker_type][-1]['id'] = self.mk_uid(text)
-            lpspeakers_dict[self.speaker_type][-1]['bio']  = []
+            lpspeakers_dict[self.speaker_type][-1][
+                'id'] = self.mk_uid(text)
+            lpspeakers_dict[self.speaker_type][-1][
+                'bio']  = []
         elif level == 2:
             self.speaker_type = 'speakers'
             lpspeakers_dict[self.speaker_type].append(OrderedDict())
 
-            lpspeakers_dict[self.speaker_type][-1]['speaker'] = text.split(', ')[0]
-            lpspeakers_dict[self.speaker_type][-1]['id'] = self.mk_uid(text)
-            lpspeakers_dict[self.speaker_type][-1]['bio']  = []
+            lpspeakers_dict[self.speaker_type][
+                -1]['speaker'] = text.split(', ')[0]
+            lpspeakers_dict[self.speaker_type][
+                -1]['id'] = self.mk_uid(text)
+            lpspeakers_dict[self.speaker_type][
+                -1]['bio']  = []
 
         return super(LPSpeakersRenderer, self).header(text, level, raw)
 
@@ -540,7 +548,8 @@ class LPSMarkdown(Markdown):
         html = super(LPSMarkdown, self).parse(text)
 
         # Write list of speakers with no ids to `speakers.noids`.
-        json_write('speakers.noids', self.sessions_renderer.speakers_noids)
+        json_write('speakers.noids',
+                    self.sessions_renderer.speakers_noids)
 
         return lps_dict
 
@@ -605,9 +614,11 @@ def main():
                        help="Generate LP speakers")
 
     parser.add_argument("--ical", type=int,
-                        help="Specify LP year as argument; generates iCal")
+                        help="Specify LP year as argument; "
+                            + "generates iCal")
     parser.add_argument("--version", action="version",
-                        version='lpschedule-generator version %s' % __version__,
+                        version='lpschedule-generator version %s'
+                        % __version__,
                         help="Show version number and exit.")
     parser.add_argument("lp_t",
                         help="Path to the LP template.")
