@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#    Copyright (C) 2015-2016  lpschedule-generator contributors. See CONTRIBUTORS.
+#    Copyright (C) 2015-2017  lpschedule-generator contributors. See CONTRIBUTORS.
 #
 #    This file is part of lpschedule-generator.
 #
@@ -18,4 +18,4 @@
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
 
-__version__ = u'0.6.1'
+__version__ = u'0.7.0b1'
