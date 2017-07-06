@@ -68,6 +68,3 @@ dev-packages:
 	@pip install -U Sphinx
 
 .PHONY: dev-packages
-
-
-
