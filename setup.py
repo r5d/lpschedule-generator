@@ -51,7 +51,10 @@ config = {
                     ['libreplanet-templates/2016/lp-schedule.jinja2',
                      'libreplanet-templates/2016/lp-speakers.jinja2']),
                    ('local/share/lpschedule-generator/libreplanet-templates/2017',
-                    ['libreplanet-templates/2017/lp-schedule.jinja2'])],
+                    ['libreplanet-templates/2017/lp-schedule.jinja2']),
+                   ('local/share/lpschedule-generator/libreplanet-templates/2018',
+                    ['libreplanet-templates/2018/lp-schedule.jinja2'])
+     ],
     'entry_points': {
         'console_scripts': ['lps_gen = lps_gen:main']
     },
