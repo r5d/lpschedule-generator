@@ -47,13 +47,22 @@ config = {
     'tests_require': ['nose', 'mock'],
     'test_suite': 'nose.collector',
     'py_modules': ['lps_gen', 'lpschedule_generator._version'],
-    'data_files': [('local/share/lpschedule-generator/libreplanet-templates/2016',
-                    ['libreplanet-templates/2016/lp-schedule.jinja2',
-                     'libreplanet-templates/2016/lp-speakers.jinja2']),
-                   ('local/share/lpschedule-generator/libreplanet-templates/2017',
-                    ['libreplanet-templates/2017/lp-schedule.jinja2']),
-                   ('local/share/lpschedule-generator/libreplanet-templates/2018',
-                    ['libreplanet-templates/2018/lp-schedule.jinja2'])
+    'data_files': [('share/lpschedule-generator/libreplanet-templates/2016',
+                        [
+                            'libreplanet-templates/2016/lp-schedule.jinja2',
+                            'libreplanet-templates/2016/lp-speakers.jinja2'
+                        ]
+                    ),
+                    ('share/lpschedule-generator/libreplanet-templates/2017',
+                        [
+                            'libreplanet-templates/2017/lp-schedule.jinja2'
+                        ]
+                    ),
+                    ('share/lpschedule-generator/libreplanet-templates/2018',
+                        [
+                            'libreplanet-templates/2018/lp-schedule.jinja2'
+                        ]
+                    )
      ],
     'entry_points': {
         'console_scripts': ['lps_gen = lps_gen:main']
