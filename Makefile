@@ -38,7 +38,7 @@ docs:
 	@$(MAKE) -C docs html
 
 upload-docs: docs
-	@python setup.py upload_docs -r pypi --show-response --upload-dir docs/_build/html
+	@rsync -avz --delete docs/_build/html/  $(LPSG_DOCS_HOST)
 
 .PHONY: docs upload-docs
 
