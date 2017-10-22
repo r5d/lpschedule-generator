@@ -262,19 +262,19 @@ class LPiCal(object):
         """Parse LP schedule dict and generate iCal Calendar object.
         """
 
-        for day_str, timeslots in self.lps_dict.iteritems():
+        for day_str, timeslots in self.lps_dict.items():
             month, day = self.get_month_day(day_str)
             if not month:
                 # month, day not specified; cannot generate ical for
                 # this day
                 continue
-            for timeslot_str, sessions in timeslots.iteritems():
+            for timeslot_str, sessions in timeslots.items():
                 t_start, t_end, t_name = self.get_timeslot(timeslot_str)
                 if not t_start:
                     # timeslot not specified; cannot generate ical for
                     # this timeslot
                     continue
-                for session, session_info in sessions.iteritems():
+                for session, session_info in sessions.items():
                     self.add_event(month, day, t_start, t_end, t_name,
                                    session, session_info)
 
