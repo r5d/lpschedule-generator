@@ -66,7 +66,7 @@ def read_file(filename):
             for line in f:
                 content = content + line
     except IOError:
-        print "Error: unable to open %s" % filename
+        print('Error: unable to open {}'.format(filename))
 
     return content
 
@@ -86,7 +86,7 @@ def write_file(filename, filecontent):
       file_.write(filecontent)
       file_.close()
     except IOError:
-        print "Error creating and writing content to %s" % filename
+        print('Error creating and writing content to {}'.format(filename))
         exit(1)
 
 
@@ -597,7 +597,7 @@ def RenderHTML(lp_dict, template):
     try:
         template = env.get_template(template_name)
     except TemplateNotFound as e:
-        print "Template %s not found." % template_name
+        print('Template {} not found.'.format(template_name))
         exit(1)
 
     lp_html = template.render(lp_dict=lp_dict)
@@ -650,9 +650,9 @@ def main():
 
     if lp_html:
         # stdout lps html
-        print lp_html
+        print(lp_html)
     else:
-        print 'Error generating LP HTML.'
+        print('Error generating LP HTML.')
 
 
 if __name__ == "__main__":
