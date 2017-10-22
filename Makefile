@@ -42,6 +42,10 @@ upload-docs: docs
 
 .PHONY: docs upload-docs
 
+venv:
+	virtualenv --clear --python=python2.7 venv
+.PHONY: venv
+
 clean-build:
 	@rm -rf build/
 	@rm -rf dist/
