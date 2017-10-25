@@ -54,6 +54,19 @@
   {% endif %}
 {% endmacro %}
 
+{# make desc details button macro #}
+{% macro mk_desc_details_btn(disc_list) %}
+  {% if disc_list[0]|lower != 'desctba' %}
+    <button class="btn btn-default btn-xs"
+            data-toggle="collapse" aria-expanded="false"
+            aria-controls="{{ caller()|trim }}"
+            data-target="#{{ caller()|trim }}">
+            Show details
+            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+    </button>
+  {% endif %}
+{% endmacro %}
+
 {# make day header macro #}
 {% macro mk_day_header(day, collapse_area) %}
   {% if day|trim != '' %}
