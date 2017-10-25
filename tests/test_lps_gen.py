@@ -892,7 +892,7 @@ class TestLPSpeakers(object):
         """Testing `RenderHTML` function with LP speakers
         """
         lps_html = RenderHTML(self.lpspeakers_dict, self.SPEAKERS_TEMPLATE)
-        print lps_html
+        print lps_html # TODO: Scrape and test html output.
 
 
     def teardown(self):
