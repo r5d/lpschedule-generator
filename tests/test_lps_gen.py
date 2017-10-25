@@ -480,7 +480,7 @@ class TestLPS(object):
         """Testing `RenderHTML` function with LP schedule
         """
         lps_html = RenderHTML(self.lps_dict, self.SCH_TEMPLATE)
-        print lps_html
+        print lps_html # TODO: Scrape and test html output
 
 
     def test_RenderHTML_sessions_only(self):
