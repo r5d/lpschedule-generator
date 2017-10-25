@@ -45,6 +45,15 @@
   {% endif %}
 {% endmacro %}
 
+{# make video macro #}
+{% macro mk_video(video) %}
+  {% if video|lower != 'videotba' %}
+    <a class="btn btn-default btn-xs" href="{{ video }}">
+      <span class="glyphicon glyphicon-facetime-video"></span>
+    </a>
+  {% endif %}
+{% endmacro %}
+
 {# make day header macro #}
 {% macro mk_day_header(day, collapse_area) %}
   {% if day|trim != '' %}
