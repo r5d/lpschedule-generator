@@ -443,6 +443,10 @@ class LPSRenderer(Renderer):
             # Room
             lps_dict[self.last_day][self.last_time_slot][
                 self.last_session]['room'] = text
+            self.no_paragraph = self.no_paragraph + 1
+        elif self.no_paragraph == 2:
+            lps_dict[self.last_day][self.last_time_slot][
+                self.last_session]['video'] = self._process_video(text)
             # Initialize description
             lps_dict[self.last_day][self.last_time_slot][
                 self.last_session]['desc'] = []

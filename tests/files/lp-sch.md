@@ -12,6 +12,8 @@ Richard Stallman
 
 Room 32-123
 
+https://media.libre.planet/rms-free-everything
+
 Preceded by a welcome address from John Sullivan, FSF executive
 director.
 
@@ -26,6 +28,8 @@ director.
 [Christopher Webber](http://dustycloud.org)
 
 Room 32-123
+
+https://media.libre.planet/gnu-fed
 
 The effort to re-decentralize the web has been under way for a number
 of years, but what's really happening under the hood? Various projects
@@ -42,6 +46,8 @@ ginger coons
 
 Room 32-141
 
+VideoTBA
+
 What if the classic horror trope of the good doctor who becomes a
 monster at night were reversed? Instead of the good Dr. Jekyll
 transforming into the rampaging Mr. Hyde, advocates of free who work
@@ -57,6 +63,8 @@ teaching.
 [Marianne Corvellec](/2015/program/speakers.html#corvellec), [Jonathan Le Lous](/2015/program/speakers.html#le-lous)
 
 Room 32-155
+
+https://media.libre.planet/tafta-ceta-tisa
 
 TAFTA, CETA, and TISA are far-reaching trade agreements posing major
 threats to online freedom and creating legal uncertainty for all
@@ -78,6 +86,8 @@ Seth Schoen
 
 Room 32-123
 
+https://media.libre.planet/letsencrypt
+
 This year a robotic certificate authority will start issuing
 publicly-trusted certificates, at no charge, by the millions. Called
 Let's Encrypt, this CA is an initiative of several organizations. Our
@@ -92,6 +102,8 @@ integration help!
 Jonas Öberg
 
 Room 32-141
+
+VideoTBA
 
 Reusing works licensed under free licenses seems pretty simple, but it
 can often be quite time consuming. One image or a few lines of source
@@ -122,6 +134,8 @@ Benjamin Mako Hill
 
 Room 32-123
 
+https://media.libre.planet/mako-keynote
+
 The free software movement has twin goals: promoting access to
 software through users' freedom to share, and empowering users by
 giving them control over their technology. For all our movement's
@@ -140,6 +154,8 @@ second challenge in the future.
 Bradley Kuhn
 
 Room 32-123
+
+https://media.libre.planet/fork-ignore
 
 Typically, GPL enforcement activity involves copyright infringement
 actions which compel license violators to correct errors in their GPL
@@ -165,6 +181,8 @@ content about vetting the licensing information of codebases.
 Ken Starks
 
 Room 32-141
+
+VideoTBA
 
 What's going on in here? Computer parts laying all over the
 place... screws and ribbon cables scattered cross heaven's half

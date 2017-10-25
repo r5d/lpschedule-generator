@@ -8,6 +8,8 @@ SpeakerTBA
 
 Room 32-141
 
+VideoTBA
+
 Your workplace can exert a lot of control over how much free software you use, what you're allowed to work on in your own time and what kinds of tools you become an expert in. New employees don't always negotiate their contracts to make sure they can continue contributing to free software and current employees aren't always successful at advocating for using free software tools, choosing free software technologies or contributing changes back upstream when they do rely on free software. We'll address what's possible, what your legal department is likely to be concerned about and how to be a smooth negotiator at work. Many companies could benefit tremendously from using Free and Open Source Software, but free software enthusiasts and institutional gatekeepers are coming from very different perspectives.
 
 Free software developers and users tend to be most familiar with free software's benefits when compared to proprietary solutions; user freedom, reusing code, public code review for bugs, increased project capacity and cost. The uninitiated may -- unfortunately -- be most familiar with the risks, some real and some perceived. Employers also benefit from having workers who are passionate about their work, are well-connected to the free software community and are constantly learning about new technologies from their peers outside the company, but new employee contracts rarely recognize this unless you ask. Conversations about contracts, choosing new technologies and sharing an employee's work with another entity are high stakes negotiations. With a solid understanding of what worries and motivates the other parties, you can become a savvy advocate for free software at work.
@@ -20,6 +22,8 @@ Paige Peterson, MaidSoft
 
 RoomTBA
 
+VideoTBA
+
 DescTBA
 
 #### Challenges and future growth in libre media and conference video production
@@ -27,6 +31,8 @@ DescTBA
 George Chriss and others, Kat Walsh (moderator)
 
 Room 32-144
+
+VideoTBA
 
 DescTBA
 
@@ -38,6 +44,8 @@ SpeakerTBA
 
 Room 31-123
 
+VideoTBA
+
 DescTBA
 
 #### Community technology for solidarity economies
@@ -46,6 +54,8 @@ Andrew Seeder, Dudley Street Neighborhood Initiative
 
 RoomTBA
 
+VideoTBA
+
 DescTBA
 
 #### Effective outreach in four steps
@@ -53,6 +63,8 @@ DescTBA
 Marina Zhurakhinskaya, Red Hat
 
 Room 32-144
+
+VideoTBA
 
 DescTBA
 
@@ -64,6 +76,8 @@ Marianne Corvellec, April and Jonathan Le Lous, April
 
 RoomTBA
 
+VideoTBA
+
 DescTBA
 
 #### FSF at 30: history of free software
@@ -72,6 +86,8 @@ SpeakerTBA
 
 RoomTBA
 
+VideoTBA
+
 A look back at free software history, with a live demonstration of software from the past being used to deliver a presentation in 2016.
 
 #### Getting the academy to support free software and open science
@@ -79,6 +95,8 @@ A look back at free software history, with a live demonstration of software from
 Scott Dexter and Evan Misshula, CUNY, and Erin Glass, UCSD
 
 RoomTBA
+
+VideoTBA
 
 Academic Institutions and their researchers are some of the biggest beneficiaries of free software development. While individual researchers have contributed greatly to free software, they usually do so outside of the scope of their regular jobs and to the detriment of their academic careers.
 
@@ -89,6 +107,8 @@ At CUNY, we have taken steps to change this unacceptable situation. Please come 
 Michaela R. Brown
 
 Room 42-042
+
+VideoTBA
 
 Being a free software user isn't easy, especially when you're a college student. I spent a year at a school that taught Visual Basic as its primary programming language for freshmen and sophomores, where "Introduction to Programming" was an overview of the Windows OS, and where most of the professors would only accept papers typed in Times New Roman -- and I survived.
 
