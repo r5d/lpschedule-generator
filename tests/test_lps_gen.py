@@ -500,6 +500,34 @@ class TestLPS(object):
                     i = i + 1
 
 
+    def test_LPSMarkdown_desc(self):
+        """Testing `LPSMarkdown` class - Video
+        """
+        descriptions = [
+            'Preceded by a welcome address from',
+            'The effort to re-decentralize the web has',
+            'What if the classic horror trope of the',
+            'TAFTA, CETA, and TISA are far-reaching',
+            'This year a robotic certificate authority will',
+            'Reusing works licensed under free licenses seems',
+            'In order to relate effectively to the digital works',
+            'The free software movement has twin',
+            'Typically, GPL enforcement activity',
+            'While traditional enforcement is often',
+            'Recently, Software Freedom Conservancy',
+            'This talk discusses which scenarios make this remedy',
+            'What\'s going on in here? Computer parts',
+        ]
+
+        i = 0
+        for lps_timeslots in self.lps_dict.values():
+            for lps_sessions in lps_timeslots.values():
+                for session_info in lps_sessions.values():
+                    for desc in session_info['desc']:
+                        assert_true(desc.startswith(descriptions[i]))
+                        i = i + 1
+
+
     def test_RenderHTML(self):
         """Testing `RenderHTML` function with LP schedule
         """
