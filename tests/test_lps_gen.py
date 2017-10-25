@@ -476,6 +476,30 @@ class TestLPS(object):
                     i = i + 1
 
 
+    def test_LPSMarkdown_video(self):
+        """Testing `LPSMarkdown` class - Video
+        """
+
+        videos = [
+            'https://media.libre.planet/rms-free-everything',
+            'https://media.libre.planet/gnu-fed',
+            'VideoTBA',
+            'https://media.libre.planet/tafta-ceta-tisa',
+            'https://media.libre.planet/letsencrypt',
+            'VideoTBA',
+            'https://media.libre.planet/mako-keynote',
+            'https://media.libre.planet/fork-ignore',
+            'VideoTBA',
+            ]
+
+        i = 0
+        for lps_timeslots in self.lps_dict.values():
+            for lps_sessions in lps_timeslots.values():
+                for session_info in lps_sessions.values():
+                    assert_equal(session_info['video'], videos[i])
+                    i = i + 1
+
+
     def test_RenderHTML(self):
         """Testing `RenderHTML` function with LP schedule
         """
