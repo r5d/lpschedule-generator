@@ -67,6 +67,15 @@
   {% endif %}
 {% endmacro %}
 
+{% macro mk_desc(disc_list) %}
+  {% if disc_list[0]|lower != 'desctba' %}
+    <div class="session-desc collapse in"
+         id="{{ caller()|trim }}">
+         {{ desc(disc_list) }}
+    </div> <!--  {{ caller()|trim }} end -->
+  {% endif %}
+{% endmacro %}
+
 {# make day header macro #}
 {% macro mk_day_header(day, collapse_area) %}
   {% if day|trim != '' %}
