@@ -491,7 +491,7 @@ class TestLPS(object):
 
         lps_html = RenderHTML(self.markdown(md_content),
                               self.SCH_TEMPLATE)
-        print lps_html
+        print lps_html # TODO: Scrape and test html output
 
     @raises(SystemExit)
     def test_RenderHTML_nonexistent_template(self):
