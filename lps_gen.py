@@ -362,6 +362,24 @@ class LPSRenderer(Renderer):
             self.last_session = 'st-from-ts'
 
 
+    def _process_video(self, text):
+        """Process the video text.
+
+        If it's a link, just extract the link and return it.
+
+        This method is meant to be called from the
+        :py:method:`.paragraph` method.
+        """
+        soup = BeautifulSoup(text, 'html.parser')
+        links = soup.find_all('a')
+
+        if len(links) == 0:
+            # no links found, so
+            return text
+
+        # link(s) found, return the first link's href.
+        return links[0]['href']
+
     def link(self, link, title, text):
         # Here, we catch speaker names that have to be autolinked and
         # autolink them if there is an id available for the speaker.
