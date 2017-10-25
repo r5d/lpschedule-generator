@@ -933,7 +933,7 @@ class TestSpeakersAutoLinking(object):
 
         self.SESSIONS_MD = path.join('files', 'lp-sessions-autolink.md')
         self.SESSIONS_MD_CONTENT = read_file(self.SESSIONS_MD)
-        self.SESSIONS_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
+        self.SESSIONS_TEMPLATE = path.join('..', 'libreplanet-templates/2018',
                                            'lp-schedule.jinja2')
 
 
