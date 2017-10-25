@@ -39,7 +39,9 @@
 {# make room macro #}
 {% macro mk_room(room) %}
   {% if room|lower != 'roomtba' %}
-    <span class="room label label-default">{{ room }}</span>
+    <div class="program-session-room-details">
+      <span class="room label label-default">{{ room }}</span>
+    </div>
   {% endif %}
 {% endmacro %}
 
