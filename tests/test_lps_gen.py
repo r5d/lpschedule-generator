@@ -539,7 +539,7 @@ class TestLPSTBA(object):
         self.MD_FILE = path.join('files', 'lp-sch-tba.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
+        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2018',
                                       'lp-schedule.jinja2')
 
         self.markdown = LPSMarkdown()
