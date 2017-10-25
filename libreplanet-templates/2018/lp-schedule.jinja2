@@ -24,7 +24,7 @@
 {# make speakers macro #}
 {% macro mk_speakers(speakers) %}
   {% if speakers[0]|lower != 'speakertba' %}
-    <span class="program-session-speaker">
+    <div class="program-session-speaker">
       {% for speaker in speakers %}
         {% if loop.last %}
           {{ speaker }}
@@ -32,7 +32,7 @@
           {{ speaker }},
         {% endif %}
       {% endfor %}
-    </span>
+    </div>
   {% endif %}
 {% endmacro %}
 
