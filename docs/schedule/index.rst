@@ -137,6 +137,15 @@ placeholder in the line that usually contains the room number; the
 rendered HTML will not have the room number for sessions that have
 ``RoomTBA``.
 
+Video TBA
+.........
+
+When the video for a session is not yet available put ``VideoTBA`` as
+the placeholder in the line that usually contains the URL for the
+video; the rendered HTML will not have the video link for sessions
+that have ``VideoTBA``.
+
+
 Description TBA
 ...............
 
