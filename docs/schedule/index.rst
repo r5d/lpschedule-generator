@@ -178,6 +178,8 @@ session heading/title can be omitted::
 
   Room 32-123
 
+  https://libre.planet/doctorow-beyond-unfree
+
   Software has eaten the world...
 
 .. highlight:: bash
