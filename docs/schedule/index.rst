@@ -89,7 +89,7 @@ Session structure::
   [sandler]: https://libreplanet.org/YEAR/path/to/speakers.html#sandler
   [sfc]: https://sfconservancy.org/
 
-Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch.md
+Sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch.md
 
 
 Auto-linking speaker names
@@ -116,7 +116,7 @@ this file is written to the disk after generating the the speakers'
 page from MD. Generate the speakers' page before generating the
 schedule page for auto-linking to work.
 
-Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sessions-autolink.md
+Sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sessions-autolink.md
 
 Special cases
 +++++++++++++
@@ -153,7 +153,7 @@ When the description for session is not yet available put ``DescTBA``
 as the placeholder; the rendered HTML will not have the description
 for sessions that have ``DescTBA``.
 
-Sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch-tba.md
+Sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch-tba.md
 
 Sessions only schedule
 ......................
@@ -164,7 +164,7 @@ beginning of the markdown document:
 - Add a level two heading (``##``) with one or more whitespaces.
 - Add a level three heading (``###``) with one or more whitespaces.
 
-Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/dev/tests/files/lp-sch-sessions-only.md
+Sessions only sample: https://notabug.org/rsd/lpschedule-generator/raw/master/tests/files/lp-sch-sessions-only.md
 
 Single session time slot
 ........................
