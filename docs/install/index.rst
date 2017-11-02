@@ -27,7 +27,7 @@ First get ``virtualenv``.
 
 On a Debian based distribution, do::
 
-  $ sudo apt-get install virtualenv
+  $ sudo apt-get install python-virtualenv
 
 On GNU Guix, do::
 
