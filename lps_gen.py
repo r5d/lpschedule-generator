@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#   Copyright (C) 2015-2017 lpschedule-generator contributors. See
-#   CONTRIBUTORS.
+#   Copyright (C) 2018 lpschedule-generator contributors. See CONTRIBUTORS.
 #
 #    This file is part of lpschedule-generator.
 #
@@ -120,7 +119,7 @@ class LPiCal(object):
 
         # Matches strings like '09:45 - 10:30: Lorem ipsum dolor sit.'
         self.timeslot_re = re.compile(r'(\d+:\d+).+?(\d+:\d+)'
-                                          + r':?\s*(.+\b)?')
+                                      r'\s*[:-]?\s*(.+\b)?')
         # Matches strings like 'Saturday, March 19'
         self.month_day_re = re.compile(r'\w+,\s*([a-zA-Z]+)\s*(\d+)')
 
@@ -153,12 +152,12 @@ class LPiCal(object):
 
         timeslot = self.timeslot_re.search(s)
 
-        if (not timeslot) or (len(timeslot.groups()) < 3):
+        if not timeslot:
             return None, None, None
 
         t_start = timeslot.group(1)
         t_end = timeslot.group(2)
-        name = timeslot.group(3)
+        name = timeslot.group(3) or ''
 
         return t_start, t_end, name
 

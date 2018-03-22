@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#    Copyright (C) 2015-2016  lpschedule-generator contributors. See CONTRIBUTORS.
+#    Copyright (C) 2018 lpschedule-generator contributors. See CONTRIBUTORS.
 #
 #    This file is part of lpschedule-generator.
 #
@@ -188,6 +188,14 @@ class TestLPiCal(object):
             [None, None, None],
             '                  ':
             [None, None, None],
+            '10:00 - 10:45 - Keynote':
+            ['10:00', '10:45', 'Keynote'],
+            '16:20 - 17:05':
+            ['16:20', '17:05', ''],
+            '16:25-17:25':
+            ['16:25', '17:25', ''],
+            '17:05-17:15 - Break':
+            ['17:05', '17:15', 'Break']
         }
 
         for string, timeslot in timeslots.iteritems():
