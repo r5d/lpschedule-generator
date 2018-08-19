@@ -17,6 +17,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
+VENV_DIR='.venv'
+
+
 test:
 	@nosetests
 
@@ -43,7 +46,12 @@ upload-docs: docs
 .PHONY: docs upload-docs
 
 venv:
-	virtualenv --clear --python=python2.7 venv
+	rm -rf *.egg-info
+	$(shell [[ -d $(VENV_DIR) ]] && mv $(VENV_DIR) $(VENV_DIR).`date +%s`)
+	virtualenv --clear --python=python2.7 $(VENV_DIR)
+	@echo 'Initialized virtualenv, run' \
+		'source '$(VENV_DIR)'/bin/activate' \
+		'to activate the virtual environment'
 .PHONY: venv
 
 clean-build:
