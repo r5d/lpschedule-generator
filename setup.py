@@ -62,6 +62,11 @@ config = {
                         [
                             'libreplanet-templates/2018/lp-schedule.jinja2'
                         ]
+                    ),
+                    ('share/lpschedule-generator/libreplanet-templates/2019',
+                        [
+                            'libreplanet-templates/2019/lp-schedule.jinja2'
+                        ]
                     )
      ],
     'entry_points': {
