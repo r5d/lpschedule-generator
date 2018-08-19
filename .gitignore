@@ -2,14 +2,11 @@
 *.pyc
 
 # virtualenv
-bin/
+.venv
+
+# build cruft
 build/
 dist/
-include/
-lib/
-local/
-share/
-man/
 *.egg-info/
 
 # docs
