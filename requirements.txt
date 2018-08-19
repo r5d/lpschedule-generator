@@ -1,0 +1,17 @@
+#
+#### packages needed for lpschedule-generator
+#
+#### package dependencies
+mistune==0.8.3
+Jinja2
+beautifulsoup4
+unidecode
+icalendar
+pytz
+#### development dependencies
+nose
+mock
+restructuredtext_lint
+wheel
+twine
+Sphinx
