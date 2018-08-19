@@ -70,9 +70,8 @@ clean-docs:
 
 .PHONY: clean-build clean-pyc clean-venv clean-docs
 
-dev-packages:
-	@pip install -U nose mock restructuredtext_lint
-	@pip install -U wheel twine
-	@pip install -U Sphinx
+dev-env:
+	pip install -r requirements.txt
+	python setup.py develop
 
-.PHONY: dev-packages
+.PHONY: dev-env
