@@ -63,11 +63,7 @@ clean-pyc:
 	@find . -name '*.pyc' -exec rm -f {} +
 
 clean-venv:
-	@rm -rf bin/
-	@rm -rf include/
-	@rm -rf lib/
-	@rm -rf local/
-	@rm -rf man/
+	@rm -rf .venv*/
 
 clean-docs:
 	@$(MAKE) -C docs clean
