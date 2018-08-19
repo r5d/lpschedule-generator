@@ -133,7 +133,7 @@ class TestLPiCal(object):
         self.MD_FILE_S_ONLY = path.join('files', 'lp-sch-sessions-only.md')
         self.MD_FILE_S_ONLY_CONTENT = read_file(self.MD_FILE_S_ONLY)
 
-        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
+        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2019',
                                       'lp-schedule.jinja2')
 
         self.markdown = LPSMarkdown()
@@ -145,7 +145,7 @@ class TestLPiCal(object):
     def setup(self):
         """Setting up things for a new test.
         """
-        self.lp_ical = LPiCal(self.lps_dict, '2016')
+        self.lp_ical = LPiCal(self.lps_dict, '2019')
 
 
     def test_gen_uid(self):
@@ -234,15 +234,15 @@ class TestLPiCal(object):
         datetimes = [
             {
                 'params': ['February', '28','08:00'],
-                'datetime': '2016-02-28 08:00:00',
+                'datetime': '2019-02-28 08:00:00',
             },
             {
                 'params': ['March', '21', '9:0'],
-                'datetime': '2016-03-21 09:00:00',
+                'datetime': '2019-03-21 09:00:00',
             },
             {
                 'params': ['March', '23', '15:30'],
-                'datetime': '2016-03-23 15:30:00',
+                'datetime': '2019-03-23 15:30:00',
             },
         ]
 
@@ -327,7 +327,7 @@ class TestLPiCal(object):
     def test_gen_ical_sessions_only(self):
         """Testing LPiCal.gen_ical with sessions only schedule.
         """
-        print LPiCal(self.lps_dict_s_only, '2016').gen_ical()
+        print LPiCal(self.lps_dict_s_only, '2019').gen_ical()
 
 
     def test_to_ical(self):
@@ -366,7 +366,7 @@ class TestLPS(object):
         self.MD_FILE = path.join('files', 'lp-sch.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2018',
+        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2019',
                                       'lp-schedule.jinja2')
 
         self.markdown = LPSMarkdown()
@@ -599,7 +599,7 @@ class TestLPSTBA(object):
         self.MD_FILE = path.join('files', 'lp-sch-tba.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2018',
+        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2019',
                                       'lp-schedule.jinja2')
 
         self.markdown = LPSMarkdown()
@@ -993,7 +993,7 @@ class TestSpeakersAutoLinking(object):
 
         self.SESSIONS_MD = path.join('files', 'lp-sessions-autolink.md')
         self.SESSIONS_MD_CONTENT = read_file(self.SESSIONS_MD)
-        self.SESSIONS_TEMPLATE = path.join('..', 'libreplanet-templates/2018',
+        self.SESSIONS_TEMPLATE = path.join('..', 'libreplanet-templates/2019',
                                            'lp-schedule.jinja2')
 
 
