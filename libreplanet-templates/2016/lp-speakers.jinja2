@@ -110,7 +110,7 @@
 {% endmacro %}
 
 {# lp speakers 2016 template start #}
-{% for speaker_type, speakers in lp_dict.iteritems() %}
+{% for speaker_type, speakers in lp_dict.items() %}
   <article class="speakers-block" id="lp-{{ speaker_type }}">
     {% if speaker_type == 'keynote-speakers' %}
       {{ mk_speakers_header(speaker_type) }}
