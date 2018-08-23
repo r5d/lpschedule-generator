@@ -18,7 +18,7 @@
 #   along with lpschedule-generator (see COPYING).  If not, see
 #   <http://www.gnu.org/licenses/>.
 VENV_DIR='.venv'
-
+VENV_DIR3='.venv3'
 
 test:
 	@nosetests
@@ -53,6 +53,15 @@ venv:
 		'source '$(VENV_DIR)'/bin/activate' \
 		'to activate the virtual environment'
 .PHONY: venv
+
+venv3:
+	rm -rf *.egg-info
+	$(shell [[ -d $(VENV_DIR3) ]] && mv $(VENV_DIR3) $(VENV_DIR3).`date +%s`)
+	virtualenv --clear --python=python3 $(VENV_DIR3)
+	@echo 'Initialized virtualenv, run' \
+		'source '$(VENV_DIR3)'/bin/activate' \
+		'to activate the virtual environment'
+.PHONY: venv3
 
 clean-build:
 	@rm -rf build/
