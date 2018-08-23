@@ -13,11 +13,11 @@ from setuptools import setup, find_packages
 def readf(filename):
     content = ''
     try:
-        with open(filename, 'rb') as f:
+        with open(filename, 'r') as f:
             for line in f:
                 content = content + line
     except IOError:
-        print "Error: unable to open %s" % filename
+        print('Error: unable to open {}'.format(filename))
     return content
 
 config = {
