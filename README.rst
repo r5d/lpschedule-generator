@@ -18,12 +18,3 @@ canonical repo
 
    $ git clone https://notabug.org/rsd/lpschedule-generator.git
 
-
-license
--------
-
-lpschedule-generator is licensed under the `GNU Generaly Public
-license version 3 or later`__.
-
-.. _gplv3: https://www.gnu.org/licenses/gpl-3.0-standalone.html
-__ gplv3_
