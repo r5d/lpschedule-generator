@@ -260,7 +260,7 @@ class LPiCal(object):
                     self.add_event(month, day, t_start, t_end, t_name,
                                    session, session_info)
 
-        return self.cal.to_ical()
+        return str(self.cal.to_ical())
 
 
     def to_ical(self):
