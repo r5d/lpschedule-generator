@@ -185,7 +185,7 @@ class TestLPiCal(object):
             ['17:05', '17:15', 'Break']
         }
 
-        for string, timeslot in timeslots.iteritems():
+        for string, timeslot in timeslots.items():
             start, end, name = self.lp_ical.get_timeslot(string)
             assert_equal(start, timeslot[0])
             assert_equal(end, timeslot[1])
@@ -208,7 +208,7 @@ class TestLPiCal(object):
             '       ': [None, None],
         }
 
-        for string, month_day in month_days.iteritems():
+        for string, month_day in month_days.items():
             month, day  = self.lp_ical.get_month_day(string)
             assert_equal(month, month_day[0])
             assert_equal(day, month_day[1])
@@ -269,11 +269,11 @@ class TestLPiCal(object):
         """
         uids = []
 
-        for day_str, timeslots in self.lps_dict.iteritems():
+        for day_str, timeslots in self.lps_dict.items():
             month, day = self.lp_ical.get_month_day(day_str)
-            for timeslot_str, sessions in timeslots.iteritems():
+            for timeslot_str, sessions in timeslots.items():
                 t_start, t_end, t_name = self.lp_ical.get_timeslot(timeslot_str)
-                for session, session_info in sessions.iteritems():
+                for session, session_info in sessions.items():
                     event = self.lp_ical.add_event(month, day,
                                             t_start, t_end, t_name,
                                             session, session_info)
