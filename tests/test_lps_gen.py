@@ -32,20 +32,20 @@ class TestJSONUtils(object):
     def setup_class(self):
         """Runs before running any tests in this class."""
         self.speakers_ids = OrderedDict({
-            unicode('Daniel Kahn Gillmor'): 'gillmor',
-            unicode('Edward Snowden'): 'snowden',
-            unicode('Richard Stallman'): 'stallman',
-            unicode('Clara Snowden'): 'clara_snowden',
-            unicode('Ludovic Courtès'): 'courtes',
-            unicode('Jonas Öberg'): 'aberg',
+            'Daniel Kahn Gillmor': 'gillmor',
+            'Edward Snowden': 'snowden',
+            'Richard Stallman': 'stallman',
+            'Clara Snowden': 'clara_snowden',
+            'Ludovic Courtès': 'courtes',
+            'Jonas Öberg': 'aberg',
         })
         self.ids_filename = 'speakers.ids'
 
         self.speakers_noids = [
-            unicode('Daniel Kahn Gillmor'),
-            unicode('Richard Stallman'),
-            unicode('Ludovic Courtès'),
-            unicode('Jonas Öberg'),
+            'Daniel Kahn Gillmor',
+            'Richard Stallman',
+            'Ludovic Courtès',
+            'Jonas Öberg',
         ]
         self.noids_filename = 'speakers.noids'
 
