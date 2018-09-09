@@ -313,7 +313,7 @@ class LPSRenderer(Renderer):
             # There is no speakers_ids OrderedDict available.
             return False
 
-        speaker = unicode(speaker)
+        speaker = str(speaker)
         if speaker in self.speakers_ids.keys():
             return self.speakers_ids[speaker]
         else:
@@ -469,7 +469,7 @@ class LPSpeakersRenderer(Renderer):
         """Returns a unique id.
         """
         # 'John HÖcker, Onion Project' -> 'John HÖcker'
-        speaker = unicode(speaker_block.split(', ')[0])
+        speaker = str(speaker_block.split(', ')[0])
 
         # 'John HÖcker' -> 'John Hacker'
         ascii_speaker = unidecode(speaker)
