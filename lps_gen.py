@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 #
-#   Copyright (C) 2018 lpschedule-generator contributors. See CONTRIBUTORS.
+#   SPDX-License-Identifier: CC0-1.0
 #
 #   This file is part of lpschedule-generator.
 #
-#   SPDX-License-Identifier: GPL-3.0-or-later
-#
+
 
 import json
 import re

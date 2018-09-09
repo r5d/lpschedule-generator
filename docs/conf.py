@@ -54,7 +54,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'lpschedule-generator'
-copyright = u'2016-2017, lpschedule-generator contributors'
+copyright = 'Public Domain'
 author = u'lpschedule-generator contributors'
 
 # The version info for the project you're documenting, acts as replacement for
