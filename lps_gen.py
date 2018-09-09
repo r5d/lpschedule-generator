@@ -44,7 +44,7 @@ def read_file(filename):
     content = ''
 
     try:
-        with open(filename, 'rb') as f:
+        with open(filename, 'r') as f:
             for line in f:
                 content = content + line
     except IOError:
