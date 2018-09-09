@@ -15,7 +15,7 @@ import mock
 
 from collections import OrderedDict
 from os import path
-from StringIO import StringIO
+from io import StringIO
 
 from bs4 import BeautifulSoup
 from icalendar import vCalAddress, vText, vDatetime
