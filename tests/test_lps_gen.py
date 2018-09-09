@@ -770,7 +770,7 @@ class TestLPSpeakers(object):
 
         i = 0
         for kspeaker in self.lpspeakers_dict['keynote-speakers']:
-            if kspeaker.has_key('img_url'):
+            if 'img_url' in kspeaker:
                 assert_equal(kspeaker['img_url'],
                              keynote_speaker_img_urls[i])
             i = i + 1
@@ -789,7 +789,7 @@ class TestLPSpeakers(object):
 
         i = 0
         for kspeaker in self.lpspeakers_dict['keynote-speakers']:
-            if kspeaker.has_key('img_alt'):
+            if 'img_alt' in kspeaker:
                 assert_equal(kspeaker['img_alt'],
                              keynote_speaker_img_alts[i])
             i = i + 1
@@ -811,7 +811,7 @@ class TestLPSpeakers(object):
 
         i = 0
         for kspeaker in self.lpspeakers_dict['keynote-speakers']:
-            if kspeaker.has_key('bio'):
+            if 'bio' in kspeaker:
                 j = 0
                 for p in kspeaker['bio']:
                     p.startswith(keynote_speaker_bios[i][j])
@@ -879,7 +879,7 @@ class TestLPSpeakers(object):
 
         i = 0
         for kspeaker in self.lpspeakers_dict['speakers']:
-            if kspeaker.has_key('img_url'):
+            if 'img_url' in kspeaker:
                 assert_equal(kspeaker['img_url'],
                              speaker_img_urls[i])
             i = i + 1
@@ -901,7 +901,7 @@ class TestLPSpeakers(object):
 
         i = 0
         for kspeaker in self.lpspeakers_dict['speakers']:
-            if kspeaker.has_key('img_alt'):
+            if 'img_alt' in kspeaker:
                 assert_equal(kspeaker['img_alt'],
                              speaker_img_alts[i])
             i = i + 1
@@ -926,7 +926,7 @@ class TestLPSpeakers(object):
 
         i = 0
         for kspeaker in self.lpspeakers_dict['speakers']:
-            if kspeaker.has_key('bio'):
+            if 'bio' in kspeaker:
                 j = 0
                 for p in kspeaker['bio']:
                     p.startswith(speaker_bios[i][j])
