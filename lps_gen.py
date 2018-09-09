@@ -28,11 +28,6 @@ from unidecode import unidecode
 from lpschedule_generator._version import __version__
 
 
-# unicode magic
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
-
 # Python dictionary that will contain the lp schedule.
 lps_dict = OrderedDict()
 
