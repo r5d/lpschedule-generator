@@ -64,7 +64,7 @@ def write_file(filename, filecontent):
     """
     file_ = None
     try:
-      file_   = open(filename, 'wb')
+      file_   = open(filename, 'w')
       file_.write(filecontent)
       file_.close()
     except IOError:
