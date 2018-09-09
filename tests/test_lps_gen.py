@@ -309,13 +309,13 @@ class TestLPiCal(object):
     def test_gen_ical(self):
         """Testing LPiCal.gen_ical.
         """
-        print self.lp_ical.gen_ical()
+        print(self.lp_ical.gen_ical())
 
 
     def test_gen_ical_sessions_only(self):
         """Testing LPiCal.gen_ical with sessions only schedule.
         """
-        print LPiCal(self.lps_dict_s_only, '2019').gen_ical()
+        print(LPiCal(self.lps_dict_s_only, '2019').gen_ical())
 
 
     def test_to_ical(self):
@@ -528,7 +528,7 @@ class TestLPS(object):
         """Testing `RenderHTML` function with LP schedule
         """
         lps_html = RenderHTML(self.lps_dict, self.SCH_TEMPLATE)
-        print lps_html # TODO: Scrape and test html output
+        print(lps_html) # TODO: Scrape and test html output
 
 
     def test_RenderHTML_sessions_only(self):
@@ -539,7 +539,7 @@ class TestLPS(object):
 
         lps_html = RenderHTML(self.markdown(md_content),
                               self.SCH_TEMPLATE)
-        print lps_html # TODO: Scrape and test html output
+        print(lps_html) # TODO: Scrape and test html output
 
     @raises(SystemExit)
     def test_RenderHTML_nonexistent_template(self):
@@ -940,7 +940,7 @@ class TestLPSpeakers(object):
         """Testing `RenderHTML` function with LP speakers
         """
         lps_html = RenderHTML(self.lpspeakers_dict, self.SPEAKERS_TEMPLATE)
-        print lps_html # TODO: Scrape and test html output.
+        print(lps_html) # TODO: Scrape and test html output.
 
 
     def teardown(self):
