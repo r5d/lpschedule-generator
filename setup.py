@@ -66,9 +66,7 @@ config = {
         'Intended Audience :: Other Audience',
         'License :: Public Domain',
         'Operating System :: POSIX :: Linux',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 2 :: Only',
+        'Programming Language :: Python :: 3 :: Only',
         'Topic :: Text Processing',
         'Topic :: Utilities',
         ]
