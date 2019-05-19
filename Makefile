@@ -59,9 +59,9 @@ clean: clean-build clean-pyc clean-docs
 .PHONY: clean
 
 clean-build:
-	@rm -rf build/
-	@rm -rf dist/
-	@rm -rf *.egg-info
+	rm -rf build/
+	rm -rf dist/
+	rm -rf *.egg-info
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
