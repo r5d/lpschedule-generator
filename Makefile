@@ -67,7 +67,7 @@ clean-pyc:
 	@find . -name '*.pyc' -exec rm -f {} +
 
 clean-venv:
-	@rm -rf .venv*/
+	rm -rf ${VENV_DIR3}*/
 
 clean-docs:
 	${GNU_MAKE} -C docs clean
