@@ -64,7 +64,7 @@ clean-build:
 	@rm -rf *.egg-info
 
 clean-pyc:
-	@find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyc' -exec rm -f {} +
 
 clean-venv:
 	rm -rf ${VENV_DIR3}*/
