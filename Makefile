@@ -55,6 +55,9 @@ venv3:
 		'to activate the virtual environment'
 .PHONY: venv3
 
+clean: clean-build clean-pyc clean-docs
+.PHONY: clean
+
 clean-build:
 	@rm -rf build/
 	@rm -rf dist/
@@ -74,5 +77,4 @@ clean-docs:
 dev-env:
 	pip install -r requirements.txt
 	python setup.py develop
-
 .PHONY: dev-env
