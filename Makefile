@@ -48,7 +48,7 @@ venv:
 
 venv3:
 	rm -rf *.egg-info
-	${SHELL} -c '[[ -d $(VENV_DIR3) ]] && mv $(VENV_DIR3) $(VENV_DIR3).`date +%s`'
+	${SHELL} -c 'if [[ -d $(VENV_DIR3) ]] then mv $(VENV_DIR3) $(VENV_DIR3).`date +%s`; fi'
 	${VENV_CMD} --clear --python=python3 $(VENV_DIR3)
 	@echo 'Initialized virtualenv, run' \
 		'source '$(VENV_DIR3)'/bin/activate' \
