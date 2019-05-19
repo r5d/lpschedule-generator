@@ -5,6 +5,8 @@
 #   This file is part of lpschedule-generator.
 #
 
+GNU_MAKE=gmake
+
 VENV_DIR='.venv'
 VENV_CMD=virtualenv
 VENV_PREFIX=.
@@ -28,7 +30,7 @@ upload:
 .PHONY: build-dist egg upload
 
 docs:
-	@$(MAKE) -C docs html
+	${GNU_MAKE} -C docs html
 
 upload-docs: docs
 	@rsync -avz --delete docs/_build/html/  $(LPSG_DOCS_HOST)
@@ -65,7 +67,7 @@ clean-venv:
 	@rm -rf .venv*/
 
 clean-docs:
-	@$(MAKE) -C docs clean
+	${GNU_MAKE} -C docs clean
 
 .PHONY: clean-build clean-pyc clean-venv clean-docs
 
