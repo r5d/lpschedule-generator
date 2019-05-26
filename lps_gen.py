@@ -125,8 +125,8 @@ class LPiCal(object):
         Used for Event object.
         """
         self.ucounter = self.ucounter + 1
-        return '%s@LP%s@libreplanet.org' % (str(self.ucounter),
-                                             self.lp_year)
+        return '{}@LP{}@libreplanet.org'.format(str(self.ucounter),
+                                                self.lp_year)
 
 
     def get_timeslot(self, s):
