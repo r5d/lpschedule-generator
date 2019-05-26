@@ -174,10 +174,11 @@ class LPiCal(object):
 
         hour = time.split(':')[0]
         minute = time.split(':')[1]
-        datetime_str = '%s %s %s %s:%s:%s' % (day, month, self.lp_year,
-                                                hour.zfill(2),
-                                                minute.zfill(2),
-                                                '00')
+        datetime_str = '{} {} {} {}:{}:{}'.format(day, month,
+                                                  self.lp_year,
+                                                  hour.zfill(2),
+                                                  minute.zfill(2),
+                                                  '00')
 
         dt_object = datetime.strptime(datetime_str, datetime_fmt)
 
