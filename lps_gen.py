@@ -623,8 +623,8 @@ def main():
                         help="Specify LP year as argument; "
                             + "generates iCal")
     parser.add_argument("--version", action="version",
-                        version='lpschedule-generator version %s'
-                        % __version__,
+                        version='lpschedule-generator version {}'
+                        .format(__version__),
                         help="Show version number and exit.")
     parser.add_argument("lp_t",
                         help="Path to the LP template.")
