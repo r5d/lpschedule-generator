@@ -331,7 +331,10 @@ class TestLPiCal(object):
     def test_to_ical(self):
         """Testing LPiCal.to_ical.
         """
-        self.purge_list.append(self.lp_ical.to_ical())
+        filename = self.lp_ical.to_ical()
+        assert_equal(filename, 'lp2019-schedule.ics')
+
+        self.purge_list.append(filename)
 
 
     @classmethod

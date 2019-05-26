@@ -267,7 +267,7 @@ class LPiCal(object):
     def to_ical(self):
         """Writes iCal to disk.
         """
-        filename = 'lp%s-schedule.ics' % self.lp_year
+        filename = 'lp{}-schedule.ics'.format(self.lp_year)
         write_file(filename, self.gen_ical())
 
         return filename
