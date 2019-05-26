@@ -135,6 +135,17 @@ class TestLPiCal(object):
         self.lp_ical = LPiCal(self.lps_dict, '2019')
 
 
+    def test_init(self):
+        """Testing LPiCal.__init__.
+        """
+        lp_ical = LPiCal(self.lps_dict, '2019')
+
+        assert_equal(lp_ical.lp_year, '2019')
+        assert_equal(lp_ical.cal.get('x-wr-calname'),
+                     'LibrePlanet 2019')
+        assert_equal(lp_ical.ucounter, 0)
+
+
     def test_gen_uid(self):
         """Testing LPiCal.gen_uid.
         """

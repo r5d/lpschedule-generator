@@ -109,7 +109,7 @@ class LPiCal(object):
         self.cal = Calendar()
         self.cal.add('prodid', '-//lpschedule generator//mxm.dk//')
         self.cal.add('version', '2.0')
-        self.cal.add('x-wr-calname', 'LibrePlanet %s' % self.lp_year)
+        self.cal.add('x-wr-calname', 'LibrePlanet {}'.format(self.lp_year))
 
         # RFC 2445 requires DTSTAMP to be in UTC. DTSTAMP is used in
         # VEVENT (Event object, see `add_event` method).
