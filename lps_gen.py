@@ -372,7 +372,7 @@ class LPSRenderer(Renderer):
             # Here, `text` is the speaker' name.
             id_ = self.get_uid(text)
             if id_:
-                link = 'speakers.html#%s' % id_
+                link = 'speakers.html#{}'.format(id_)
             else:
                 # Oh no, there is no id for this speaker.
                 self.speakers_noids.append(text)
