@@ -4,6 +4,11 @@
 
 .. _lps-doc-sec-help:
 
+help
+----
+
+Contact rsiddharth <rsd@gnu.org>.
+
 
 .. toctree::
    :hidden:
