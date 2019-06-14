@@ -10,11 +10,3 @@ See "Installation_" to get started.
 .. _FSF: https://fsf.org
 .. _LibrePlanet: https://libreplanet.org/conference
 .. _Markdown: https://daringfireball.net/projects/markdown
-
-canonical repo
---------------
-
-::
-
-   $ git clone https://notabug.org/rsd/lpschedule-generator.git
-
