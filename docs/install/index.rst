@@ -39,7 +39,7 @@ virtual environment in it::
   $ mkdir lpschedule-generator
   $ cd lpschedule-generator
 
-  $ virtualenv -p python2.7 .
+  $ virtualenv -p python3 .
   $ source bin/activate
 
 Install ``lpschedule-generator`` inside this directory using ``pip``::
