@@ -124,7 +124,7 @@ html_theme = 'alabaster'
 html_theme_options = {
     'show_powered_by': False,
     'extra_nav_links': {
-        'browse source': 'https://notabug.org/rsd/lpschedule-generator',
+        'Source': 'https://notabug.org/rsd/lpschedule-generator',
         'Report Bugs': 'https://notabug.org/rsd/lpschedule-generator/issues'
     }
 }
