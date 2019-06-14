@@ -53,9 +53,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'lpschedule-generator'
+project = 'lpschedule-generator'
 copyright = 'Public Domain'
-author = u'lpschedule-generator contributors'
+author = 'lpschedule-generator contributors'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
