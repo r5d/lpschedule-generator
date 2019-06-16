@@ -37,14 +37,6 @@ upload-docs: docs
 
 .PHONY: docs upload-docs
 
-venv:
-	rm -rf *.egg-info
-	$(shell [[ -d $(VENV_DIR) ]] && mv $(VENV_DIR) $(VENV_DIR).`date +%s`)
-	virtualenv --clear --python=python2.7 $(VENV_DIR)
-	@echo 'Initialized virtualenv, run' \
-		'source '$(VENV_DIR)'/bin/activate' \
-		'to activate the virtual environment'
-.PHONY: venv
 
 venv3:
 	rm -rf *.egg-info
