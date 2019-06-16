@@ -38,14 +38,14 @@ upload-docs: docs
 .PHONY: docs upload-docs
 
 
-venv3:
+venv:
 	rm -rf *.egg-info
 	${SHELL} -c 'if [[ -d $(VENV_DIR3) ]] then mv $(VENV_DIR3) $(VENV_DIR3).`date +%s`; fi'
 	${VENV_CMD} --clear --python=python3 $(VENV_DIR3)
 	@echo 'Initialized virtualenv, run' \
 		'source '$(VENV_DIR3)'/bin/activate' \
 		'to activate the virtual environment'
-.PHONY: venv3
+.PHONY: venv
 
 clean: clean-build clean-pyc clean-docs
 .PHONY: clean
