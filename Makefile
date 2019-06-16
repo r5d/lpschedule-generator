@@ -10,7 +10,7 @@ GNU_MAKE=gmake
 VENV_DIR='.venv'
 VENV_CMD=virtualenv
 VENV_PREFIX=.
-VENV_DIR3=${VENV_PREFIX}/.venv3-lpschedule-generator
+VENV_DIR=${VENV_PREFIX}/.lpschedule-generator
 
 test:
 	@nosetests
@@ -40,10 +40,10 @@ upload-docs: docs
 
 venv:
 	rm -rf *.egg-info
-	${SHELL} -c 'if [[ -d $(VENV_DIR3) ]] then mv $(VENV_DIR3) $(VENV_DIR3).`date +%s`; fi'
-	${VENV_CMD} --clear --python=python3 $(VENV_DIR3)
+	${SHELL} -c 'if [[ -d $(VENV_DIR) ]] then mv $(VENV_DIR) $(VENV_DIR).`date +%s`; fi'
+	${VENV_CMD} --clear --python=python3 $(VENV_DIR)
 	@echo 'Initialized virtualenv, run' \
-		'source '$(VENV_DIR3)'/bin/activate' \
+		'source '$(VENV_DIR)'/bin/activate' \
 		'to activate the virtual environment'
 .PHONY: venv
 
@@ -59,7 +59,7 @@ clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 
 clean-venv:
-	rm -rf ${VENV_DIR3}*/
+	rm -rf ${VENV_DIR}*/
 
 clean-docs:
 	${GNU_MAKE} -C docs clean
