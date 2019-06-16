@@ -24,8 +24,12 @@ egg:
 	@python setup.py egg_info
 
 upload:
-	@twine upload -r pypi -s -i '1534 126D 8C8E AD29 EDD9  1396 6BE9 3D8B F866 4377' dist/*.tar.gz
-	@twine upload -r pypi -s -i '1534 126D 8C8E AD29 EDD9  1396 6BE9 3D8B F866 4377' dist/*.whl
+	@twine upload -r pypi -s --sign-with 'gpg2' \
+		-i '1534 126D 8C8E AD29 EDD9  1396 6BE9 3D8B F866 4377' \
+		dist/*.tar.gz
+	@twine upload -r pypi -s --sign-with 'gpg2' \
+		-i '1534 126D 8C8E AD29 EDD9  1396 6BE9 3D8B F866 4377' \
+		dist/*.whl
 
 .PHONY: build-dist egg upload
 
