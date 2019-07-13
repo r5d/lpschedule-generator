@@ -34,7 +34,8 @@ config = {
                          'unidecode', 'icalendar', 'pytz'],
     'tests_require': ['nose', 'mock'],
     'test_suite': 'nose.collector',
-    'py_modules': ['lps_gen', 'lpschedule_generator._version'],
+    'py_modules': ['lps_gen'],
+    'packages': ['lpschedule_generator'],
     'package_data': {
         'lpschedule_generator': ['data/schedule.jinja2', 'data/speakers.jinja2']
     },
