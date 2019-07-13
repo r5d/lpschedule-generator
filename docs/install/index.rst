@@ -67,10 +67,9 @@ Do::
 
 You must get::
 
-  usage: lps_gen [-h] [-s | -sp] [--ical ICAL] [--version] lp_t lp_md
+  usage: lps_gen [-h] [-s | -sp] [--ical ICAL] [--version] lp_md
 
   positional arguments:
-    lp_t             Path to the LP template.
     lp_md            Path to the LP markdown.
 
   optional arguments:

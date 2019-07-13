@@ -63,11 +63,11 @@ Generate HTML from Markdown
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ::
 
-   $ lps_gen -sp path/to/lp-speakers.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
+   $ lps_gen -sp path/to/lp-speakers.md > path/to/speakers-content.html
 
 or::
 
-  $ lps_gen --speakers path/to/lp-speakers.jinja2 path/to/lp-speakers.md > path/to/speakers-content.html
+  $ lps_gen --speakers path/to/lp-speakers.md > path/to/speakers-content.html
 
 If you run into issues, ask for :ref:`help <lps-doc-sec-help>`.
 

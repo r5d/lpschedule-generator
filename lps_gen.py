@@ -604,22 +604,19 @@ class LPSpeakersMarkdown(Markdown):
         return lpspeakers_dict
 
 
-def RenderHTML(lp_dict, template):
+def RenderHTML(lp_dict, template_name):
     """Renders LP schedule/speakers in HTML from a python dictionary.
 
     Returns the HTML as a string.
     """
-    env = Environment(loader=FileSystemLoader(path.dirname(template)),
-                      trim_blocks=True, lstrip_blocks=True)
+    template_content = template_read(template_name)
+    if not template_content:
+        exit('Unable to read {} template'.format(template_name))
 
-    template_name = path.basename(template)
-    template  = None
-
-    try:
-        template = env.get_template(template_name)
-    except TemplateNotFound as e:
-        print('Template {} not found.'.format(template_name))
-        exit(1)
+    template = Environment(
+        trim_blocks=True,
+        lstrip_blocks=True
+    ).from_string(template_content)
 
     lp_html = template.render(lp_dict=lp_dict)
 
@@ -642,26 +639,26 @@ def main():
                         version='lpschedule-generator version {}'
                         .format(__version__),
                         help="Show version number and exit.")
-    parser.add_argument("lp_t",
-                        help="Path to the LP template.")
     parser.add_argument("lp_md",
                         help="Path to the LP markdown.")
     args = parser.parse_args()
 
-    lp_template = args.lp_t
     lp_md_content = read_file(path.abspath(args.lp_md))
 
-    if path.exists(lp_template) and lp_md_content:
+    if lp_md_content:
+        template_name = ''
 
         if args.schedule:
             markdown = LPSMarkdown()
+            template_name = 'schedule'
         elif args.speakers:
             markdown = LPSpeakersMarkdown()
+            template_name = 'speakers'
         else:
             parser.error('No action requested, add -s or -sp switch')
 
         lp_dict = markdown(lp_md_content)
-        lp_html = RenderHTML(lp_dict, lp_template)
+        lp_html = RenderHTML(lp_dict, template_name)
 
         if args.ical and args.schedule:
             LPiCal(lp_dict, args.ical).to_ical()

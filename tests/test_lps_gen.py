@@ -557,7 +557,7 @@ class TestLPS(object):
     def test_RenderHTML(self):
         """Testing `RenderHTML` function with LP schedule
         """
-        lps_html = RenderHTML(self.lps_dict, self.SCH_TEMPLATE)
+        lps_html = RenderHTML(self.lps_dict, 'schedule')
         print(lps_html) # TODO: Scrape and test html output
 
 
@@ -568,19 +568,15 @@ class TestLPS(object):
                                          'lp-sch-sessions-only.md'))
 
         lps_html = RenderHTML(self.markdown(md_content),
-                              self.SCH_TEMPLATE)
+                              'schedule')
         print(lps_html) # TODO: Scrape and test html output
 
     @raises(SystemExit)
     def test_RenderHTML_nonexistent_template(self):
         """Testing `RenderHTML` function - LP schedule - ith non-existent template
         """
-        with mock.patch('sys.stdout', new_callable=StringIO) as out:
-            nonexistent_template = 'lpsch-template.null'
-
-            lps_html = RenderHTML(self.lps_dict, nonexistent_template)
-            expected_out = 'Template %s not found.\n' % template_name
-            assert out.getvalue() == expected_out
+        with mock.patch('sys.stderr', new_callable=StringIO) as out:
+            lps_html = RenderHTML(self.lps_dict, 'nonexistent')
 
 
     def teardown(self):
@@ -628,7 +624,7 @@ class TestLPSTBA(object):
         """Runs before each test in this class.
 
         """
-        lp_html = RenderHTML(self.lps_dict, self.SCH_TEMPLATE)
+        lp_html = RenderHTML(self.lps_dict, 'schedule')
         self.soup = BeautifulSoup(lp_html, 'html.parser')
 
 
@@ -969,7 +965,7 @@ class TestLPSpeakers(object):
     def test_RenderHTML(self):
         """Testing `RenderHTML` function with LP speakers
         """
-        lps_html = RenderHTML(self.lpspeakers_dict, self.SPEAKERS_TEMPLATE)
+        lps_html = RenderHTML(self.lpspeakers_dict, 'speakers')
         print(lps_html) # TODO: Scrape and test html output.
 
 
