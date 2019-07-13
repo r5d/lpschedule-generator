@@ -10,6 +10,7 @@ import json
 import re
 import sys
 
+import pkg_resources as pkgr
 import pytz
 
 from argparse import ArgumentParser
@@ -90,6 +91,15 @@ def json_read(filename):
 
     return json.loads(read_file(filename),
                       object_pairs_hook=OrderedDict)
+
+
+def template_read(name):
+    """Return template as `str`.
+    """
+    p = 'lpschedule_generator'
+    r = 'data/{}'.format(name)
+
+    return pkgr.resource_string(p, r).decode('utf-8')
 
 
 class LPiCal(object):

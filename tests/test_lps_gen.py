@@ -100,6 +100,20 @@ class TestJSONUtils(object):
         os.chdir(self.old_cwd)
 
 
+class TestTemplates(object):
+    """Petty tests for lp templates.
+    """
+
+    def test_read(self):
+        t = template_read('schedule.jinja2')
+        assert type(t) is str
+        assert len(t) > 0
+
+        t = template_read('speakers.jinja2')
+        assert type(t) is str
+        assert len(t) > 0
+
+
 class TestLPiCal(object):
     """
     Testing LPiCal class.
