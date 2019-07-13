@@ -664,7 +664,7 @@ def main():
             LPiCal(lp_dict, args.ical).to_ical()
 
     else:
-        exit(1)
+        exit('Unable to read LP markdown')
 
     if lp_html:
         # stdout lps html
