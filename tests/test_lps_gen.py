@@ -113,8 +113,9 @@ class TestTemplates(object):
         assert type(t) is str
         assert len(t) > 0
 
-        t = template_read('nonexistent')
-        assert t is None
+        with mock.patch('sys.stderr', new_callable=StringIO) as out:
+            t = template_read('nonexistent')
+            assert t is None
 
 
 class TestLPiCal(object):
