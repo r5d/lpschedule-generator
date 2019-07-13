@@ -99,7 +99,13 @@ def template_read(name):
     p = 'lpschedule_generator'
     r = 'data/{}'.format(name)
 
-    return pkgr.resource_string(p, r).decode('utf-8')
+    t = None
+    try:
+        t = pkgr.resource_string(p, r).decode('utf-8')
+    except Exception as e:
+        print(e, file=sys.stderr)
+
+    return t
 
 
 class LPiCal(object):

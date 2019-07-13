@@ -113,6 +113,9 @@ class TestTemplates(object):
         assert type(t) is str
         assert len(t) > 0
 
+        t = template_read('nonexistent.jinja2')
+        assert t is None
+
 
 class TestLPiCal(object):
     """
