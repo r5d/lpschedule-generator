@@ -35,6 +35,9 @@ config = {
     'tests_require': ['nose', 'mock'],
     'test_suite': 'nose.collector',
     'py_modules': ['lps_gen', 'lpschedule_generator._version'],
+    'package_data': {
+        'lpschedule_generator': ['data/schedule.jinja2', 'data/speakers.jinja2']
+    },
     'entry_points': {
         'console_scripts': ['lps_gen = lps_gen:main']
     },
