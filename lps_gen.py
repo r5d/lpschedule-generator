@@ -97,7 +97,7 @@ def template_read(name):
     """Return template as `str`.
     """
     p = 'lpschedule_generator'
-    r = 'data/{}'.format(name)
+    r = 'data/{}.jinja2'.format(name)
 
     t = None
     try:

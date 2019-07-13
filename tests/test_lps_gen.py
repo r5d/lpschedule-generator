@@ -105,15 +105,15 @@ class TestTemplates(object):
     """
 
     def test_read(self):
-        t = template_read('schedule.jinja2')
+        t = template_read('schedule')
         assert type(t) is str
         assert len(t) > 0
 
-        t = template_read('speakers.jinja2')
+        t = template_read('speakers')
         assert type(t) is str
         assert len(t) > 0
 
-        t = template_read('nonexistent.jinja2')
+        t = template_read('nonexistent')
         assert t is None
 
 
