@@ -120,8 +120,8 @@ class TestLPiCal(object):
         self.MD_FILE_S_ONLY = path.join('files', 'lp-sch-sessions-only.md')
         self.MD_FILE_S_ONLY_CONTENT = read_file(self.MD_FILE_S_ONLY)
 
-        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2019',
-                                      'lp-schedule.jinja2')
+        self.SCH_TEMPLATE = path.join('..', 'lpschedule_generator/data',
+                                      'schedule.jinja2')
 
         self.markdown = LPSMarkdown()
         self.lps_dict = self.markdown(self.MD_FILE_CONTENT)
@@ -367,8 +367,8 @@ class TestLPS(object):
         self.MD_FILE = path.join('files', 'lp-sch.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2019',
-                                      'lp-schedule.jinja2')
+        self.SCH_TEMPLATE = path.join('..', 'lpschedule_generator/data',
+                                      'schedule.jinja2')
 
         self.markdown = LPSMarkdown()
         self.lps_dict = self.markdown(self.MD_FILE_CONTENT)
@@ -600,8 +600,8 @@ class TestLPSTBA(object):
         self.MD_FILE = path.join('files', 'lp-sch-tba.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SCH_TEMPLATE = path.join('..', 'libreplanet-templates/2019',
-                                      'lp-schedule.jinja2')
+        self.SCH_TEMPLATE = path.join('..', 'lpschedule_generator/data',
+                                      'schedule.jinja2')
 
         self.markdown = LPSMarkdown()
         self.lps_dict = self.markdown(self.MD_FILE_CONTENT)
@@ -714,8 +714,8 @@ class TestLPSpeakers(object):
         self.MD_FILE = path.join('files', 'lp-speakers.md')
         self.MD_FILE_CONTENT = read_file(self.MD_FILE)
 
-        self.SPEAKERS_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
-                                           'lp-speakers.jinja2')
+        self.SPEAKERS_TEMPLATE = path.join('..', 'lpschedule_generator/data',
+                                           'speakers.jinja2')
 
         self.markdown = LPSpeakersMarkdown()
         self.lpspeakers_dict = self.markdown(self.MD_FILE_CONTENT)
@@ -989,13 +989,13 @@ class TestSpeakersAutoLinking(object):
 
         self.SPEAKERS_MD = path.join('files', 'lp-speakers-autolink.md')
         self.SPEAKERS_MD_CONTENT = read_file(self.SPEAKERS_MD)
-        self.SPEAKERS_TEMPLATE = path.join('..', 'libreplanet-templates/2016',
-                                           'lp-speakers.jinja2')
+        self.SPEAKERS_TEMPLATE = path.join('..', 'lpschedule_generator/data',
+                                           'speakers.jinja2')
 
         self.SESSIONS_MD = path.join('files', 'lp-sessions-autolink.md')
         self.SESSIONS_MD_CONTENT = read_file(self.SESSIONS_MD)
-        self.SESSIONS_TEMPLATE = path.join('..', 'libreplanet-templates/2019',
-                                           'lp-schedule.jinja2')
+        self.SESSIONS_TEMPLATE = path.join('..', 'lpschedule_generator/data',
+                                           'schedule.jinja2')
 
 
     def setup(self):
