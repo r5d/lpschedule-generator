@@ -277,7 +277,7 @@ class LPiCal(object):
                     self.add_event(month, day, t_start, t_end, t_name,
                                    session, session_info)
 
-        return str(self.cal.to_ical())
+        return self.cal.to_ical().decode('utf-8')
 
 
     def to_ical(self):
