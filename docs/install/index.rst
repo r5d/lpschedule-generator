@@ -67,14 +67,14 @@ Do::
 
 You must get::
 
-  usage: lps_gen [-h] [-s | -sp] [--ical ICAL] [--version] lp_md
+  usage: lps_gen [-h] [-sc | -sp] [--ical ICAL] [--version] lp_md
 
   positional arguments:
     lp_md            Path to the LP markdown.
 
   optional arguments:
     -h, --help       show this help message and exit
-    -s, --schedule   Generate LP schedule
+    -sc, --schedule  Generate LP schedule
     -sp, --speakers  Generate LP speakers
     --ical ICAL      Specify LP year as argument; generates iCal
     --version        Show version number and exit.

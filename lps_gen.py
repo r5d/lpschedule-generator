@@ -627,7 +627,7 @@ def main():
     parser = ArgumentParser()
 
     group = parser.add_mutually_exclusive_group()
-    group.add_argument("-s", "--schedule", action="store_true",
+    group.add_argument("-sc", "--schedule", action="store_true",
                        help="Generate LP schedule")
     group.add_argument("-sp", "--speakers", action="store_true",
                        help="Generate LP speakers")

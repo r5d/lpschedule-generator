@@ -188,7 +188,7 @@ Generate HTML from Markdown
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ::
 
-   $ lps_gen -s path/to/lp-sch.md > path/to/program-schedule.html
+   $ lps_gen -sc path/to/lp-sch.md > path/to/program-schedule.html
 
 or::
 
@@ -201,7 +201,7 @@ iCal export
 The ``--ical`` switch enables iCal export while generating LP
 schedule::
 
-  $ lps_gen -s --ical 2016 path/to/lp-schedule.md > path/to/program-schedule.html
+  $ lps_gen -sc --ical 2016 path/to/lp-schedule.md > path/to/program-schedule.html
 
 The year of the conference must be given as an argument to the
 ``--ical`` switch.
