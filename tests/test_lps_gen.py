@@ -21,7 +21,10 @@ from icalendar import vCalAddress, vText, vDatetime
 from nose.tools import *
 from pytz import timezone
 
-from lps_gen import *
+from lps_gen import (read_file, write_file, json_write, json_read,
+                     json_write, template_read, LPiCal, LPSRenderer,
+                     LPSpeakersRenderer, LPSMarkdown,
+                     LPSpeakersMarkdown, RenderHTML)
 
 
 class TestJSONUtils(object):
