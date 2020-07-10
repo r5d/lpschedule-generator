@@ -17,6 +17,10 @@ test:
 
 .PHONY: test
 
+fmt:
+	black --include 'lps_gen.py|setup.py|tests/*.py|lpschedule_generator/*.py' .
+.PHONY: fmt
+
 build-dist:
 	@python setup.py sdist bdist_wheel
 

@@ -42,14 +42,14 @@ def read_file(filename):
     :param str filename: Absolute pathname of the file.
 
     """
-    content = ''
+    content = ""
 
     try:
-        with open(filename, 'r') as f:
+        with open(filename, "r") as f:
             for line in f:
                 content = content + line
     except IOError:
-        print('Error: unable to open {}'.format(filename))
+        print("Error: unable to open {}".format(filename))
 
     return content
 
@@ -65,11 +65,11 @@ def write_file(filename, filecontent):
     """
     file_ = None
     try:
-      file_   = open(filename, 'w')
-      file_.write(filecontent)
-      file_.close()
+        file_ = open(filename, "w")
+        file_.write(filecontent)
+        file_.close()
     except IOError:
-        print('Error creating and writing content to {}'.format(filename))
+        print("Error creating and writing content to {}".format(filename))
         exit(1)
 
 
@@ -89,19 +89,18 @@ def json_read(filename):
     if not path.isfile(filename):
         return False
 
-    return json.loads(read_file(filename),
-                      object_pairs_hook=OrderedDict)
+    return json.loads(read_file(filename), object_pairs_hook=OrderedDict)
 
 
 def template_read(name):
     """Return template as `str`.
     """
-    p = 'lpschedule_generator'
-    r = 'data/{}.jinja2'.format(name)
+    p = "lpschedule_generator"
+    r = "data/{}.jinja2".format(name)
 
     t = None
     try:
-        t = pkgr.resource_string(p, r).decode('utf-8')
+        t = pkgr.resource_string(p, r).decode("utf-8")
     except Exception as e:
         print(e, file=sys.stderr)
 
@@ -117,15 +116,14 @@ class LPiCal(object):
         self.lp_year = str(lp_year)
 
         # Matches strings like '09:45 - 10:30: Lorem ipsum dolor sit.'
-        self.timeslot_re = re.compile(r'(\d+:\d+).+?(\d+:\d+)'
-                                      r'\s*[:-]?\s*(.+\b)?')
+        self.timeslot_re = re.compile(r"(\d+:\d+).+?(\d+:\d+)" r"\s*[:-]?\s*(.+\b)?")
         # Matches strings like 'Saturday, March 19'
-        self.month_day_re = re.compile(r'\w+,\s*([a-zA-Z]+)\s*(\d+)')
+        self.month_day_re = re.compile(r"\w+,\s*([a-zA-Z]+)\s*(\d+)")
 
         self.cal = Calendar()
-        self.cal.add('prodid', '-//lpschedule generator//mxm.dk//')
-        self.cal.add('version', '2.0')
-        self.cal.add('x-wr-calname', 'LibrePlanet {}'.format(self.lp_year))
+        self.cal.add("prodid", "-//lpschedule generator//mxm.dk//")
+        self.cal.add("version", "2.0")
+        self.cal.add("x-wr-calname", "LibrePlanet {}".format(self.lp_year))
 
         # RFC 2445 requires DTSTAMP to be in UTC. DTSTAMP is used in
         # VEVENT (Event object, see `add_event` method).
@@ -134,16 +132,13 @@ class LPiCal(object):
         # used to generate uid for ical.
         self.ucounter = 0
 
-
     def gen_uid(self):
         """Returns an unique id.
 
         Used for Event object.
         """
         self.ucounter = self.ucounter + 1
-        return '{}@LP{}@libreplanet.org'.format(str(self.ucounter),
-                                                self.lp_year)
-
+        return "{}@LP{}@libreplanet.org".format(str(self.ucounter), self.lp_year)
 
     def get_timeslot(self, s):
         """Get start and end time for a timeslot.
@@ -156,10 +151,9 @@ class LPiCal(object):
 
         t_start = timeslot.group(1)
         t_end = timeslot.group(2)
-        name = timeslot.group(3) or ''
+        name = timeslot.group(3) or ""
 
         return t_start, t_end, name
-
 
     def get_month_day(self, s):
         """Get month and day.
@@ -175,7 +169,6 @@ class LPiCal(object):
 
         return month, day
 
-
     def mk_datetime(self, month, day, time):
         """Returns datetime object (EST).
         """
@@ -185,21 +178,18 @@ class LPiCal(object):
         # Hour %H (24-hr)
         # Minute %M (zero padded)
         # Second %S (zero padded)
-        datetime_fmt = '%d %B %Y %H:%M:%S'
-        eastern = timezone('US/Eastern')
+        datetime_fmt = "%d %B %Y %H:%M:%S"
+        eastern = timezone("US/Eastern")
 
-        hour = time.split(':')[0]
-        minute = time.split(':')[1]
-        datetime_str = '{} {} {} {}:{}:{}'.format(day, month,
-                                                  self.lp_year,
-                                                  hour.zfill(2),
-                                                  minute.zfill(2),
-                                                  '00')
+        hour = time.split(":")[0]
+        minute = time.split(":")[1]
+        datetime_str = "{} {} {} {}:{}:{}".format(
+            day, month, self.lp_year, hour.zfill(2), minute.zfill(2), "00"
+        )
 
         dt_object = datetime.strptime(datetime_str, datetime_fmt)
 
         return vDatetime(eastern.localize(dt_object))
-
 
     def mk_attendee(self, speaker):
         """Make Attendee to be added to an Event object.
@@ -207,55 +197,52 @@ class LPiCal(object):
         See `add_event` method.
         """
         # Get rid of HTML (<a> element, etc) in `speaker`
-        speaker = BeautifulSoup(speaker, 'html.parser').get_text()
+        speaker = BeautifulSoup(speaker, "html.parser").get_text()
 
-        attendee = vCalAddress('invalid:nomail')
-        attendee.params['cn'] = vText(speaker)
-        attendee.params['ROLE'] = vText('REQ-PARTICIPANT')
-        attendee.params['CUTYPE'] = vText('INDIVIDUAL')
+        attendee = vCalAddress("invalid:nomail")
+        attendee.params["cn"] = vText(speaker)
+        attendee.params["ROLE"] = vText("REQ-PARTICIPANT")
+        attendee.params["CUTYPE"] = vText("INDIVIDUAL")
 
         return attendee
 
-
-    def add_event(self, month, day, t_start, t_end, t_name, session,
-                      session_info):
+    def add_event(self, month, day, t_start, t_end, t_name, session, session_info):
         """Adds event to calendar.
         """
         event = Event()
-        event['uid'] = self.gen_uid()
-        event['dtstamp'] = self.dtstamp
-        event['class'] = vText('PUBLIC')
-        event['status'] = vText('CONFIRMED')
-        event['method'] = vText('PUBLISH')
+        event["uid"] = self.gen_uid()
+        event["dtstamp"] = self.dtstamp
+        event["class"] = vText("PUBLIC")
+        event["status"] = vText("CONFIRMED")
+        event["method"] = vText("PUBLISH")
 
-        if session == 'st-from-ts':
-            event['summary'] = t_name
+        if session == "st-from-ts":
+            event["summary"] = t_name
         else:
-            event['summary'] = session
+            event["summary"] = session
 
-        event['location'] = vText(session_info['room'])
+        event["location"] = vText(session_info["room"])
 
         # Get rid of HTML in 'desc'
-        desc = BeautifulSoup(' '.join(
-            session_info['desc']).replace(
-                '\n', ' '), 'html.parser').get_text()
-        event['description'] = desc
+        desc = BeautifulSoup(
+            " ".join(session_info["desc"]).replace("\n", " "), "html.parser"
+        ).get_text()
+        event["description"] = desc
 
         # Add speakers
-        for speaker in session_info['speakers']:
-            event.add('attendee', self.mk_attendee(speaker), encode=0)
+        for speaker in session_info["speakers"]:
+            event.add("attendee", self.mk_attendee(speaker), encode=0)
 
         dt_start = self.mk_datetime(month, day, t_start)
         dt_end = self.mk_datetime(month, day, t_end)
 
-        event['dtstart'] = dt_start
-        event['dtend'] = dt_end
+        event["dtstart"] = dt_start
+        event["dtend"] = dt_end
 
         # Add to calendar
         self.cal.add_component(event)
 
         return event
-
 
     def gen_ical(self):
         """Parse LP schedule dict and generate iCal Calendar object.
@@ -274,16 +261,16 @@ class LPiCal(object):
                     # this timeslot
                     continue
                 for session, session_info in sessions.items():
-                    self.add_event(month, day, t_start, t_end, t_name,
-                                   session, session_info)
+                    self.add_event(
+                        month, day, t_start, t_end, t_name, session, session_info
+                    )
 
-        return self.cal.to_ical().decode('utf-8')
-
+        return self.cal.to_ical().decode("utf-8")
 
     def to_ical(self):
         """Writes iCal to disk.
         """
-        filename = 'lp{}-schedule.ics'.format(self.lp_year)
+        filename = "lp{}-schedule.ics".format(self.lp_year)
         write_file(filename, self.gen_ical())
 
         return filename
@@ -313,8 +300,7 @@ class LPSRenderer(Renderer):
         # If it is 'False', then the 'speaker.ids' file was not found;
         # otherwise it is an OrderedDict containing the mapping of
         # speakers and their corresponding id.
-        self.speakers_ids = json_read('speakers.ids')
-
+        self.speakers_ids = json_read("speakers.ids")
 
     def get_uid(self, speaker):
         """Generate unique id for `speaker`.
@@ -331,7 +317,6 @@ class LPSRenderer(Renderer):
         else:
             # speaker not found in speakers_ids OrderedDict.
             return False
-
 
     def _check_session_title_exists(self):
         """Checks if :py:attr:`.last_session` is set.
@@ -356,10 +341,8 @@ class LPSRenderer(Renderer):
             # no session title.
             #
             # st-from-ts -> session title from time slot.
-            lps_dict[self.last_day][self.last_time_slot][
-                'st-from-ts'] = OrderedDict()
-            self.last_session = 'st-from-ts'
-
+            lps_dict[self.last_day][self.last_time_slot]["st-from-ts"] = OrderedDict()
+            self.last_session = "st-from-ts"
 
     def _process_video(self, text):
         """Process the video text.
@@ -369,15 +352,15 @@ class LPSRenderer(Renderer):
         This method is meant to be called from the
         :py:method:`.paragraph` method.
         """
-        soup = BeautifulSoup(text, 'html.parser')
-        links = soup.find_all('a')
+        soup = BeautifulSoup(text, "html.parser")
+        links = soup.find_all("a")
 
         if len(links) == 0:
             # no links found, so
             return text
 
         # link(s) found, return the first link's href.
-        return links[0]['href']
+        return links[0]["href"]
 
     def link(self, link, title, text):
         # Here, we catch speaker names that have to be autolinked and
@@ -388,7 +371,7 @@ class LPSRenderer(Renderer):
             # Here, `text` is the speaker' name.
             id_ = self.get_uid(text)
             if id_:
-                link = 'speakers.html#{}'.format(id_)
+                link = "speakers.html#{}".format(id_)
             else:
                 # Oh no, there is no id for this speaker.
                 self.speakers_noids.append(text)
@@ -396,7 +379,6 @@ class LPSRenderer(Renderer):
                 return text
 
         return super(LPSRenderer, self).link(link, title, text)
-
 
     def header(self, text, level, raw=None):
         global lps_dict
@@ -415,15 +397,13 @@ class LPSRenderer(Renderer):
             self.last_session = None
         elif level == 4:
             # Add new session
-            lps_dict[self.last_day][self.last_time_slot][
-                text] = OrderedDict()
+            lps_dict[self.last_day][self.last_time_slot][text] = OrderedDict()
             self.last_session = text
             # We found a new session; set no of paragraphs processed
             # to 0.
             self.no_paragraph = 0
 
         return super(LPSRenderer, self).header(text, level, raw)
-
 
     def paragraph(self, text):
         global lps_dict
@@ -433,26 +413,29 @@ class LPSRenderer(Renderer):
 
         if self.no_paragraph == 0:
             # Speaker
-            speakers = text.split(', ')
+            speakers = text.split(", ")
 
-            lps_dict[self.last_day][self.last_time_slot][
-                self.last_session]['speakers'] = speakers
+            lps_dict[self.last_day][self.last_time_slot][self.last_session][
+                "speakers"
+            ] = speakers
             self.no_paragraph = self.no_paragraph + 1
         elif self.no_paragraph == 1:
             # Room
-            lps_dict[self.last_day][self.last_time_slot][
-                self.last_session]['room'] = text
+            lps_dict[self.last_day][self.last_time_slot][self.last_session][
+                "room"
+            ] = text
             self.no_paragraph = self.no_paragraph + 1
         elif self.no_paragraph == 2:
-            lps_dict[self.last_day][self.last_time_slot][
-                self.last_session]['video'] = self._process_video(text)
+            lps_dict[self.last_day][self.last_time_slot][self.last_session][
+                "video"
+            ] = self._process_video(text)
             # Initialize description
-            lps_dict[self.last_day][self.last_time_slot][
-                self.last_session]['desc'] = []
+            lps_dict[self.last_day][self.last_time_slot][self.last_session]["desc"] = []
             self.no_paragraph = self.no_paragraph + 1
         elif self.no_paragraph > 1:
-            lps_dict[self.last_day][self.last_time_slot][
-                self.last_session]['desc'].append(text)
+            lps_dict[self.last_day][self.last_time_slot][self.last_session][
+                "desc"
+            ].append(text)
 
         return p
 
@@ -466,8 +449,8 @@ class LPSpeakersRenderer(Renderer):
         global lpspeakers_dict
 
         lpspeakers_dict = OrderedDict()
-        lpspeakers_dict['keynote-speakers'] = []
-        lpspeakers_dict['speakers'] = []
+        lpspeakers_dict["keynote-speakers"] = []
+        lpspeakers_dict["speakers"] = []
 
         # Type of present speaker being processed; can either be
         # 'keynote-speakers' or 'speakers'.
@@ -476,12 +459,11 @@ class LPSpeakersRenderer(Renderer):
         # Maintain a dict of speakers and their IDs.
         self.speakers_ids = OrderedDict()
 
-
     def mk_uid(self, speaker_block):
         """Returns a unique id.
         """
         # 'John HÖcker, Onion Project' -> 'John HÖcker'
-        speaker = str(speaker_block.split(', ')[0])
+        speaker = str(speaker_block.split(", ")[0])
 
         # 'John HÖcker' -> 'John Hacker'
         ascii_speaker = unidecode(speaker)
@@ -490,60 +472,52 @@ class LPSpeakersRenderer(Renderer):
         id_ = ascii_speaker.split()[-1].lower()
 
         if id_ not in self.speakers_ids.values():
-            self.speakers_ids[speaker]= id_
+            self.speakers_ids[speaker] = id_
             return id_
         else:
             # 'John Hacker' -> 'john_hacker'
-            id_ = '_'.join([s.lower() for s in ascii_speaker.split()])
+            id_ = "_".join([s.lower() for s in ascii_speaker.split()])
             self.speakers_ids[speaker] = id_
             return id_
-
 
     def header(self, text, level, raw=None):
         global lpspeakers_dict
 
         if level == 1:
-            self.speaker_type = 'keynote-speakers'
+            self.speaker_type = "keynote-speakers"
             lpspeakers_dict[self.speaker_type].append(OrderedDict())
 
-            lpspeakers_dict[self.speaker_type][-1]['speaker'] = text
-            lpspeakers_dict[self.speaker_type][-1][
-                'id'] = self.mk_uid(text)
-            lpspeakers_dict[self.speaker_type][-1][
-                'bio']  = []
+            lpspeakers_dict[self.speaker_type][-1]["speaker"] = text
+            lpspeakers_dict[self.speaker_type][-1]["id"] = self.mk_uid(text)
+            lpspeakers_dict[self.speaker_type][-1]["bio"] = []
         elif level == 2:
-            self.speaker_type = 'speakers'
+            self.speaker_type = "speakers"
             lpspeakers_dict[self.speaker_type].append(OrderedDict())
 
-            lpspeakers_dict[self.speaker_type][
-                -1]['speaker'] = text.split(', ')[0]
-            lpspeakers_dict[self.speaker_type][
-                -1]['id'] = self.mk_uid(text)
-            lpspeakers_dict[self.speaker_type][
-                -1]['bio']  = []
+            lpspeakers_dict[self.speaker_type][-1]["speaker"] = text.split(", ")[0]
+            lpspeakers_dict[self.speaker_type][-1]["id"] = self.mk_uid(text)
+            lpspeakers_dict[self.speaker_type][-1]["bio"] = []
 
         return super(LPSpeakersRenderer, self).header(text, level, raw)
-
 
     def image(self, src, title, text):
         global lpspeakers_dict
 
-        lpspeakers_dict[self.speaker_type][-1]['img_url'] = src
-        lpspeakers_dict[self.speaker_type][-1]['img_alt'] = text
+        lpspeakers_dict[self.speaker_type][-1]["img_url"] = src
+        lpspeakers_dict[self.speaker_type][-1]["img_alt"] = text
 
         return super(LPSpeakersRenderer, self).image(src, title, text)
-
 
     def paragraph(self, text):
         global lpspeakers_dict
 
         p = super(LPSpeakersRenderer, self).paragraph(text)
 
-        if text.startswith('<img'):
+        if text.startswith("<img"):
             # ignore
             return p
 
-        lpspeakers_dict[self.speaker_type][-1]['bio'].append(text)
+        lpspeakers_dict[self.speaker_type][-1]["bio"].append(text)
         return p
 
 
@@ -552,16 +526,15 @@ class LPSMarkdown(Markdown):
 
     Returns the Markdown version of LP schedule as a dictionary.
     """
+
     def __init__(self, inline=None, block=None, **kwargs):
         """
         Initialize with LPSRenderer as the renderer.
         """
         self.sessions_renderer = LPSRenderer()
         super(LPSMarkdown, self).__init__(
-            renderer=self.sessions_renderer,
-            inline=None, block=None,
-            **kwargs)
-
+            renderer=self.sessions_renderer, inline=None, block=None, **kwargs
+        )
 
     def parse(self, text):
         global lps_dict
@@ -570,8 +543,7 @@ class LPSMarkdown(Markdown):
         html = super(LPSMarkdown, self).parse(text)
 
         # Write list of speakers with no ids to `speakers.noids`.
-        json_write('speakers.noids',
-                    self.sessions_renderer.speakers_noids)
+        json_write("speakers.noids", self.sessions_renderer.speakers_noids)
 
         return lps_dict
 
@@ -588,10 +560,8 @@ class LPSpeakersMarkdown(Markdown):
         """
         self.speakers_renderer = LPSpeakersRenderer()
         super(LPSpeakersMarkdown, self).__init__(
-            renderer=self.speakers_renderer,
-            inline=None, block=None,
-            **kwargs)
-
+            renderer=self.speakers_renderer, inline=None, block=None, **kwargs
+        )
 
     def parse(self, text):
         global lpspeakers_dict
@@ -599,7 +569,7 @@ class LPSpeakersMarkdown(Markdown):
         html = super(LPSpeakersMarkdown, self).parse(text)
 
         # Write mapping of speakers and their ids to `speakers.ids`.
-        json_write('speakers.ids', self.speakers_renderer.speakers_ids)
+        json_write("speakers.ids", self.speakers_renderer.speakers_ids)
 
         return lpspeakers_dict
 
@@ -611,51 +581,53 @@ def RenderHTML(lp_dict, template_name):
     """
     template_content = template_read(template_name)
     if not template_content:
-        exit('Unable to read {} template'.format(template_name))
+        exit("Unable to read {} template".format(template_name))
 
-    template = Environment(
-        trim_blocks=True,
-        lstrip_blocks=True
-    ).from_string(template_content)
+    template = Environment(trim_blocks=True, lstrip_blocks=True).from_string(
+        template_content
+    )
 
     lp_html = template.render(lp_dict=lp_dict)
 
-    return str(BeautifulSoup(lp_html, 'html.parser')).strip()
+    return str(BeautifulSoup(lp_html, "html.parser")).strip()
 
 
 def main():
     parser = ArgumentParser()
 
     group = parser.add_mutually_exclusive_group()
-    group.add_argument("-sc", "--schedule", action="store_true",
-                       help="Generate LP schedule")
-    group.add_argument("-sp", "--speakers", action="store_true",
-                       help="Generate LP speakers")
+    group.add_argument(
+        "-sc", "--schedule", action="store_true", help="Generate LP schedule"
+    )
+    group.add_argument(
+        "-sp", "--speakers", action="store_true", help="Generate LP speakers"
+    )
 
-    parser.add_argument("--ical", type=int,
-                        help="Specify LP year as argument; "
-                            + "generates iCal")
-    parser.add_argument("--version", action="version",
-                        version='lpschedule-generator version {}'
-                        .format(__version__),
-                        help="Show version number and exit.")
-    parser.add_argument("lp_md",
-                        help="Path to the LP markdown.")
+    parser.add_argument(
+        "--ical", type=int, help="Specify LP year as argument; " + "generates iCal"
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="lpschedule-generator version {}".format(__version__),
+        help="Show version number and exit.",
+    )
+    parser.add_argument("lp_md", help="Path to the LP markdown.")
     args = parser.parse_args()
 
     lp_md_content = read_file(path.abspath(args.lp_md))
 
     if lp_md_content:
-        template_name = ''
+        template_name = ""
 
         if args.schedule:
             markdown = LPSMarkdown()
-            template_name = 'schedule'
+            template_name = "schedule"
         elif args.speakers:
             markdown = LPSpeakersMarkdown()
-            template_name = 'speakers'
+            template_name = "speakers"
         else:
-            parser.error('No action requested, add -s or -sp switch')
+            parser.error("No action requested, add -s or -sp switch")
 
         lp_dict = markdown(lp_md_content)
         lp_html = RenderHTML(lp_dict, template_name)
@@ -664,13 +636,13 @@ def main():
             LPiCal(lp_dict, args.ical).to_ical()
 
     else:
-        exit('Unable to read LP markdown')
+        exit("Unable to read LP markdown")
 
     if lp_html:
         # stdout lps html
         print(lp_html)
     else:
-        print('Error generating LP HTML.')
+        print("Error generating LP HTML.")
 
 
 if __name__ == "__main__":
