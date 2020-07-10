@@ -5,3 +5,4 @@ restructuredtext_lint
 wheel
 twine
 Sphinx
+black
