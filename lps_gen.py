@@ -116,7 +116,7 @@ class LPiCal(object):
         self.lp_year = str(lp_year)
 
         # Matches strings like '09:45 - 10:30: Lorem ipsum dolor sit.'
-        self.timeslot_re = re.compile(r"(\d+:\d+).+?(\d+:\d+)" r"\s*[:-]?\s*(.+\b)?")
+        self.timeslot_re = re.compile(r"(\d+:\d+).+?(\d+:\d+)\s*[:-]?\s*(.+\b)?")
         # Matches strings like 'Saturday, March 19'
         self.month_day_re = re.compile(r"\w+,\s*([a-zA-Z]+)\s*(\d+)")
 
