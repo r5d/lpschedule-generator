@@ -70,7 +70,7 @@ clean-docs:
 
 .PHONY: clean-build clean-pyc clean-venv clean-docs
 
-dev-env:
-	pip install -r requirements.txt
+dev:
 	python setup.py develop
-.PHONY: dev-env
+	pip install -r requirements.txt
+.PHONY: dev
