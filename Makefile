@@ -43,7 +43,7 @@ upload-docs: docs
 
 
 venv:
-	rm -rf *.egg-info
+	rm -rf *.egg-info .eggs
 	${SHELL} -c 'if [[ -d $(VENV_DIR) ]] then mv $(VENV_DIR) $(VENV_DIR).`date +%s`; fi'
 	${VENV_CMD} --clear --python=python3 $(VENV_DIR)
 	@echo 'Initialized virtualenv, run' \
