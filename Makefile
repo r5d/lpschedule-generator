@@ -35,11 +35,11 @@ upload:
 
 docs:
 	${GNU_MAKE} -C docs html
+.PHONY: docs
 
 upload-docs: docs
 	@rsync -avz --delete docs/_build/html/  $(LPSG_DOCS_HOST)
-
-.PHONY: docs upload-docs
+.PHONY: upload-docs
 
 
 venv:
@@ -58,17 +58,19 @@ clean-build:
 	rm -rf build/
 	rm -rf dist/
 	rm -rf *.egg-info
+.PHONY: clean-build
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
+.PHONY: clean-pyc
 
 clean-venv:
 	rm -rf ${VENV_DIR}*/
+.PHONY: clean-venv
 
 clean-docs:
 	${GNU_MAKE} -C docs clean
-
-.PHONY: clean-build clean-pyc clean-venv clean-docs
+.PHONY: clean-docs
 
 dev:
 	python setup.py develop
