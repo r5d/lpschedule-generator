@@ -14,15 +14,15 @@ VENV_DIR=${VENV_PREFIX}/.lpschedule-generator
 
 test:
 	@nosetests
-
 .PHONY: test
 
 fmt:
 	black --include 'lps_gen.py|setup.py|tests/*.py|lpschedule_generator/*.py' .
 .PHONY: fmt
 
-build-dist:
+build:
 	@python setup.py sdist bdist_wheel
+.PHONY: build
 
 upload:
 	@twine upload -r pypi -s --sign-with 'gpg2' \
@@ -31,8 +31,7 @@ upload:
 	@twine upload -r pypi -s --sign-with 'gpg2' \
 		-i '1534 126D 8C8E AD29 EDD9  1396 6BE9 3D8B F866 4377' \
 		dist/*.whl
-
-.PHONY: build-dist upload
+.PHONY: upload
 
 docs:
 	${GNU_MAKE} -C docs html
