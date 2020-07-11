@@ -5,4 +5,4 @@
 #   This file is part of lpschedule-generator.
 #
 
-__version__ = "0.10.1.dev1"
+__version__ = "0.10.2"
