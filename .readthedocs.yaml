@@ -1,0 +1,4 @@
+version: 2
+python:
+  - method: setuptools
+    path: ./
